@@ -72,9 +72,9 @@
 %--- Loading of packages -------------------------------------------------------
 
 \ifscrreprt%
-  \LoadClass[a4paper,11pt,titlepage]{scrreprt}
+    \LoadClass[a4paper,11pt,titlepage]{scrreprt}
 \else
-  \LoadClass[a4paper,11pt,titlepage]{scrartcl}
+    \LoadClass[a4paper,11pt,titlepage]{scrartcl}
 \fi
 
 \RequirePackage{titling}
@@ -82,16 +82,16 @@
 
 % Default: Computer Modern (TeX-Standard)
 \iftimes%
-  \RequirePackage{times}				% font type Times New Roman
+    \RequirePackage{times}				% font type Times New Roman
 \fi
 \ifpalatino%
-  \RequirePackage{palatino}			% font type Book Antiqua/Palatino
+    \RequirePackage{palatino}			% font type Book Antiqua/Palatino
 \fi
 
 \ifframes%
     % showframe option for testing the layout
     \RequirePackage[showframe]{geometry}
-  \else
+\else
     \RequirePackage[]{geometry}
 \fi
 
@@ -109,16 +109,16 @@
 \renewcommand{\abstract}[1]{\def\abstract{#1}}
 
 \newcommand{\monthword}{%
-  \ifenglish%
-  \ifcase\month%
-    \or January\or February\or March\or April\or May\or June\or July
-    \or August\or September\or Oktober\or November\or December\fi
-  \else
-    \ifcase\month%
-     \or Januar\or Februar\or M\"arz\or April\or Mai\or Juni\or Juli%
-     \or August\or September\or Oktober\or November\or Dezember%
+    \ifenglish%
+        \ifcase\month%
+        \or January\or February\or March\or April\or May\or June\or July
+        \or August\or September\or Oktober\or November\or December\fi
+    \else
+        \ifcase\month%
+        \or Januar\or Februar\or M\"arz\or April\or Mai\or Juni\or Juli%
+        \or August\or September\or Oktober\or November\or Dezember%
+        \fi
     \fi
-  \fi
 }
 
 % redefine \maketitle
@@ -136,10 +136,10 @@
             \includegraphics[height=1.0cm]{figures/Uni_hagen_logo.png}\\
             \begin{footnotesize}
                 \ifenglish%
-                        Faculty of Mathematics and Computer Science
-                    \else
-                        Fakultät für Mathematik und Informatik
-                    \fi
+                    Faculty of Mathematics and Computer Science
+                \else
+                    Fakultät für Mathematik und Informatik
+                \fi
             \end{footnotesize}
         \end{minipage}%
         \hfill%
@@ -154,27 +154,27 @@
         \vspace*{0.9cm}
         \begin{LARGE}
             \textbf{\thetitle}\\[0.5cm]
-                \ifseminar%
-                    \ifenglish%
-                        Seminar Paper
-                    \else
-                        Seminararbeit
-                    \fi
+            \ifseminar%
+                \ifenglish%
+                    Seminar Paper
                 \else
-                    \ifproposal%
-                        \ifenglish%
-                            Thesis Proposal
-                        \else
-                            % Proposal
-                            Exposé
-                        \fi
+                    Seminararbeit
+                \fi
+            \else
+                \ifproposal%
+                    \ifenglish%
+                        Thesis Proposal
+                    \else
+                        % Proposal
+                        Exposé
+                    \fi
                 \else
                     \ifresearchlab%
                         \ifenglish%
                             Research Lab Report
                         \else
                             Fachpraktikumsbericht
-                        \fi 
+                        \fi
                     \else
                         >>SET TYPE (seminar, proposal, researchlab) IN DOCUMENTCLASS OPTIONS<<
                     \fi
@@ -219,12 +219,12 @@
         \begin{center}
             \begin{minipage}[c]{0.85\textwidth}
                 \begin{small}
-                    \abstract 
+                    \abstract
                 \end{small}
             \end{minipage}
         \end{center}
     \fi
-        
+
     % --- reset language ---
     \ifenglish
         \selectlanguage{english}
@@ -237,53 +237,69 @@
 \newcommand{\makestatement}[1]{
     \clearpage
     \pagestyle{empty}
-        \selectlanguage{ngerman}
-        \ifenglish
-            \section*{Statement}
-        \else
-            \section*{Erklärung}
-        \fi
+    \selectlanguage{ngerman}
+    \ifenglish
+        \section*{Statement}
+        I declare that I have written this seminar paper independently and without
+        the unauthorized use of third parties. I have only used the sources and aids
+        indicated and have marked the passages taken from them literally or analogously
+        as such. The assurance of independent work also applies to any drawings, sketches
+        or graphic representations included. The paper has not previously been submitted
+        in the same or a similar form to the same or any other examining authority,
+        nor has it been published. By submitting the electronic version of the final
+        version of the thesis, I acknowledge that it can be checked for plagiarism with
+        the help of a plagiarism detection service and will be stored exclusively
+        for examination purposes.
+
+    \else
+        \section*{Erklärung}
         Ich erkläre, dass ich die schriftliche Ausarbeitung zum Seminar selbstständig
         und ohne unzulässige Inanspruchnahme Dritter verfasst habe. Ich habe dabei nur
-        die angegebenen Quellen und Hilfsmittel verwendet und die aus diesen wörtlich 
-        oder sinngemäß entnommenen Stellen als solche kenntlich gemacht. Die Versicherung 
-        selbstständiger Arbeit gilt auch für enthaltene Zeichnungen, Skizzen oder 
-        graphische Darstellungen. Die Ausarbeitung wurde bisher in gleicher oder ähnlicher 
-        Form weder derselben noch einer anderen Prüfungsbehörde vorgelegt und auch nicht 
-        veröffentlicht. Mit der Abgabe der elektronischen Fassung der endgültigen Version 
-        der Ausarbeitung nehme ich zur Kenntnis, dass diese mit Hilfe eines 
-        Plagiatserkennungsdienstes auf enthaltene Plagiate geprüft werden kann und 
+        die angegebenen Quellen und Hilfsmittel verwendet und die aus diesen wörtlich
+        oder sinngemäß entnommenen Stellen als solche kenntlich gemacht. Die Versicherung
+        selbstständiger Arbeit gilt auch für enthaltene Zeichnungen, Skizzen oder
+        graphische Darstellungen. Die Ausarbeitung wurde bisher in gleicher oder ähnlicher
+        Form weder derselben noch einer anderen Prüfungsbehörde vorgelegt und auch nicht
+        veröffentlicht. Mit der Abgabe der elektronischen Fassung der endgültigen Version
+        der Ausarbeitung nehme ich zur Kenntnis, dass diese mit Hilfe eines
+        Plagiatserkennungsdienstes auf enthaltene Plagiate geprüft werden kann und
         ausschließlich für Prüfungszwecke gespeichert wird.
+    \fi
 
-        \ifresearchlab
-            \vspace{1.5cm}
-            \noindent
-            \multido{}{#1}{\printauthorline}
-        \else
-            \vspace{2.5cm}
-            \noindent
-            \dotfill\\
-            \begin{small}
-                \ifenglish
-                    (Place, Date)\hfill(Signature)
-                \else
-                    (Ort, Datum)\hfill(Unterschrift)
-                \fi
-            \end{small}
-        \fi
+    \ifresearchlab
+        \vspace{1.5cm}
+        \noindent
+        \multido{}{#1}{\printauthorline}
+    \else
+        \vspace{0.5cm}
+        \noindent
+        Musterstadt, \today
+        \hfill
+        % signature is excluded from repo for privacy reasons
+        \includegraphics[width=6cm]{figures/signature.png}
+        \noindent\makebox[\linewidth]{\dotfill}
+        \begin{small}
+            \noindent\hfill
+            \ifdefined\ifenglish
+                (Place, Date)\hfill(Signature)
+            \else
+                (Ort, Datum)\hfill(Unterschrift)
+            \fi
+        \end{small}
+    \fi
 }
 
 \newcommand{\printauthorline}{
-        \vspace{1.0cm}
-        \\\
-        \vspace{0.01cm}
-        \noindent
-        \dotfill\\
-        \begin{small}
-            \ifenglish
-                (Place, Date)\hfill(Signature)\\
-            \else
-                (Ort, Datum)\hfill(Unterschrift)\\
-            \fi
-        \end{small}
+    \vspace{1.0cm}
+    \\\
+    \vspace{0.01cm}
+    \noindent
+    \dotfill\\
+    \begin{small}
+        \ifenglish
+            (Place, Date)\hfill(Signature)\\
+        \else
+            (Ort, Datum)\hfill(Unterschrift)\\
+        \fi
+    \end{small}
 }
