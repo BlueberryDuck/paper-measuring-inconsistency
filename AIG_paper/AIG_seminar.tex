@@ -10,18 +10,19 @@
 \usepackage{amssymb}					    % math symbols
 \usepackage{amsmath}					    % overall enhancements to math environment
 
+\input{meta} % contains \myAuthor and \myCity but excluded from repo for privacy
 
 % === set information ===
-\author{Max Mustermann}
+\author{\myAuthor}
 \title{Measuring inconsistency in non-monotonic logics}
 
-\abstract{\input{abstract.tex}}
+\abstract{\input{abstract}}
 
 \begin{document}
 
 \maketitle % prints title and author information, as well as the abstract 
 
-\input{text.tex} % contains the main content
+\input{text} % contains the main content
 
 % References
 \bibliographystyle{alpha}

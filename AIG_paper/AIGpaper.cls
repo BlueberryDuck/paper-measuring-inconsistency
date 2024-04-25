@@ -273,7 +273,7 @@
     \else
         \vspace{0.5cm}
         \noindent
-        Musterstadt, \today
+        \myCity, \today
         \hfill
         % signature is excluded from repo for privacy reasons
         \includegraphics[width=6cm]{figures/signature.png}
