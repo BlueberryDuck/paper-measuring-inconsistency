@@ -1,6 +1,4 @@
-signature.png
-meta.tex
-
+# artifacts
 *.aux
 *.bbl
 *.blg
@@ -25,4 +23,8 @@ meta.tex
 *.nav
 *.vrb
 *.synctex.gz
+
+# privacy
 *.pdf
+signature.png
+meta.tex
