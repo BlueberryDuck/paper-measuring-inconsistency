@@ -14,14 +14,14 @@ Errors in assumptions and conclusions are common, yet do not collapse the entire
 
 Several factors are listed by \cite{beierle_methoden_2019} that contribute to this knowledge imperfection:
 \begin{itemize}
-    \item Some information is unknown due to lack of learning, forgetfulness, general unavailability, or inaccessibility.
-          Time constraints also necessitate decisions based on limited information.
-    \item Describing real situations completely in a logical sense is impossible.
-          Listing all conceivable exceptions to a rule is impractical, and checking all details is time-consuming.
-    \item Abstraction from seemingly unimportant aspects to focus on essentials often leads to incomplete information, which can be both sensible and intentional.
-    \item Situational characteristics can be overlooked or misinterpreted.
-    \item Future events can only be speculated upon.
-    \item Natural language is context-dependent and rarely entirely clear, requiring interpretation and posing a risk of misunderstandings.
+      \item \textbf{Unknown Information:} Some information is unknown due to lack of learning, forgetfulness, general unavailability, or inaccessibility.
+            Time constraints also necessitate decisions based on limited information.
+      \item \textbf{Incomplete Descriptions:} Describing real situations completely in a logical sense is impossible.
+            Listing all conceivable exceptions to a rule is impractical, and checking all details is time-consuming.
+      \item \textbf{Abstraction:} Abstraction from seemingly unimportant aspects to focus on essentials often leads to incomplete information, which can be both sensible and intentional.
+      \item \textbf{Situational Characteristics:} Situational characteristics can be overlooked or misinterpreted.
+      \item \textbf{Speculation:} Future events can only be speculated upon.
+      \item \textbf{Natural language:} Natural language is context-dependent and rarely entirely clear, requiring interpretation and posing a risk of misunderstandings.
 \end{itemize}
 
 Despite these challenges, humans handle incomplete information successfully for decision-making and navigation.
@@ -29,11 +29,20 @@ This capability is considered a significant intelligence achievement, demonstrat
 Humans excel in non-monotonic reasoning, which should be considered a standard form of logic rather than a peripheral one.
 However, non-monotonic logic often appears difficult and esoteric due to its complex nature.
 
-\subsection{Introduction to Non-Monotonic Logics}
-"The purpose of non-monotonic inference rules is not to add certain knowledge where there is none, but rather to guide the selection of tentatively held beliefs in the hope that fruitful investigations and good guesses will result.
-This means that one should not \textit{a priori} expect non-monotonic rules to derive valid conclusions independent of the monotonic rules.
-Rather one should expect to be led to a set of beliefs which while perhaps eventually shown incorrect will meanwhile coherently guide investigations."\\
-\cite[p. 46]{mcdermott_non-monotonic_1980}
+\subsection{Theoretical Foundation and Motivation}
+In \cite{mcdermott_non-monotonic_1980} the authors present a detailed exploration of non-monotonic logical systems, which are distinguished by the property that new axioms can invalidate previously established theorems.
+These logics are essential for modeling the beliefs of active processes operating with incomplete information, requiring assumptions that may need to be revised as new observations are made.
+This, for the time, new proposition is regarded as the basis and motivation for modern non-monotonic logics, developing model and proof theories, and offering a proof procedure along with applications for a specific non-monotonic logic.
+They demonstrate the completeness of the non-monotonic predicate calculus and the decidability of the non-monotonic sentential calculus, emphasizing the importance of these logics in handling the dynamic nature of real-world information and beliefs.
+
+A critical aspect of non-monotonic logic discussed in \cite{mcdermott_non-monotonic_1980} is its ability to handle routine revisions, where beliefs expressed as universally true have exceptions that must be managed.
+This flexibility contrasts with the rigidity of classical logic, which lacks tools for revising formal theories in the face of new, inconsistent information.
+For example, the belief that "all animals with beaks are birds" can be contradicted by introducing the platypus.
+The primary challenge in revising beliefs lies in non-monotonic logic's ability to incorporate exceptions and adjustments, thereby better reflecting the inherently non-monotonic nature of human reasoning processes.
+
+Non-monotonic inference rules aim not to establish certain knowledge where none exists, but to guide the selection of provisional beliefs, fostering fruitful investigations and informed guesses.
+These rules are not intended to independently derive valid conclusions as classical monotonic rules do.
+Instead, they help formulate a coherent set of beliefs that, even if later proven incorrect, provide a meaningful framework for further inquiry.
 
 \subsection{Understanding Inconsistencies in Logic Systems}
 text
