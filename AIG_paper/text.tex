@@ -2,7 +2,39 @@
 text
 
 \section{Background}
-text
+To establish results applying to arbitrary logic, a formal definition of what is meant by logic is required.
+Any logic is characterized by its syntax and semantics.
+The syntax is typically defined in terms of well-formed formulas that can appear in knowledge bases, while the semantics are described using the underlying consequence relations.
+
+To cover logics that generate multiple sets of consequences further referred to as belief sets, it is necessary to associate a knowledge base with several belief sets.
+Additionally, there are situations where the syntax of knowledge bases differs from that of belief sets, requiring a specification of what constitutes a belief set.
+
+\cite{brewka_equilibria_2007} states that a logic \(L\) constitutes a set \(KB_L\) of knowledge bases, a set \(BS_L\) of belief sets, and an acceptability function \(ACC_L: KB_L \to 2^{BS_L}\), that maps knowledge bases to sets of belief set.
+In this paper knowledge bases are considered sets of formulas, and the elements of belief sets are called beliefs.
+The distinction between consistent and inconsistent belief sets is crucial.
+By defining inconsistency abstractly and independently of the specific syntax of belief sets (such as the presence of negation), one can identify which belief sets are inconsistent.
+Based on this definition \cite{brewka_strong_2019} proposes an extension to \cite{brewka_equilibria_2007}:
+
+A logic \(L\) is a tuple \(L = (WF, BS, INC, ACC)\), where:
+\begin{itemize}
+      \item \(WF\) is the set of well-formed formulas.
+      \item \(BS\) is the set of belief sets.
+      \item \(INC \subseteq BS\) is an upward-closed set of inconsistent belief sets.
+      \item \(ACC: KB \to 2^{BS}\) assigns a collection of belief sets to each subset of \(WF\).
+\end{itemize}
+
+A knowledge base \(K\) in logic \(L\) is a finite subset of \(WF\).
+\(K\) is considered inconsistent if all of its belief sets are inconsistent, including cases where \(K\) has no belief sets at all.
+A knowledge base is consistent if at least one of its belief sets is not in \(INC\).
+When it is stated that a particular instance \(L = (WF, BS, INC, ACC)\) "properly models" a logic \(L\), it implies:
+\begin{itemize}
+      \item \(WF\) corresponds to the well-formed formulas of \(L\).
+      \item \(BS\) includes all sets of beliefs that any knowledge base of \(L\) might have.
+      \item \(INC\) contains the belief sets that are considered inconsistent in \(L\).
+      \item \(ACC\) assigns the correct belief sets to each knowledge base \(K\) according to \(L\).
+\end{itemize}
+
+In the following sections, examples of this definition applied to different logical systems are provided, such as propositional logic, quantified Boolean formulas, answer set programming, and abstract argumentation frameworks. These examples are to demonstrate the flexibility and generality of the definition.
 
 \subsection{Propositional logic}
 \cite{gelfond_classical_1991}
