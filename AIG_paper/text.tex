@@ -37,7 +37,17 @@ When it is stated that a particular instance \(L = (WF, BS, INC, ACC)\) "properl
 In the following sections, examples of this definition applied to different logical systems are provided, such as propositional logic, quantified Boolean formulas, answer set programming, and abstract argumentation frameworks. These examples are to demonstrate the flexibility and generality of the definition.
 
 \subsection{Propositional logic}
-\cite{gelfond_classical_1991}
+Denoting a propositional logic as proposed by \cite{gelfond_classical_1991} involves a set of propositional atoms, denoted as \(A\).
+Well-formed formulas, denoted in regards to \(A\) as \(WF^P_A\), are created using these atoms with logical operators like negation (\(\neg\)), conjunction (\(\land\)), and disjunction (\(\lor\)).
+The classical entailment relation, denoted as \(\models\), states that a formula \(\phi\) is entailed by a set \(K\) of formulas if \(\phi\) is true in every model where all formulas in \(K\) are true.
+The set of all deductively closed sets of \(WF^P_A\) forms the belief sets (\(BS^P_A\)) in propositional logic.
+The acceptability function (\(ACC^P_A\)) assigns to each knowledge base \(K\) its deductive closure.
+The only inconsistent belief set is the set of \(WF^P_A\), which defines \(INC^P_A\).
+
+If for example a propositional signature \(A_1 = \{a,b\}\) with the knowledge bases
+\[K_1 = \{a, a \Rightarrow b\} \quad K_2 = \{a, \neg a\}\]
+was given. Then for \(K_1\) the belief set includes all logical consequences of \(a\) and \(a \Rightarrow b\), such as \(b\).
+\(K_2\), however, is inconsistent because it contains both \(a\) and \(\neg a\).
 
 \subsection{Quantified Boolean formulas}
 \cite{gelfond_logic_2002}
@@ -100,8 +110,6 @@ Strong inconsistency \cite{brewka_strong_2019}
 \subsection{Challenges Specific to Non-Monotonic Logics}
 Strong equivalency \cite{lifschitz_strongly_2001}
 "We mention strong equivalence here not because it is closely related to inconsistency, but because it helps to illustrate what the goals of this paper are. The observation that standard equivalence is not a very useful concept when it comes to nonmonotonic reasoning has led to a whole body of interesting work investigating stronger notions of equivalence. Similarly, starting from the observation that minimal inconsistent subsets are not very useful for nonmonotonic reasoning, we aim for a stronger notion which coincides with the standard notion for classical logics, but is a lot more useful for nonmonotonic logics." \cite{brewka_strong_2019}
-
-Strong inconsistency in non-monotonic logics \cite{brewka_strong_2017}
 
 \section{Measuring Inconsistency}
 Analyze the distribution of inconsistency within a knowledge base using the Shapely measure \cite{hunter_measure_2010} in the classical case.
