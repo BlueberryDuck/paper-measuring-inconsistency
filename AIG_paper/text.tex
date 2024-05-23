@@ -2,12 +2,15 @@
 text
 
 \section{Background}
-To establish results applying to arbitrary logic, a formal definition of what is meant by logic is required.
-Any logic is characterized by its syntax and semantics.
-The syntax is typically defined in terms of well-formed formulas that can appear in knowledge bases, while the semantics are described using the underlying consequence relations.
+To establish results that apply to any form of logic, it is essential to first define what is meant by "logic" in a formal context.
+Logic is generally characterized by two main components: syntax and semantics.
+Syntax pertains to the structure and formation of well-formed formulas that can be included in knowledge bases.
+Semantics, on the other hand, involve the underlying consequence relations that give meaning to these formulas.
 
-To cover logics that generate multiple sets of consequences further referred to as belief sets, it is necessary to associate a knowledge base with several belief sets.
-Additionally, there are situations where the syntax of knowledge bases differs from that of belief sets, requiring a specification of what constitutes a belief set.
+In order to address logics that produce multiple sets of consequences, often referred to as belief sets, it is necessary to link a single knowledge base to several belief sets.
+This is crucial for capturing the diversity of possible outcomes that can arise from different interpretations or applications of the same knowledge base.
+Moreover, there are instances where the syntax used in knowledge bases may differ from that used in belief sets.
+In such cases, it is important to clearly specify what constitutes a belief set to ensure consistency and coherence in logical reasoning.
 
 \cite{brewka_equilibria_2007} states that a logic \(L\) constitutes a set \(KB_L\) of knowledge bases, a set \(BS_L\) of belief sets, and an acceptability function \(ACC_L: KB_L \to 2^{BS_L}\), that maps knowledge bases to sets of belief set.
 In this paper knowledge bases are considered sets of formulas, and the elements of belief sets are called beliefs.
@@ -46,14 +49,31 @@ The only inconsistent belief set is the set of \(WF^P_A\), which defines \(INC^P
 
 If for example a propositional signature \(A_1 = \{a,b\}\) with the knowledge bases
 \[K_1 = \{a, a \Rightarrow b\} \quad K_2 = \{a, \neg a\}\]
-was given. Then for \(K_1\) the belief set includes all logical consequences of \(a\) and \(a \Rightarrow b\), such as \(b\).
+was given.
+Then for \(K_1\) the belief set includes all logical consequences of \(a\) and \(a \Rightarrow b\), such as \(b\).
 \(K_2\), however, is inconsistent because it contains both \(a\) and \(\neg a\).
 
-\subsection{Quantified Boolean formulas}
-\cite{gelfond_logic_2002}
+\subsection{Quantified Boolean Formulas}
+Quantified Boolean Formulas (QBFs) as described in \cite{gelfond_logic_2002} extend propositional logic by introducing quantifiers like \(\forall\) and \(\exists\) over variables.
+A QBF is true if the formula evaluates to true under the given quantifiers.
+For instance, \(\exists x_1 \forall x_2 (x_1 \lor \neg x_2)\) is true if there exists and assignment to \(x_1\) such that for every \(x_2\), the formula \(x_1 \lor \neg x_2\) holds.
 
-\subsection{Answer set programming (ASP)}
-\cite{brewka_answer_2011}
+If for example \(Q = \{\exists,\forall\}\) and \(X = \{x_1,x_2\}\) with the knowledge bases
+\[K_1 = \{x_1 \lor  x_2, x_1 \lor \neg x_2\} \quad K_2 = \{x_1 \Rightarrow x_2, x_2 \Rightarrow x_1\}\]
+were given.
+The QBF \(\exists x_1 \forall x_2 (x_1 \lor x_2)\) evaluates to true for \(K_1\), while \(\exists x_1 \forall x_2 (x_1 \Rightarrow x_2) \land (x_2 \Rightarrow x_1)\) does not for \(K_2\), indicating inconsistency.
+
+\subsection{Answer Set Programming}
+Answer Set Programming, as in \cite{brewka_answer_2011}, is a form of declarative programming oriented towards difficult search problems.
+It uses disjunctive logic programs, which consist of rules with a head and a body.
+An answer set is a minimal model satisfying the rules of the program.
+A program is inconsistent if it has no answer sets or if all answer sets are inconsistent.
+
+If for example the signature \(A = \{a,b\}\) with the logic programs
+\[P_1 = \{a., b., \neg b \leftarrow not \; a.\} \quad P_2 = \{b., \neg b \leftarrow not \; a.\}\]
+was given.
+Here \(P_1\) is consistent because it allows for a valid answer set where \(a\) and \(b\) can both be true without conflict, avoiding any contradictions.
+Conversely \(P_2\) is inconsistent because it leads to a contradiction where \(b\) and \(\neg b\) cannot be true simultaneously, resulting in no valid answer sets.
 
 \subsection{Abstract argumentation frameworks}
 \cite{dung_acceptability_1995}
