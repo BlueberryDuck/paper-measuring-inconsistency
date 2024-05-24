@@ -1,7 +1,7 @@
 \section{Introduction}
 text
 
-\section{Background}
+\section{Logics}
 To establish results that apply to any form of logic, it is essential to first define what is meant by "logic" in a formal context.
 Logic is generally characterized by two main components: syntax and semantics.
 Syntax pertains to the structure and formation of well-formed formulas that can be included in knowledge bases.
@@ -15,7 +15,7 @@ In such cases, it is important to clearly specify what constitutes a belief set 
 \cite{brewka_equilibria_2007} states that a logic \(L\) constitutes a set \(KB_L\) of knowledge bases, a set \(BS_L\) of belief sets, and an acceptability function \(ACC_L: KB_L \to 2^{BS_L}\), that maps knowledge bases to sets of belief set.
 In this paper knowledge bases are considered sets of formulas, and the elements of belief sets are called beliefs.
 The distinction between consistent and inconsistent belief sets is crucial.
-By defining inconsistency abstractly and independently of the specific syntax of belief sets (such as the presence of negation), one can identify which belief sets are inconsistent.
+By defining inconsistency abstractly and independently of the specific syntax of belief sets, such as the presence of negation, one can identify which belief sets are inconsistent.
 Based on this definition \cite{brewka_strong_2019} proposes an extension to \cite{brewka_equilibria_2007}:
 
 A logic \(L\) is a tuple \(L = (WF, BS, INC, ACC)\), where:
@@ -51,7 +51,8 @@ If for example a propositional signature \(A_1 = \{a,b\}\) with the knowledge ba
 \[K_1 = \{a, a \Rightarrow b\} \quad K_2 = \{a, \neg a\}\]
 was given.
 Then for \(K_1\) the belief set includes all logical consequences of \(a\) and \(a \Rightarrow b\), such as \(b\).
-\(K_2\), however, is inconsistent because it contains both \(a\) and \(\neg a\).
+This is consistent since not all belief sets are in \(INC^P_A\).
+\(K_2\), however, is inconsistent because it contains both \(a\) and \(\neg a\), making \(ACC^P_A(K_2) \subseteq INC^P_A\).
 
 \subsection{Quantified Boolean Formulas}
 Quantified Boolean Formulas (QBFs) as described in \cite{gelfond_logic_2002} extend propositional logic by introducing quantifiers like \(\forall\) and \(\exists\) over variables.
@@ -61,7 +62,8 @@ For instance, \(\exists x_1 \forall x_2 (x_1 \lor \neg x_2)\) is true if there e
 If for example \(Q = \{\exists,\forall\}\) and \(X = \{x_1,x_2\}\) with the knowledge bases
 \[K_1 = \{x_1 \lor  x_2, x_1 \lor \neg x_2\} \quad K_2 = \{x_1 \Rightarrow x_2, x_2 \Rightarrow x_1\}\]
 were given.
-The QBF \(\exists x_1 \forall x_2 (x_1 \lor x_2)\) evaluates to true for \(K_1\), while \(\exists x_1 \forall x_2 (x_1 \Rightarrow x_2) \land (x_2 \Rightarrow x_1)\) does not for \(K_2\), indicating inconsistency.
+The QBF \(\exists x_1 \forall x_2 (x_1 \lor x_2)\) evaluates to true for \(K_1\), making \(ACC^{QBF}_{Q,X}(K_1) = \{\{\}\}\) and consistent.
+Meanwhile \(\exists x_1 \forall x_2 (x_1 \Rightarrow x_2) \land (x_2 \Rightarrow x_1)\) is false for \(K_2\),making \(ACC^{QBF}_{Q,X}(K_2) = \{\{\bot\}\}\) and inconsistent.
 
 \subsection{Answer Set Programming}
 Answer Set Programming, as in \cite{brewka_answer_2011}, is a form of declarative programming oriented towards difficult search problems.
@@ -72,11 +74,51 @@ A program is inconsistent if it has no answer sets or if all answer sets are inc
 If for example the signature \(A = \{a,b\}\) with the logic programs
 \[P_1 = \{a., b., \neg b \leftarrow not \; a.\} \quad P_2 = \{b., \neg b \leftarrow not \; a.\}\]
 was given.
-Here \(P_1\) is consistent because it allows for a valid answer set where \(a\) and \(b\) can both be true without conflict, avoiding any contradictions.
-Conversely \(P_2\) is inconsistent because it leads to a contradiction where \(b\) and \(\neg b\) cannot be true simultaneously, resulting in no valid answer sets.
+Here \(P_1\) is consistent because it makes \(ACC^{ASP}_{A}(P_1) = \{\{a,b\}\}\), avoiding any contradictions.
+Conversely \(P_2\) is inconsistent because it leads to a contradiction where \(b\) and \(\neg b\) cannot be true simultaneously, resulting in \(ACC^{ASP}_{A}(P_2) = \{\{\}\}\).
 
-\subsection{Abstract argumentation frameworks}
-\cite{dung_acceptability_1995}
+\subsection{Abstract Argumentation Frameworks}
+Abstract Argumentation Frameworks, as denoted by \cite{dung_acceptability_1995}, consist of arguments and attack relations.
+An abstract argumentation framework is represented as a directed graph where nodes are arguments, and edges represent attacks between arguments.
+A stable extension is a conflict-free set of arguments, meaning no two arguments within the set attack each other, and it also includes arguments that can counter every argument not included in the set.
+
+\begin{figure}
+      \centering
+      \begin{tikzpicture}[->,>=stealth',node distance=1.5cm]
+            \tikzstyle{every node}=[circle, draw, minimum size=1cm]
+            \node (A)               {a};
+            \node (B) [right of=A]  {b};
+            \node (C) [right of=B]  {c};
+            \node (D) [right of=C]  {d};
+            \path
+            (A) edge [bend left]    (B)
+            (B) edge [bend left]    (A)
+            (C) edge                (B)
+            (C) edge [loop above, looseness=5, out=120, in=60]   (C)
+            (D) edge                (C);
+            \node[draw=none,above of=A] {\(S_1:\)};
+      \end{tikzpicture}
+      \qquad
+      \begin{tikzpicture}[->,>=stealth',node distance=1.5cm]
+            \tikzstyle{every node}=[circle, draw, minimum size=1cm]
+            \node (A)               {a};
+            \node (B) [right of=A]  {b};
+            \node (C) [right of=B]  {c};
+            \path
+            (A) edge [bend left]    (B)
+            (B) edge [bend left]    (A)
+            (C) edge                (B)
+            (C) edge [loop above, looseness=5, out=120, in=60]   (C);
+            \node[draw=none,above of=A] {\(S_2:\)};
+      \end{tikzpicture}
+      \caption{The argumentation frameworks with sets \(S_1\) and \(S_2\)}
+\end{figure}
+
+If for example the frameworks over the arguments \(A = \{a,b,c,d\}\) with the sets
+\[S_1 = \{(a,b),(b,a),(c,c),(c,b),(d,c)\} \quad S_2 = \{(a,b),(b,a),(c,c),(c,b)\}\]
+were given.
+The set \(S_1\) is considered consistent with stable extensions \(\{a,d\}\) and \(\{b,d\}\), making \(ACC^{AAF}_{A}(S_1) = \{\{a,d\},\{b,d\}\}\).
+For set \(S_2\) it has no stable extension, resulting in \(ACC^{AAF}_{A}(S_2) = \{\}\) and inconsistency.
 
 \section{Non-Monotonic Logics}
 The term "non-monotonic logic" may initially evoke discomfort due to the complexities and deviations from classical logic.
