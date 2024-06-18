@@ -7,10 +7,10 @@ Logic is generally characterized by two main components: syntax and semantics.
 Syntax pertains to the structure and formation of well-formed formulas that can be included in knowledge bases.
 Semantics, on the other hand, involve the underlying consequence relations that give meaning to these formulas.
 
-In order to address logics that produce multiple sets of consequences, often referred to as belief sets, it is necessary to link a single knowledge base to several belief sets.
+To address logics that produce multiple sets of consequences, often referred to as belief sets, it is necessary to link a single knowledge base to several belief sets.
 This is crucial for capturing the diversity of possible outcomes that can arise from different interpretations or applications of the same knowledge base.
 Moreover, there are instances where the syntax used in knowledge bases may differ from that used in belief sets.
-In such cases, it is important to clearly specify what constitutes a belief set to ensure consistency and coherence in logical reasoning.
+In such cases, it is important to unambiguously specify what constitutes a belief set to ensure consistency and coherence in logical reasoning.
 
 \cite{brewka_equilibria_2007} states that a logic \(L\) constitutes a set \(KB_L\) of knowledge bases, a set \(BS_L\) of belief sets, and an acceptability function \(ACC_L: KB_L \to 2^{BS_L}\), that maps knowledge bases to sets of belief set.
 In this paper knowledge bases are considered sets of formulas, and the elements of belief sets are called beliefs.
@@ -37,7 +37,9 @@ When it is stated that a particular instance \(L = (WF, BS, INC, ACC)\) "properl
       \item \(ACC\) assigns the correct belief sets to each knowledge base \(K\) according to \(L\).
 \end{itemize}
 
-In the following sections, examples of this definition applied to different logical systems are provided, such as propositional logic, quantified Boolean formulas, answer set programming, and abstract argumentation frameworks. These examples are to demonstrate the flexibility and generality of the definition.
+In the following sections, examples of this definition applied to different logical systems are provided, such as propositional logic, quantified Boolean formulas, and answer set programming.
+% and abstract argumentation frameworks.
+These examples are to demonstrate the flexibility and generality of the definition.
 
 \subsection{Propositional logic}
 Denoting a propositional logic as proposed by \cite{gelfond_classical_1991} involves a set of propositional atoms, denoted as \(A\).
@@ -77,48 +79,48 @@ was given.
 Here \(P_1\) is consistent because it makes \(ACC^{ASP}_{A}(P_1) = \{\{a,b\}\}\), avoiding any contradictions.
 Conversely \(P_2\) is inconsistent because it leads to a contradiction where \(b\) and \(\neg b\) cannot be true simultaneously, resulting in \(ACC^{ASP}_{A}(P_2) = \{\{\}\}\).
 
-\subsection{Abstract Argumentation Frameworks}
-Abstract Argumentation Frameworks, as denoted by \cite{dung_acceptability_1995}, consist of arguments and attack relations.
-An abstract argumentation framework is represented as a directed graph where nodes are arguments, and edges represent attacks between arguments.
-A stable extension is a conflict-free set of arguments, meaning no two arguments within the set attack each other, and it also includes arguments that can counter every argument not included in the set.
+% \subsection{Abstract Argumentation Frameworks}
+% Abstract Argumentation Frameworks, as denoted by \cite{dung_acceptability_1995}, consist of arguments and attack relations.
+% An abstract argumentation framework is represented as a directed graph where nodes are arguments, and edges represent attacks between arguments.
+% A stable extension is a conflict-free set of arguments, meaning no two arguments within the set attack each other, and it also includes arguments that can counter every argument not included in the set.
 
-\begin{figure}
-      \centering
-      \begin{tikzpicture}[->,>=stealth',node distance=1.5cm]
-            \tikzstyle{every node}=[circle, draw, minimum size=1cm]
-            \node (A)               {a};
-            \node (B) [right of=A]  {b};
-            \node (C) [right of=B]  {c};
-            \node (D) [right of=C]  {d};
-            \path
-            (A) edge [bend left]    (B)
-            (B) edge [bend left]    (A)
-            (C) edge                (B)
-            (C) edge [loop above, looseness=5, out=120, in=60]   (C)
-            (D) edge                (C);
-            \node[draw=none,above of=A] {\(S_1:\)};
-      \end{tikzpicture}
-      \qquad
-      \begin{tikzpicture}[->,>=stealth',node distance=1.5cm]
-            \tikzstyle{every node}=[circle, draw, minimum size=1cm]
-            \node (A)               {a};
-            \node (B) [right of=A]  {b};
-            \node (C) [right of=B]  {c};
-            \path
-            (A) edge [bend left]    (B)
-            (B) edge [bend left]    (A)
-            (C) edge                (B)
-            (C) edge [loop above, looseness=5, out=120, in=60]   (C);
-            \node[draw=none,above of=A] {\(S_2:\)};
-      \end{tikzpicture}
-      \caption{The argumentation frameworks with sets \(S_1\) and \(S_2\)}
-\end{figure}
+% \begin{figure}
+%       \centering
+%       \begin{tikzpicture}[->,>=stealth',node distance=1.5cm]
+%             \tikzstyle{every node}=[circle, draw, minimum size=1cm]
+%             \node (A)               {a};
+%             \node (B) [right of=A]  {b};
+%             \node (C) [right of=B]  {c};
+%             \node (D) [right of=C]  {d};
+%             \path
+%             (A) edge [bend left]    (B)
+%             (B) edge [bend left]    (A)
+%             (C) edge                (B)
+%             (C) edge [loop above, looseness=5, out=120, in=60]   (C)
+%             (D) edge                (C);
+%             \node[draw=none,above of=A] {\(S_1:\)};
+%       \end{tikzpicture}
+%       \qquad
+%       \begin{tikzpicture}[->,>=stealth',node distance=1.5cm]
+%             \tikzstyle{every node}=[circle, draw, minimum size=1cm]
+%             \node (A)               {a};
+%             \node (B) [right of=A]  {b};
+%             \node (C) [right of=B]  {c};
+%             \path
+%             (A) edge [bend left]    (B)
+%             (B) edge [bend left]    (A)
+%             (C) edge                (B)
+%             (C) edge [loop above, looseness=5, out=120, in=60]   (C);
+%             \node[draw=none,above of=A] {\(S_2:\)};
+%       \end{tikzpicture}
+%       \caption{The argumentation frameworks with sets \(S_1\) and \(S_2\)}
+% \end{figure}
 
-If for example the frameworks over the arguments \(A = \{a,b,c,d\}\) with the sets
-\[S_1 = \{(a,b),(b,a),(c,c),(c,b),(d,c)\} \quad S_2 = \{(a,b),(b,a),(c,c),(c,b)\}\]
-were given.
-The set \(S_1\) is considered consistent with stable extensions \(\{a,d\}\) and \(\{b,d\}\), making \(ACC^{AAF}_{A}(S_1) = \{\{a,d\},\{b,d\}\}\).
-For set \(S_2\) it has no stable extension, resulting in \(ACC^{AAF}_{A}(S_2) = \{\}\) and inconsistency.
+% If for example the frameworks over the arguments \(A = \{a,b,c,d\}\) with the sets
+% \[S_1 = \{(a,b),(b,a),(c,c),(c,b),(d,c)\} \quad S_2 = \{(a,b),(b,a),(c,c),(c,b)\}\]
+% were given.
+% The set \(S_1\) is considered consistent with stable extensions \(\{a,d\}\) and \(\{b,d\}\), making \(ACC^{AAF}_{A}(S_1) = \{\{a,d\},\{b,d\}\}\).
+% For set \(S_2\) it has no stable extension, resulting in \(ACC^{AAF}_{A}(S_2) = \{\}\) and inconsistency.
 
 \section{Non-Monotonic Logics}
 The term "non-monotonic logic" may initially appear challenging due to its complexities and its divergence from classical logic principles.
@@ -168,7 +170,10 @@ These rules are not intended to independently derive valid conclusions as classi
 Instead, they help formulate a coherent set of beliefs that, even if later proven incorrect, provide a meaningful framework for further inquiry.
 
 \subsection{Understanding Inconsistencies in Logic Systems}
-Strong inconsistency \cite{brewka_strong_2019}
+% Strong inconsistency \cite{brewka_strong_2019}
+Monotonic logic, as illustrated by previously modeled propositional logic \(L^P_A\) and Quantified Boolean Formula \(L^{QBF}_A\), maintain consistency by ensuring that the addition of new information (\(K \subseteq K'\)) either retains or expands the belief set.
+
+The generalized definition by \cite{brewka_strong_2019} for monotonic logics of \cite{brewka_equilibria_2007} states that a logic \(L = (WF, BS, INC, ACC)\) is skeptically monotonic whenever \(K \subseteq K' \subseteq WF\) implies that if \(B' \in ACC(K')\), then \(B \subseteq B'\), for some \(B \in ACC(K)\).
 
 \subsection{Challenges Specific to Non-Monotonic Logics}
 Strong equivalency \cite{lifschitz_strongly_2001}
