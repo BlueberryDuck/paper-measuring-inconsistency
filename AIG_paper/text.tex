@@ -37,15 +37,14 @@ When it is stated that a particular instance \(L = (WF, BS, INC, ACC)\) "properl
       \item \(ACC\) assigns the correct belief sets to each knowledge base \(K\) according to \(L\).
 \end{itemize}
 
-In the following sections, examples of this definition applied to different logical systems are provided, such as propositional logic, quantified Boolean formulas, and answer set programming.
-% and abstract argumentation frameworks.
+In the following sections, examples of this definition applied to different logical systems are provided, such as propositional logics, Quantified Boolean Formulas, and Answer Set Programming.
 These examples are to demonstrate the flexibility and generality of the definition.
 
-\subsection{Propositional logic}
+\subsection{Propositional logics}
 Denoting a propositional logic as proposed by \cite{gelfond_classical_1991} involves a set of propositional atoms, denoted as \(A\).
 Well-formed formulas, denoted in regards to \(A\) as \(WF^P_A\), are created using these atoms with logical operators like negation (\(\neg\)), conjunction (\(\land\)), and disjunction (\(\lor\)).
 The classical entailment relation, denoted as \(\models\), states that a formula \(\phi\) is entailed by a set \(K\) of formulas if \(\phi\) is true in every model where all formulas in \(K\) are true.
-The set of all deductively closed sets of \(WF^P_A\) forms the belief sets (\(BS^P_A\)) in propositional logic.
+The set of all deductively closed sets of \(WF^P_A\) forms the belief sets (\(BS^P_A\)) in propositional logics.
 The acceptability function (\(ACC^P_A\)) assigns to each knowledge base \(K\) its deductive closure.
 The only inconsistent belief set is the set of \(WF^P_A\), which defines \(INC^P_A\).
 
@@ -57,7 +56,7 @@ This is consistent since not all belief sets are in \(INC^P_A\).
 \(K_2\), however, is inconsistent because it contains both \(a\) and \(\neg a\), making \(ACC^P_A(K_2) \subseteq INC^P_A\).
 
 \subsection{Quantified Boolean Formulas}
-Quantified Boolean Formulas (QBFs) as described in \cite{gelfond_logic_2002} extend propositional logic by introducing quantifiers like \(\forall\) and \(\exists\) over variables.
+Quantified Boolean Formulas (QBFs) as described in \cite{gelfond_logic_2002} extend propositional logics by introducing quantifiers like \(\forall\) and \(\exists\) over variables.
 A QBF is true if the formula evaluates to true under the given quantifiers.
 For instance, \(\exists x_1 \forall x_2 (x_1 \lor \neg x_2)\) is true if there exists and assignment to \(x_1\) such that for every \(x_2\), the formula \(x_1 \lor \neg x_2\) holds.
 
@@ -79,60 +78,17 @@ was given.
 Here \(P_1\) is consistent because it makes \(ACC^{ASP}_{A}(P_1) = \{\{a,b\}\}\), avoiding any contradictions.
 Conversely \(P_2\) is inconsistent because it leads to a contradiction where \(b\) and \(\neg b\) cannot be true simultaneously, resulting in \(ACC^{ASP}_{A}(P_2) = \{\{\}\}\).
 
-% \subsection{Abstract Argumentation Frameworks}
-% Abstract Argumentation Frameworks, as denoted by \cite{dung_acceptability_1995}, consist of arguments and attack relations.
-% An abstract argumentation framework is represented as a directed graph where nodes are arguments, and edges represent attacks between arguments.
-% A stable extension is a conflict-free set of arguments, meaning no two arguments within the set attack each other, and it also includes arguments that can counter every argument not included in the set.
-
-% \begin{figure}
-%       \centering
-%       \begin{tikzpicture}[->,>=stealth',node distance=1.5cm]
-%             \tikzstyle{every node}=[circle, draw, minimum size=1cm]
-%             \node (A)               {a};
-%             \node (B) [right of=A]  {b};
-%             \node (C) [right of=B]  {c};
-%             \node (D) [right of=C]  {d};
-%             \path
-%             (A) edge [bend left]    (B)
-%             (B) edge [bend left]    (A)
-%             (C) edge                (B)
-%             (C) edge [loop above, looseness=5, out=120, in=60]   (C)
-%             (D) edge                (C);
-%             \node[draw=none,above of=A] {\(S_1:\)};
-%       \end{tikzpicture}
-%       \qquad
-%       \begin{tikzpicture}[->,>=stealth',node distance=1.5cm]
-%             \tikzstyle{every node}=[circle, draw, minimum size=1cm]
-%             \node (A)               {a};
-%             \node (B) [right of=A]  {b};
-%             \node (C) [right of=B]  {c};
-%             \path
-%             (A) edge [bend left]    (B)
-%             (B) edge [bend left]    (A)
-%             (C) edge                (B)
-%             (C) edge [loop above, looseness=5, out=120, in=60]   (C);
-%             \node[draw=none,above of=A] {\(S_2:\)};
-%       \end{tikzpicture}
-%       \caption{The argumentation frameworks with sets \(S_1\) and \(S_2\)}
-% \end{figure}
-
-% If for example the frameworks over the arguments \(A = \{a,b,c,d\}\) with the sets
-% \[S_1 = \{(a,b),(b,a),(c,c),(c,b),(d,c)\} \quad S_2 = \{(a,b),(b,a),(c,c),(c,b)\}\]
-% were given.
-% The set \(S_1\) is considered consistent with stable extensions \(\{a,d\}\) and \(\{b,d\}\), making \(ACC^{AAF}_{A}(S_1) = \{\{a,d\},\{b,d\}\}\).
-% For set \(S_2\) it has no stable extension, resulting in \(ACC^{AAF}_{A}(S_2) = \{\}\) and inconsistency.
-
 \section{Non-Monotonic Logics}
 The term "non-monotonic logic" may initially appear challenging due to its complexities and its divergence from classical logic principles.
-However, real-world scenarios frequently present situations that classical logic fails to adequately address, thereby necessitating the exploration and application of non-monotonic logic.
-In classical logic, reasoning processes are governed by stringent formal rules.
+However, real-world scenarios frequently present situations that classical logics fail to adequately address, thereby necessitating the exploration and application of non-monotonic logics.
+In classical logics, reasoning processes are governed by stringent formal rules.
 Each element has a precise definition, and relationships among elements can be systematically formalized.
 These assumptions allow for the derivation of irrefutable conclusions from a given set of premises through deductive reasoning.
-This deductive process underpins the monotonicity inherent in classical logic, where adding new information to a knowledge base does not invalidate previously drawn conclusions.
+This deductive process underpins the monotonicity inherent in classical logics, where adding new information to a knowledge base does not invalidate previously drawn conclusions.
 
 In contrast, real-world scenarios are characterized by unexpected events and complex relationships that often resist formalization.
 Descriptions of predicates such as "small" are context-dependent; for instance, an elephant is small compared to a mountain but not to a mouse.
-Additionally, temporal changes affect the state of objects and systems continuously, highlighting the limitations of classical logic in representing dynamic real-world knowledge.
+Additionally, temporal changes affect the state of objects and systems continuously, highlighting the limitations of classical logics in representing dynamic real-world knowledge.
 
 Human knowledge is inherently incomplete, and everyday life involves drawing conclusions based on incomplete information.
 Errors in assumptions and conclusions are common, yet do not collapse the entire worldview.
@@ -154,40 +110,53 @@ This capability is considered a significant intelligence achievement, demonstrat
 Humans excel in non-monotonic reasoning, which should be considered a standard form of logic rather than a peripheral one.
 However, non-monotonic logic often appears difficult and esoteric due to its complex nature.
 
-\subsection{Theoretical Foundation and Motivation}
+\subsection{Theoretical Foundation}
 In \cite{mcdermott_non-monotonic_1980} the authors present a detailed exploration of non-monotonic logical systems, which are distinguished by the property that new axioms can invalidate previously established theorems.
 These logics are essential for modeling the beliefs of active processes operating with incomplete information, requiring assumptions that may need to be revised as new observations are made.
 This, for the time, new proposition is regarded as the basis and motivation for modern non-monotonic logics, developing model and proof theories, and offering a proof procedure along with applications for a specific non-monotonic logic.
 They demonstrate the completeness of the non-monotonic predicate calculus and the decidability of the non-monotonic sentential calculus, emphasizing the importance of these logics in handling the dynamic nature of real-world information and beliefs.
 
-A critical aspect of non-monotonic logic discussed in \cite{mcdermott_non-monotonic_1980} is its ability to handle routine revisions, where beliefs expressed as universally true have exceptions that must be managed.
-This flexibility contrasts with the rigidity of classical logic, which lacks tools for revising formal theories in the face of new, inconsistent information.
+A critical aspect of non-monotonic logics discussed in \cite{mcdermott_non-monotonic_1980} is their ability to handle routine revisions, where beliefs expressed as universally true have exceptions that must be managed.
+This flexibility contrasts with the rigidity of classical logics, which lack tools for revising formal theories in the face of new, inconsistent information.
 For example, the belief that "all animals with beaks are birds" can be contradicted by introducing the platypus.
-The primary challenge in revising beliefs lies in non-monotonic logic's ability to incorporate exceptions and adjustments, thereby better reflecting the inherently non-monotonic nature of human reasoning processes.
+The primary challenge in revising beliefs lies in non-monotonic logics' ability to incorporate exceptions and adjustments, thereby better reflecting the inherently non-monotonic nature of human reasoning processes.
 
 Non-monotonic inference rules aim not to establish certain knowledge where none exists, but to guide the selection of provisional beliefs, fostering fruitful investigations and informed guesses.
 These rules are not intended to independently derive valid conclusions as classical monotonic rules do.
 Instead, they help formulate a coherent set of beliefs that, even if later proven incorrect, provide a meaningful framework for further inquiry.
 
-\subsection{Understanding Inconsistencies in Logic Systems}
-% Strong inconsistency \cite{brewka_strong_2019}
-Monotonic logic, as illustrated by previously modeled propositional logic \(L^P_A\) and Quantified Boolean Formula \(L^{QBF}_A\), maintain consistency by ensuring that the addition of new information (\(K \subseteq K'\)) either retains or expands the belief set.
+\subsection{Understanding Inconsistencies}
+Monotonic logics, as illustrated by previously modeled propositional logic \(L^P\) and Quantified Boolean Formula \(L^{QBF}\), maintains consistency by ensuring that the addition of new information (\(K \subseteq K'\)) either retains or expands the belief set.
 
-The generalized definition by \cite{brewka_strong_2019} for monotonic logics of \cite{brewka_equilibria_2007} states that a logic \(L = (WF, BS, INC, ACC)\) is skeptically monotonic whenever \(K \subseteq K' \subseteq WF\) implies that if \(B' \in ACC(K')\), then \(B \subseteq B'\), for some \(B \in ACC(K)\).
+A generalized definition by \cite{brewka_strong_2019} for monotonic logics of \cite{brewka_equilibria_2007} states that whenever \(K \subseteq K' \subseteq WF\) of a logic \(L = (WF, BS, INC, ACC)\) implies
+\begin{itemize}
+      \item if \(B' \in ACC(K')\), then \(B \subseteq B'\), for some \(B \in ACC(K)\) it is \textit{skeptically monotonic}.
+      \item if \(B \in ACC(K)\), then \(B \subseteq B'\), for some \(B' \in ACC(K')\) it is \textit{credulously monotonic}.
+\end{itemize}
+\(L\) is monotonic if it is both skeptically and credulously monotonic.
 
-\subsection{Challenges Specific to Non-Monotonic Logics}
-Strong equivalency \cite{lifschitz_strongly_2001}
-"We mention strong equivalence here not because it is closely related to inconsistency, but because it helps to illustrate what the goals of this paper are. The observation that standard equivalence is not a very useful concept when it comes to nonmonotonic reasoning has led to a whole body of interesting work investigating stronger notions of equivalence. Similarly, starting from the observation that minimal inconsistent subsets are not very useful for nonmonotonic reasoning, we aim for a stronger notion which coincides with the standard notion for classical logics, but is a lot more useful for nonmonotonic logics." \cite{brewka_strong_2019}
+It is further proven in \cite{brewka_strong_2019} that both \(L^P\) and \(L^{QBF}\), given two knowledge bases \(K\) and \(K'\) where \(K \subseteq K'\), \(ACC(K)\) and \(ACC(K')\) maintain their required subset relations, demonstrate both skeptical and credulous monotonicity.
+
+It can be stated that for a skeptically monotonic logic \(L=(WF, BS, INC, ACC)\), if \(K \subseteq K'\) and \(K\) is inconsistent (i.e., \(ACC(K) \subseteq INC\)), then \(K'\) is also inconsistent, ensuring the upward closure of inconsistency in monotonic logics.
+
+\subsection{Challenges in Non-Monotonic Logics}
+In contrast, non-monotonic logics, such as Answer Set Programming without default negation \(L^{ASP-not}\), exhibit different behaviors.
+\cite{brewka_strong_2019} proves that the logic \(L^{ASP-not}\) is skeptically but not credulously monotonic, thus failing to meet the criteria for monotonicity.
+In that case it is possible for an inconsistent knowledge base \(K\) and a consistent superset \(K'\) to exist, which is not possible in weakly monotonic logics.
+This behavior complicates the understanding of inconsistencies because the consistency status of the knowledge base can change with the introduction of new information.
+In non-monotonic logics, an inconsistent knowledge base \(K\) can become consistent when extended to \(K'\), or vice versa, illustrating the failure to ensure the upward closure of inconsistencies in these contexts.
+
+Understanding inconsistencies in non-monotonic logics involves recognizing that these logics allow for more dynamic changes in belief sets.
+The addition of new information can resolve existing inconsistencies or create new ones, depending on how the new information interacts with the existing knowledge base.
+This contrasts with monotonic logics, where the set of conclusions only grows as more information is added, ensuring a predictable handling of inconsistencies.
 
 \section{Measuring Inconsistency}
-Analyze the distribution of inconsistency within a knowledge base using the Shapely measure \cite{hunter_measure_2010} in the classical case.
-Measures based on minimal inconsistent sets of a knowledge base \(\mathcal{K}\) \cite{jabbour_mis_2016} were proposed by \cite{ulbricht_measuring_2018}.
-
-\subsection{Measures of Inconsistency in Non-Monotonic logics}
+% Analyze the distribution of inconsistency within a knowledge base using the Shapely measure \cite{hunter_measure_2010} in the classical case.
+% Measures based on minimal inconsistent sets of a knowledge base \(K\) \cite{jabbour_mis_2016} were proposed by \cite{ulbricht_measuring_2018}.
 text
 
-\subsection{Case Studies and Applications}
+\subsection{Measuring Inconsistency in Non-Monotonic Logics}
 text
 
-\section{Future Directions}
-text
+\section{(Future Directions)}
+ (text)
