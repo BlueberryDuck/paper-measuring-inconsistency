@@ -126,7 +126,7 @@ These rules are not intended to independently derive valid conclusions as classi
 Instead, they help formulate a coherent set of beliefs that, even if later proven incorrect, provide a meaningful framework for further inquiry.
 
 \subsection{Understanding Inconsistencies}
-Monotonic logics, as illustrated by previously modeled propositional logic \(L^P\) and Quantified Boolean Formula \(L^{QBF}\), maintains consistency by ensuring that the addition of new information (\(K \subseteq K'\)) either retains or expands the belief set.
+Monotonic logics, as illustrated by previously modeled propositional logic \(L^P\) and Quantified Boolean Formula \(L^{QBF}\), maintain consistency by ensuring that the addition of new information (\(K \subseteq K'\)) either retains or expands the belief set.
 
 A generalized definition by \cite{brewka_strong_2019} for monotonic logics of \cite{brewka_equilibria_2007} states that whenever \(K \subseteq K' \subseteq WF\) of a logic \(L = (WF, BS, INC, ACC)\) implies
 \begin{itemize}
@@ -135,14 +135,14 @@ A generalized definition by \cite{brewka_strong_2019} for monotonic logics of \c
 \end{itemize}
 \(L\) is monotonic if it is both skeptically and credulously monotonic.
 
-It is further proven in \cite{brewka_strong_2019} that both \(L^P\) and \(L^{QBF}\), given two knowledge bases \(K\) and \(K'\) where \(K \subseteq K'\), \(ACC(K)\) and \(ACC(K')\) maintain their required subset relations, demonstrate both skeptical and credulous monotonicity.
+It is further proven in \cite{brewka_strong_2019} that for both \(L^P\) and \(L^{QBF}\), given two knowledge bases \(K\) and \(K'\) where \(K \subseteq K'\), \(ACC(K)\) and \(ACC(K')\) maintain their required subset relations, demonstrating both skeptical and credulous monotonicity.
 
 It can be stated that for a skeptically monotonic logic \(L=(WF, BS, INC, ACC)\), if \(K \subseteq K'\) and \(K\) is inconsistent (i.e., \(ACC(K) \subseteq INC\)), then \(K'\) is also inconsistent, ensuring the upward closure of inconsistency in monotonic logics.
 
 \subsection{Challenges in Non-Monotonic Logics}
 In contrast, non-monotonic logics, such as Answer Set Programming without default negation \(L^{ASP-not}\), exhibit different behaviors.
 \cite{brewka_strong_2019} proves that the logic \(L^{ASP-not}\) is skeptically but not credulously monotonic, thus failing to meet the criteria for monotonicity.
-In that case it is possible for an inconsistent knowledge base \(K\) and a consistent superset \(K'\) to exist, which is not possible in weakly monotonic logics.
+In that case it is possible for an inconsistent knowledge base \(K\) and a consistent superset \(K'\) to exist.
 This behavior complicates the understanding of inconsistencies because the consistency status of the knowledge base can change with the introduction of new information.
 In non-monotonic logics, an inconsistent knowledge base \(K\) can become consistent when extended to \(K'\), or vice versa, illustrating the failure to ensure the upward closure of inconsistencies in these contexts.
 
