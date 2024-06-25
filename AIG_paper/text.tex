@@ -30,7 +30,7 @@ text
 (Besnard 2014)
 \cite{ferme_revisiting_2014}
 
-"This becomes apparent when considering the monotony postulate which is usually satisfied by classical inconsistency measures and demands \(I(K) \lesseqgtr I(K')\) whenever \(K \subseteq K'\) holds, i.e., the severity of inconsistency cannot be decreased by adding new information. However, in nonmonotonic frameworks, adding information may resolve conflicts. It is thus possible that \(K\) is inconsistent, while \(K'\) is not, so we would expect \(I(K') < I(K)\) for any reasonable measure I."
+"This becomes apparent when considering the monotony postulate which is usually satisfied by classical inconsistency measures and demands \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K}')\) whenever \(\mathcal{K} \subseteq \mathcal{K}'\) holds, i.e., the severity of inconsistency cannot be decreased by adding new information. However, in nonmonotonic frameworks, adding information may resolve conflicts. It is thus possible that \(\mathcal{K}\) is inconsistent, while \(\mathcal{K}'\) is not, so we would expect \(\mathcal{I}(\mathcal{K}') < \mathcal{I}(\mathcal{K})\) for any reasonable measure \(\mathcal{I}\)."
 
 "we consider generalized versions of three measures based on minimal inconsistent sets" - Section 2\\
 "we develop rationality postulates based on previous ones from the literature [...] most of them require refinements" - Section 3
@@ -40,7 +40,7 @@ text
 
 "Some examples of such formalisms are, e.g. [...] answer set programming \cite{gelfond_logic_2002} [...]"
 
-"The basic intuition behind an inconsistency measure \(I\) is that the larger the inconsistency in \(K\) the larger the value \(I(K)\). A simple but popular approach to measure inconsistency is to take the number of minimal inconsistent subsets \cite{hunter_measuring_2008}, i.e. to define \(I_{MI}(K)=|I_{min}(K)|\), where \(I_{min}(K)\) is the set of all minimal inconsistent subsets of a knowledge base \(K\). This measure already complies with many basic ideas of inconsistency measurement, in particular \(I_{MI}(K)=0\) iff \(K\) is consistent. By also taking the size and the relationships of minimal inconsistent subsets into account, a wide variety of different inconsistency measures can be defined on top of that idea. \cite{hunter_measuring_2008} \cite{jabbour_mis_2016}"
+"The basic intuition behind an inconsistency measure \(\mathcal{I}\) is that the larger the inconsistency in \(\mathcal{K}\) the larger the value \(\mathcal{I}(\mathcal{K})\). A simple but popular approach to measure inconsistency is to take the number of minimal inconsistent subsets \cite{hunter_measuring_2008}, i.e. to define \(\mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|\), where \(I_{\min}(\mathcal{K})\) is the set of all minimal inconsistent subsets of a knowledge base \(\mathcal{K}\). This measure already complies with many basic ideas of inconsistency measurement, in particular \(\mathcal{I}_{\text{MI}}(\mathcal{K})=0\) iff \(\mathcal{K}\) is consistent. By also taking the size and the relationships of minimal inconsistent subsets into account, a wide variety of different inconsistency measures can be defined on top of that idea. \cite{hunter_measuring_2008} \cite{jabbour_mis_2016}"
 
 "Measuring inconsistency in non-monotonic logics has only recently gained some attention \cite{ulbricht_measuring_2018} \cite{brewka_strong_2019}"
 
@@ -55,3 +55,22 @@ strong K-inconsistency \cite{brewka_strong_2017}
 "we extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledge bases can be repaired by adding information"
 
 "extends previous work \cite{ulbricht_measuring_2018}"
+
+\subsection{Measures for strong inconsistency}
+\cite{ulbricht_handling_2020}
+
+"a subset of a knowledge base \(\mathcal{K}\) is strongly inconsistent if all its supersets within \(\mathcal{K}\) are inconsistent as well. Intuitively, one can think of a conflict that cannot be resolved by formulas in \(\mathcal{K}\) itself"
+
+"classical and strong inconsistency coincide whenever our logic is monotonic \cite{brewka_strong_2019}"
+
+"In particular, the notions coincide for monotonic logics and the existence of a strongly inconsistent subset of \(\mathcal{K}\) is a necessary and sufficient condition for inconsistency of \(\mathcal{K}\) itself. Moreover, removing from \(\mathcal{K}\) any minimal hitting set of \(SI_{\min}(\mathcal{K})\) yields a maximal consistent subset of \(\mathcal{K}\), which is also known as the hitting set duality in classical logics \cite{reiter_theory_1987}." See \cite{brewka_strong_2017}
+
+"Assume an arbitrary but fixed logic \(L\). In classical inconsistency measurement, minimal inconsistent subsets of a knowledge base play an important role since they can be seen as the “atomic conflicts” within \(\mathcal{K}\). A rather simple but still popular approach to measure inconsistency is thus taking the value \(\left| \mathcal{I}_{\min}(\mathcal{K}) \right|\). The notion of strong inconsistency facilitates the following generalization of this measure to arbitrary logics."
+
+\(\mathcal{I}_{\text{MSI}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{MSI}}(\mathcal{K}) = \left| SI_{\min}(\mathcal{K}) \right|\)
+
+\(\mathcal{I}_{\text{MSI}^\text{C}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{MSI}^\text{C}}(\mathcal{K}) = \sum_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}\)
+\cite{hunter_measuring_2008}
+
+\(\mathcal{I}_{\text{p}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|\)
+\cite{liu_measuring_2011}
