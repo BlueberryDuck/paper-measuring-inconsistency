@@ -1,7 +1,14 @@
 \section{Introduction}
 text
 
-\section{Outline}
+\section{Inconsistency Measurements}
+Nicht alle inconsistent knowledgebases besitzen keine oder die gleiche Menge an Informationen, was dadurch gezeigt wird, dass aus zwei inkonsistenten knowledgebases unterschiedliche Schlussfolgerungen gezogen werden können. Es reicht kein binärer measure aus, welcher angibt ob eine knowledge base inkonsistent ist, da es neben der classical inference, welche mit inkonstenten knowledgebases nicht arbeiten kann, auch andere logiken gibt, welche von einer feineren measure profitieren könnten. \cite{bertossi_approaches_2005}
+Ein Beispiel ist die quasi-classical logic welche die first-order logic erweitert, um Ähnlichkeiten aber insbesondere inkonsistenzen in einer knowledge base mit einer "degree of inconsistency" zu quantifizieren. \cite{grant_measuring_2006}
+
+Not all inconsistent knowledgebases contain no information at all or the same amount of, just because they are inconsistent as a whole. This can be deduced as two inconsistent knowledgebases can provide different conclusions, proving they contain different information.
+
+
+\section{Todo}
 
 "inconsistency measurements"
 \cite{bertossi_approaches_2005} \cite{grant_measuring_2006}
@@ -15,7 +22,7 @@ text
 "a refined notion of inconsistent subsets of a knowledge base K of a possibly nonmonotonic framework has been introduced, called strong K-inconsistency"
 \cite{brewka_strong_2017}
 
-"The notion of strong inconsistency generalizes classical inconsistency in a well behaved manner as it preserves many structural properties as e.g. the hitting set duality with maximal consistent sets \cite{reiter_theory_1987}"
+"The notion of strong inconsistency generalizes classical inconsistency in a well-behaved manner as it preserves many structural properties e.g. the hitting set duality with maximal consistent sets \cite{reiter_theory_1987}"
 
 "There is a growing number of rationality postulates for inconsistency measurement but not every postulate is generally accepted \cite{hameurlain_basic_2017} \cite{ferme_revisiting_2014}"
 
@@ -27,14 +34,14 @@ text
 
 "we extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledge bases can be repaired by adding information" in section 7 of \cite{ulbricht_handling_2020}
 
-\subsection{Measures for strong inconsistency}
+\subsection{Section 3 - Measures for strong inconsistency}
 \cite{ulbricht_handling_2020}
 
 "a subset of a knowledge base \(\mathcal{K}\) is strongly inconsistent if all its supersets within \(\mathcal{K}\) are inconsistent as well. Intuitively, one can think of a conflict that cannot be resolved by formulas in \(\mathcal{K}\) itself"
 
 "classical and strong inconsistency coincide whenever our logic is monotonic \cite{brewka_strong_2019}"
 
-"In particular, the notions coincide for monotonic logics and the existence of a strongly inconsistent subset of \(\mathcal{K}\) is a necessary and sufficient condition for inconsistency of \(\mathcal{K}\) itself. Moreover, removing from \(\mathcal{K}\) any minimal hitting set of \(SI_{\min}(\mathcal{K})\) yields a maximal consistent subset of \(\mathcal{K}\), which is also known as the hitting set duality in classical logics \cite{reiter_theory_1987}." See \cite{brewka_strong_2017}
+"In particular, the notions coincide for monotonic logics, and the existence of a strongly inconsistent subset of \(\mathcal{K}\) is a necessary and sufficient condition for the inconsistency of \(\mathcal{K}\) itself. Moreover, removing from \(\mathcal{K}\) any minimal hitting set of \(SI_{\min}(\mathcal{K})\) yields a maximal consistent subset of \(\mathcal{K}\), which is also known as the hitting set duality in classical logics \cite{reiter_theory_1987}." See \cite{brewka_strong_2017}
 
 "Assume an arbitrary but fixed logic \(L\). In classical inconsistency measurement, minimal inconsistent subsets of a knowledge base play an important role since they can be seen as the “atomic conflicts” within \(\mathcal{K}\). A rather simple but still popular approach to measure inconsistency is thus taking the value \(\left| \mathcal{I}_{\min}(\mathcal{K}) \right|\). The notion of strong inconsistency facilitates the following generalization of this measure to arbitrary logics."
 
