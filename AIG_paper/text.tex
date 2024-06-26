@@ -2,16 +2,12 @@
 text
 
 \section{Inconsistency Measurements}
-Nicht alle inconsistent knowledgebases besitzen keine oder die gleiche Menge an Informationen, was dadurch gezeigt wird, dass aus zwei inkonsistenten knowledgebases unterschiedliche Schlussfolgerungen gezogen werden können. Es reicht kein binärer measure aus, welcher angibt ob eine knowledge base inkonsistent ist, da es neben der classical inference, welche mit inkonstenten knowledgebases nicht arbeiten kann, auch andere logiken gibt, welche von einer feineren measure profitieren könnten. \cite{bertossi_approaches_2005}
-Ein Beispiel ist die quasi-classical logic welche die first-order logic erweitert, um Ähnlichkeiten aber insbesondere inkonsistenzen in einer knowledge base mit einer "degree of inconsistency" zu quantifizieren. \cite{grant_measuring_2006}
-
-Not all inconsistent knowledgebases contain no information at all or the same amount of, just because they are inconsistent as a whole. This can be deduced as two inconsistent knowledgebases can provide different conclusions, proving they contain different information.
+Not all inconsistent knowledgebases contain no information at all or the same amount of, just because they are inconsistent as a whole. This can be deduced as two inconsistent knowledgebases can provide different conclusions, implying they contain different information. \cite{bertossi_approaches_2005}\\
+A binary measure, commonly used for example in classical inference, only provides the information on whether a knowledgebase is consistent or inconsistent. Other logics that can work with inconsistent knowledgebases would profit from more fine-grained measures.
+One example of such logic is the quasi-classical logic \cite{grant_measuring_2006} which extends the first-order logic to enable the quantification of equality and more importantly inconsistency in a knowledgebase by determining "degrees of inconsistency".
 
 
 \section{Todo}
-
-"inconsistency measurements"
-\cite{bertossi_approaches_2005} \cite{grant_measuring_2006}
 
 "The basic intuition behind an inconsistency measure \(\mathcal{I}\) is that the larger the inconsistency in \(\mathcal{K}\) the larger the value \(\mathcal{I}(\mathcal{K})\). A simple but popular approach to measure inconsistency is to take the number of minimal inconsistent subsets \cite{hunter_measuring_2008}, i.e. to define \(\mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|\), where \(I_{\min}(\mathcal{K})\) is the set of all minimal inconsistent subsets of a knowledge base \(\mathcal{K}\). This measure already complies with many basic ideas of inconsistency measurement, in particular \(\mathcal{I}_{\text{MI}}(\mathcal{K})=0\) iff \(\mathcal{K}\) is consistent. By also taking the size and the relationships of minimal inconsistent subsets into account, a wide variety of different inconsistency measures can be defined on top of that idea. \cite{hunter_measuring_2008} \cite{jabbour_mis_2016}"
 
@@ -22,17 +18,17 @@ Not all inconsistent knowledgebases contain no information at all or the same am
 "a refined notion of inconsistent subsets of a knowledge base K of a possibly nonmonotonic framework has been introduced, called strong K-inconsistency"
 \cite{brewka_strong_2017}
 
-"The notion of strong inconsistency generalizes classical inconsistency in a well-behaved manner as it preserves many structural properties e.g. the hitting set duality with maximal consistent sets \cite{reiter_theory_1987}"
+"The notion of strong inconsistency generalizes classical inconsistency in a wellbehaved manner as it preserves many structural properties e.g. the hitting set duality with maximal consistent sets \cite{reiter_theory_1987}"
 
 "There is a growing number of rationality postulates for inconsistency measurement but not every postulate is generally accepted \cite{hameurlain_basic_2017} \cite{ferme_revisiting_2014}"
 
 "This becomes apparent when considering the monotony postulate which is usually satisfied by classical inconsistency measures and demands \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K}')\) whenever \(\mathcal{K} \subseteq \mathcal{K}'\) holds, i.e., the severity of inconsistency cannot be decreased by adding new information. However, in nonmonotonic frameworks, adding information may resolve conflicts. It is thus possible that \(\mathcal{K}\) is inconsistent, while \(\mathcal{K}'\) is not, so we would expect \(\mathcal{I}(\mathcal{K}') < \mathcal{I}(\mathcal{K})\) for any reasonable measure \(\mathcal{I}\)."
 
-"we consider generalized versions of three measures based on minimal inconsistent sets" in Section 2 of \cite{ulbricht_measuring_2018} and Section 3 of \cite{ulbricht_handling_2020}
+"We consider generalized versions of three measures based on minimal inconsistent sets" in Section 2 of \cite{ulbricht_measuring_2018} and Section 3 of \cite{ulbricht_handling_2020}
 
-"we develop rationality postulates based on previous ones from the literature [...] most of them require refinements" in Section 3 of \cite{ulbricht_measuring_2018} and Section 4 of \cite{ulbricht_handling_2020}
+"We develop rationality postulates based on previous ones from the literature [...] most of them require refinements" in Section 3 of \cite{ulbricht_measuring_2018} and Section 4 of \cite{ulbricht_handling_2020}
 
-"we extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledge bases can be repaired by adding information" in section 7 of \cite{ulbricht_handling_2020}
+"We extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledge bases can be repaired by adding information" in section 7 of \cite{ulbricht_handling_2020}
 
 \subsection{Section 3 - Measures for strong inconsistency}
 \cite{ulbricht_handling_2020}
