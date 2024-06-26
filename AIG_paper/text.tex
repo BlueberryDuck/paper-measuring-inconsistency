@@ -1,60 +1,31 @@
 \section{Introduction}
 text
 
-\section{Measuring Strong Inconsistency}
-\cite{ulbricht_measuring_2018}
+\section{Outline}
 
 "inconsistency measurements"
-(Hunter and Konieczny 2004; Grant and Hunter 2006; Thimm 2016)
 \cite{bertossi_approaches_2005} \cite{grant_measuring_2006}
-
-"popular approach to measure inconsistency is to take the number of minimal inconsistent subsets"
-(Hunter and Konieczny 2008)
-\cite{hunter_measuring_2008}
-
-"a wide variety of different inconsistency measures can be defined on top of that idea"
-(Hunter and Konieczny 2008; Jabbour et al. 2016; Jabbour and Sais 2016)
-\cite{hunter_measuring_2008} \cite{jabbour_mis_2016}
-
-"Measuring inconsistency in nonmonotonic logics"
-(Ulbricht, Thimm, and Brewka 2016; Brewka, Thimm, and Ulbricht 2017)
-\cite{michael_measuring_2016} \cite{brewka_strong_2017}
-
-"a refined notion of inconsistent subsets of a knowledge base K of a possibly nonmonotonic framework has been introduced, called strong K-inconsistency"
-(Brewka, Thimm, and Ulbricht 2017)
-\cite{brewka_strong_2017}
-
-"generalize existing inconsistency measures based on minimal inconsistent sets to arbitrary logics, which is the topic of the present paper"
-
-"rationality postulates, i.e., desirable properties that should hold for concrete approaches. There is a growing number of rationality postulates for inconsistency measurement but not every postulate is generally accepted"
-(Besnard 2014)
-\cite{ferme_revisiting_2014}
-
-"This becomes apparent when considering the monotony postulate which is usually satisfied by classical inconsistency measures and demands \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K}')\) whenever \(\mathcal{K} \subseteq \mathcal{K}'\) holds, i.e., the severity of inconsistency cannot be decreased by adding new information. However, in nonmonotonic frameworks, adding information may resolve conflicts. It is thus possible that \(\mathcal{K}\) is inconsistent, while \(\mathcal{K}'\) is not, so we would expect \(\mathcal{I}(\mathcal{K}') < \mathcal{I}(\mathcal{K})\) for any reasonable measure \(\mathcal{I}\)."
-
-"we consider generalized versions of three measures based on minimal inconsistent sets" - Section 2\\
-"we develop rationality postulates based on previous ones from the literature [...] most of them require refinements" - Section 3
-
-\section{Handling and measuring inconsistency in non-monotonic logics}
-\cite{ulbricht_handling_2020}
-
-"Some examples of such formalisms are, e.g. [...] answer set programming \cite{gelfond_logic_2002} [...]"
 
 "The basic intuition behind an inconsistency measure \(\mathcal{I}\) is that the larger the inconsistency in \(\mathcal{K}\) the larger the value \(\mathcal{I}(\mathcal{K})\). A simple but popular approach to measure inconsistency is to take the number of minimal inconsistent subsets \cite{hunter_measuring_2008}, i.e. to define \(\mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|\), where \(I_{\min}(\mathcal{K})\) is the set of all minimal inconsistent subsets of a knowledge base \(\mathcal{K}\). This measure already complies with many basic ideas of inconsistency measurement, in particular \(\mathcal{I}_{\text{MI}}(\mathcal{K})=0\) iff \(\mathcal{K}\) is consistent. By also taking the size and the relationships of minimal inconsistent subsets into account, a wide variety of different inconsistency measures can be defined on top of that idea. \cite{hunter_measuring_2008} \cite{jabbour_mis_2016}"
 
-"Measuring inconsistency in non-monotonic logics has only recently gained some attention \cite{ulbricht_measuring_2018} \cite{brewka_strong_2019}"
+"Some examples of such formalisms are, e.g. [...] answer set programming \cite{gelfond_logic_2002} [...]"
 
-strong K-inconsistency \cite{brewka_strong_2017}
+"Measuring inconsistency in non-monotonic logics has only recently gained some attention \cite{ulbricht_measuring_2018} \cite{brewka_strong_2019} \cite{michael_measuring_2016} \cite{brewka_strong_2017}"
+
+"a refined notion of inconsistent subsets of a knowledge base K of a possibly nonmonotonic framework has been introduced, called strong K-inconsistency"
+\cite{brewka_strong_2017}
 
 "The notion of strong inconsistency generalizes classical inconsistency in a well behaved manner as it preserves many structural properties as e.g. the hitting set duality with maximal consistent sets \cite{reiter_theory_1987}"
 
 "There is a growing number of rationality postulates for inconsistency measurement but not every postulate is generally accepted \cite{hameurlain_basic_2017} \cite{ferme_revisiting_2014}"
 
-"we consider generalized versions of three measures based on minimal inconsistent sets" - Section 3
-"we develop rationality postulates based on previous ones from the literature [...] most of them require refinements" - Section 4
-"we extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledge bases can be repaired by adding information"
+"This becomes apparent when considering the monotony postulate which is usually satisfied by classical inconsistency measures and demands \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K}')\) whenever \(\mathcal{K} \subseteq \mathcal{K}'\) holds, i.e., the severity of inconsistency cannot be decreased by adding new information. However, in nonmonotonic frameworks, adding information may resolve conflicts. It is thus possible that \(\mathcal{K}\) is inconsistent, while \(\mathcal{K}'\) is not, so we would expect \(\mathcal{I}(\mathcal{K}') < \mathcal{I}(\mathcal{K})\) for any reasonable measure \(\mathcal{I}\)."
 
-"extends previous work \cite{ulbricht_measuring_2018}"
+"we consider generalized versions of three measures based on minimal inconsistent sets" in Section 2 of \cite{ulbricht_measuring_2018} and Section 3 of \cite{ulbricht_handling_2020}
+
+"we develop rationality postulates based on previous ones from the literature [...] most of them require refinements" in Section 3 of \cite{ulbricht_measuring_2018} and Section 4 of \cite{ulbricht_handling_2020}
+
+"we extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledge bases can be repaired by adding information" in section 7 of \cite{ulbricht_handling_2020}
 
 \subsection{Measures for strong inconsistency}
 \cite{ulbricht_handling_2020}
