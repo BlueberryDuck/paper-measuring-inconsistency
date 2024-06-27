@@ -2,14 +2,16 @@
 text
 
 \section{Inconsistency Measurements}
-Not all inconsistent knowledgebases contain no information at all or the same amount of, just because they are inconsistent as a whole. This can be deduced as two inconsistent knowledgebases can provide different conclusions, implying they contain different information. \cite{bertossi_approaches_2005}\\
+Not all inconsistent knowledgebases contain no information at all or the same amount of, just because they are inconsistent as a whole. This can be deduced as two inconsistent knowledgebases can provide different conclusions, implying they contain different information \cite{bertossi_approaches_2005}.\\
 A binary measure, commonly used for example in classical inference, only provides the information on whether a knowledgebase is consistent or inconsistent. Other logics that can work with inconsistent knowledgebases would profit from more fine-grained measures.
 One example of such logic is the quasi-classical logic \cite{grant_measuring_2006} which extends the first-order logic to enable the quantification of equality and more importantly inconsistency in a knowledgebase by determining "degrees of inconsistency".
 
+The fundamental idea of an inconsistency measure is to provide a function \(\mathcal{I}\) that when applied to a knowledgebase \(\mathcal{K}\) is growing in number the more inconsistencies there are in \(\mathcal{K}\). One of the most popular approaches for such a measure is using the number of minimal inconsistent subsets \cite{hunter_measuring_2008}. This approach "counts" the minimal number of formulas needed to depict the inconsistency of the entire set, while also taking into account the proportion of the language that is touched by the inconsistency.\\
+So when using a set of all minimal inconsistent subsets of a knowledgebase \(I_{\min}(\mathcal{K})\) one can define an inconsistency measure as \(\mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|\). This simple approach comes with the advantage of already meeting a number of the basics that an inconsistency measure needs to fulfill, most notably \(\mathcal{I}_{\text{MI}}(\mathcal{K}) = 0\) if \(\mathcal{K}\) is consistent.
+Many other inconsistency measures like \cite{jabbour_mis_2016} build on top of that.
 
 \section{Todo}
-
-"The basic intuition behind an inconsistency measure \(\mathcal{I}\) is that the larger the inconsistency in \(\mathcal{K}\) the larger the value \(\mathcal{I}(\mathcal{K})\). A simple but popular approach to measure inconsistency is to take the number of minimal inconsistent subsets \cite{hunter_measuring_2008}, i.e. to define \(\mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|\), where \(I_{\min}(\mathcal{K})\) is the set of all minimal inconsistent subsets of a knowledge base \(\mathcal{K}\). This measure already complies with many basic ideas of inconsistency measurement, in particular \(\mathcal{I}_{\text{MI}}(\mathcal{K})=0\) iff \(\mathcal{K}\) is consistent. By also taking the size and the relationships of minimal inconsistent subsets into account, a wide variety of different inconsistency measures can be defined on top of that idea. \cite{hunter_measuring_2008} \cite{jabbour_mis_2016}"
+\cite{jabbour_mis_2016}
 
 "Some examples of such formalisms are, e.g. [...] answer set programming \cite{gelfond_logic_2002} [...]"
 
