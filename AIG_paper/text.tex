@@ -41,13 +41,18 @@ Let \(L\) be an arbitrary but fixed logic. A simple but popular approach to meas
 
 The restriction to limit the measure to non-negative numbers stems from its intended use. Intuitively an inconsistency measure \(\mathcal{I}(\mathcal{K}) = 0\) should mean the knowledge base measured is consistent, while \(\mathcal{I}(\mathcal{K}') < \mathcal{I}(\mathcal{K}'')\) should mean that \(\mathcal{K}'\) is "less" inconsistent than \(\mathcal{K}''\). The need to differentiate between consistent knowledge bases and thus using negative values is not given.
 
-    [Measures to introduce]
+One extension of this approach is taking the size of a set \(\mathcal{H} \in SI_{\min}(\mathcal{K})\) into account. An inconsistency should be considered more severe, the smaller a minimal inconsistent subset is, which means that the contradiction can be represented with fewer formulas.
 
-\(\mathcal{I}_{\text{MSI}^\text{C}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{MSI}^\text{C}}(\mathcal{K}) = \sum_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}\)
-\cite{hunter_measuring_2008}
+The lottery paradox \cite{kyburg_probability_1961} highlights this issue.
+Assume a lottery with \(n\) tickets and statements \(t_1, ..., t_n\) whether their respective ticket is the winner. As the lottery is fair and has exactly one winner (\(t_1 \lor ... \lor t_n\)) and it is reasonable to assume a specific ticket \(t_i\) is likely to lose which can be applied to all tickets (\(\neg t_1, ..., \neg t_n\)) it results in an inconsistent knowledgebase \(\mathcal{K}_n = \{ t_1 \lor ... \lor t_n, \neg t_1, ..., \neg t_n \}\). Looking at two lotteries with \(n = 1\) and \(n = 1000000\) it doesn't seem as reasonable anymore to assume \(t_1\) loses in the first lottery compared to the latter. Although \(\mathcal{K}_1\) and \(\mathcal{K}_{1000000}\) are still both inconsistent \(\mathcal{K}_1\) seems a lot more unreasonable.
 
-\(\mathcal{I}_{\text{p}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|\)
-\cite{liu_measuring_2011}
+Coming back to the measure at hand, this intuition is not represented by \(\mathcal{I}_{\text{MSI}}\), as it provides \(\mathcal{I}_{\text{MSI}}(\mathcal{K}_n) = 1\) for all lotteries, no matter their size. To combat this \cite{ulbricht_handling_2020} proposes two further measures \(\mathcal{I}_{\text{MSI}^\text{C}}\) and \(\mathcal{I}_{\text{p}}\) by applying strong inconsistency to them.
+
+The first measure \(\mathcal{I}_{\text{MSI}^\text{C}}\) is based on the measure \(\mathcal{I}_{\text{MI}^{\text{C}}}\) by \cite{hunter_measuring_2008} which considers the size of a minimal inconsistent set.\\
+\[\mathcal{I}_{\text{MSI}^\text{C}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{MSI}^\text{C}}(\mathcal{K}) = \sum_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}\]
+
+The second measure \(\mathcal{I}_{\text{p}}\) is based on \cite{liu_measuring_2011} which considers the number of problematic formulas instead of the number of minimal inconsistent sets.\\
+\[\mathcal{I}_{\text{p}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|\]
 
 \section{Rationality Postulates}
 "We develop rationality postulates based on previous ones from the literature [...] most of them require refinements" in Section 3 of \cite{ulbricht_measuring_2018} and Section 4 of \cite{ulbricht_handling_2020}
