@@ -237,7 +237,6 @@
 \newcommand{\makestatement}[1]{
     \clearpage
     \pagestyle{empty}
-    \selectlanguage{ngerman}
     \ifenglish
         \section*{Statement}
         I declare that I have written this seminar paper independently and without
@@ -247,11 +246,12 @@
         or graphic representations included. The paper has not previously been submitted
         in the same or a similar form to the same or any other examining authority,
         nor has it been published. By submitting the electronic version of the final
-        version of the thesis, I acknowledge that it can be checked for plagiarism with
+        version of the seminar paper, I acknowledge that it can be checked for plagiarism with
         the help of a plagiarism detection service and will be stored exclusively
         for examination purposes.
 
     \else
+        \selectlanguage{ngerman}
         \section*{Erklärung}
         Ich erkläre, dass ich die schriftliche Ausarbeitung zum Seminar selbstständig
         und ohne unzulässige Inanspruchnahme Dritter verfasst habe. Ich habe dabei nur
