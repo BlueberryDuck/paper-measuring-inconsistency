@@ -29,9 +29,10 @@
 % \tableofcontents
 
 % === LaTeX environments ===
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{exmaple}[theorem]{Example}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{theorem}[definition]{Theorem}
 
 \input{text}                                % contains the main content
 

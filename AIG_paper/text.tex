@@ -89,13 +89,42 @@ The second measure \(\mathcal{I}_{\text{p}}\) is based on \cite{liu_measuring_20
 \section{Rationality Postulates}
 As described above, an inconsistency measure should indicate how much inconsistency a knowledge base carries. However, not just any function can be used for this purpose. A list of requirements is needed that an inconsistency measure must fulfill to be useful, these requirements are called rationality postulates.
 
-There are a number of these rationality postulates for inconsistency measures, which are revised and challenged in active discourse. For example, \cite{hunter_measure_2010} formulates a core set of rationality postulates, which are in turn revised by \cite{hameurlain_basic_2017} to ensure that inconsistency measures are robust to counterexamples, and alternative variants of this core set are proposed. This is done to refine rationality postulates and make them usable in different application contexts.
+There exist a number of these rationality postulates for inconsistency measures, which are revised and challenged in active discourse. For example, \cite{hunter_measure_2010} formulates a core set of rationality postulates, which are in turn revised by \cite{hameurlain_basic_2017} to ensure that inconsistency measures are robust to counterexamples, and alternative variants of this core set are proposed. This is done to refine rationality postulates and make them usable in different application contexts.
 
 This is also the case in the context of inconsistency measures for non-monotonic logics, for which \cite{ulbricht_measuring_2018} and \cite{ulbricht_handling_2020} make several revisions to existing rationality postulates. The focal point here is on the monotony postulate which requires \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K}')\). In contrast to classical inconsistency measures, however, this postulate does not work for non-monotonic frameworks, as new information can resolve inconsistencies in a knowledge base, which means that \(\mathcal{I}(\mathcal{K}') < \mathcal{I}(\mathcal{K})\) is not only possible but also expected.
 
 \subsection{Basic Postulates}
+There are four basic postulates - Consistency, Monotony, Free Formula Independence, and Dominance - which a basic inconsistency measure should have, according to \cite{hunter_measure_2010}. Based on these, \cite{ulbricht_handling_2020} phrases the following basic postulates for non-monotonic logics.
+\\
+\textbf{Consistency}
+For any knowledge base \(\mathcal{K} \subseteq \text{WF}\), \(\mathcal{I}(\mathcal{K}) = 0\) if and only if \(\mathcal{K}\) is consistent.
+
+This requires an inconsistency measure to be able to distinguish between consistent and inconsistent knowledge bases.
+\\
+\textbf{Monotonicity}
+If \(\mathcal{K}\) and \(\mathcal{K}'\) are knowledge bases, then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+\\
+\textbf{Strong Monotonicity}
+If \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(\mathcal{I}(\mathcal{K} \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+\\
+\textbf{SI-Free}
+If \(\alpha \in Free_{SI}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
+\\
+\textbf{Independence}
+If \(\alpha \in Ntr(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
 
 \subsection{Extended Postulates}
+text
+\\
+\textbf{Strong Equivalence}
+\\
+\textbf{FW-Strong Equivalence}
+\\
+\textbf{Strong Equivalence Replacement}
+\\
+\textbf{Separability}
+\\
+\textbf{Strong Super-Additivity}
 
 \section{[Optional] Repair Knowledge Bases}
 "We extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledgebases can be repaired by adding information" in section 7 of \cite{ulbricht_handling_2020}
