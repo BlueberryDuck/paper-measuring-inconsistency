@@ -99,13 +99,29 @@ There are four basic postulates - Consistency, Monotony, Free Formula Independen
 \textbf{Consistency}
 For any knowledge base \(\mathcal{K} \subseteq \text{WF}\), \(\mathcal{I}(\mathcal{K}) = 0\) if and only if \(\mathcal{K}\) is consistent.
 
-This requires an inconsistency measure to be able to distinguish between consistent and inconsistent knowledge bases.
+This requires an inconsistency measure to be able to distinguish between consistent and inconsistent knowledge bases and is true for non-monotonic logics without any modifications.
 \\
-\textbf{Monotonicity}
+\textit{\textbf{Monotonicity}}
 If \(\mathcal{K}\) and \(\mathcal{K}'\) are knowledge bases, then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+
+Monotonicity is a usually widely accepted postulate, which describes the intuition that a superset of a knowledge base cannot reduce inconsistency, only increase it, since more information is likely to be accompanied by more conflicts.
+
+For non-monotonic logics, however, monotonicity does not make sense as new information might resolve conflicts in \(\mathcal{K}\). Monotonic behavior should only appear if \(\mathcal{K}'\) does not resolve any conflicts in \(\mathcal{K}\). If \(\mathcal{H} \subseteq \mathcal{K}\) is strongly inconsistent, so \(\mathcal{H} \in \text{SI}(\mathcal{K})\), then there should not exist a \(\mathcal{H}' \subseteq \mathcal{K}'\), such that \(\mathcal{H} \cup \mathcal{H}'\) is consistent. If there was, \(\mathcal{H}\) might not contribute to \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\), which in turn questions the comparability of \(\mathcal{I}(\mathcal{K})\) and \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
+
+
+Consider the following example as an illustration:
+[Example here]
+
+This results in the need for a rephrased monotonicity postulate that recognizes the preservation of conflicts as a condition for monotonicity in non-monotonic logics. Using the concept of strongly inconsistent subsets, preserving conflicts is defined as follows:
+
+\begin{definition}
+    Let \(\mathcal{K}\) and \(\mathcal{K}'\) be knowledge bases. \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\) if \(\mathcal{H} \in \text{SI}(\mathcal{K} \cup \mathcal{K}')\) for any \(\mathcal{H} \in \text{SI}(\mathcal{K})\).
+\end{definition}
+
+Applying this concept of conflict preservation \cite{ulbricht_handling_2020} provides the rephrased monotonicity postulate under the name strong monotonicity.
 \\
 \textbf{Strong Monotonicity}
-If \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(\mathcal{I}(\mathcal{K} \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+If \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
 \\
 \textbf{SI-Free}
 If \(\alpha \in Free_{SI}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
