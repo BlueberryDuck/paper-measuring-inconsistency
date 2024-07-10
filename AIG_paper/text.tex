@@ -1,7 +1,7 @@
 \section{Introduction}
 text
 
-\section{Inconsistency Measurements}
+\section{Inconsistency Measures}
 Not all inconsistent knowledge bases contain no information at all or the same amount of, just because they are inconsistent as a whole. This can be deduced as two inconsistent knowledge bases can provide different conclusions, implying they contain different information \cite{bertossi_approaches_2005}.
 
 A binary measure, commonly used for example in classical inference, only provides information on whether a knowledge base is consistent or inconsistent. Other logics that can work with inconsistent knowledge bases would profit from more fine-grained measures.
@@ -77,13 +77,13 @@ Coming back to the measure at hand, this intuition is not represented by \(\math
 The first measure \(\mathcal{I}_{\text{MSI}^\text{C}}\) is based on the measure \(\mathcal{I}_{\text{MI}^{\text{C}}}\) by \cite{hunter_measuring_2008} which considers the size of a minimal inconsistent set.
 
 \begin{definition}
-    \(\mathcal{I}_{\text{MSI}^\text{C}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{MSI}^\text{C}}(\mathcal{K}) = \sum_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}\)
+    \(\mathcal{I}_{\text{MSI}^\text{C}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{MSI}^\text{C}}(\mathcal{K}) = \sum\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}\)
 \end{definition}
 
 The second measure \(\mathcal{I}_{\text{p}}\) is based on \cite{liu_measuring_2011} which considers the number of problematic formulas instead of the number of minimal inconsistent sets.
 
 \begin{definition}
-    \(\mathcal{I}_{\text{p}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|\)
+    \(\mathcal{I}_{\text{p}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|\)
 \end{definition}
 
 \section{Rationality Postulates}
@@ -118,16 +118,36 @@ This results in the need for a rephrased monotonicity postulate that recognizes 
     Let \(\mathcal{K}\) and \(\mathcal{K}'\) be knowledge bases. \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\) if \(\mathcal{H} \in \text{SI}(\mathcal{K} \cup \mathcal{K}')\) for any \(\mathcal{H} \in \text{SI}(\mathcal{K})\).
 \end{definition}
 
-Applying this concept of conflict preservation \cite{ulbricht_handling_2020} provides the rephrased monotonicity postulate under the name strong monotonicity.
+Applying this concept of conflict preservation, \cite{ulbricht_handling_2020} provides the rephrased monotonicity postulate under the name strong monotonicity.
 \\
 \textbf{Strong Monotonicity}
 If \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+
+Now coming to the free formula independence postulate which states that a free formula \(\alpha\) of a knowledge base \(\mathcal{K}\) should not impact the degree of inconsistency of \(\mathcal{K}\) regardless of its existence, so \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\) for \(\alpha \in Free(\mathcal{K})\). Free in this context then means that the formula \(\alpha\) is not part of a minimal inconsistent subset \(I_{\min}(\mathcal{K})\).
+
+\begin{definition}
+    Let \(\mathcal{K}\) be a monotonic knowledge base. A formula \(\alpha \in \mathcal{K}\) is called free if\\
+    \(\alpha \in \mathcal{K} \backslash \bigcup\limits_{\mathcal{H} \in I_{\min}(\mathcal{K})} \mathcal{H}\).
+\end{definition}
+
+To generalize the definition of free to non-monotonic logics as well, the concepts of hitting set duality and strong inconsistency can be applied. This results in the minimal inconsistent subset \(I_{\min}(\mathcal{K})\) to be replaced with \(SI_{\min}(\mathcal{K})\) and instead of \(\alpha\) having to appear in any minimal hitting set of \(SI_{\min}(\mathcal{K})\) one can assume \(\alpha\) to be present in all maximal consistent sets \(\mathcal{H} \in C_{\max}(\mathcal{K})\). This leads to the following definition:
+
+\begin{definition}
+    Let \(\mathcal{K}\) be a knowledge base. A formula \(\alpha \in \mathcal{K}\) is called free with respect to strong inconsistency (or SI-free or simply free if there is no risk of confusion) if\\
+    \(\alpha \in \mathcal{K} \backslash \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} = \bigcap\limits_{\mathcal{H} \in C_{\max}(\mathcal{K})} \mathcal{H}\).
+\end{definition}
+
+[Example here]
+
+Given the similarities between \(Free(\mathcal{K})\) and \(Free_{SI}(\mathcal{K})\) a revised postulate for free formula independence is proposed by \cite{ulbricht_handling_2020}. This SI-Free postulate suggests that a free formula \(\alpha\) not only does not increase the degree of inconsistency but also does not introduce strongly inconsistent subsets.
 \\
 \textbf{SI-Free}
 If \(\alpha \in Free_{SI}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
 \\
 \textbf{Independence}
 If \(\alpha \in Ntr(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
+\\
+\textbf{Dominance}
 
 \subsection{Extended Postulates}
 text
