@@ -123,31 +123,49 @@ Applying this concept of conflict preservation, \cite{ulbricht_handling_2020} pr
 \textbf{Strong Monotonicity}
 If \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
 
-Now coming to the free formula independence postulate which states that a free formula \(\alpha\) of a knowledge base \(\mathcal{K}\) should not impact the degree of inconsistency of \(\mathcal{K}\) regardless of its existence, so \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\) for \(\alpha \in Free(\mathcal{K})\). Free in this context then means that the formula \(\alpha\) is not part of a minimal inconsistent subset \(I_{\min}(\mathcal{K})\).
+Now coming to the free formula independence postulate which states that a free formula \(\alpha\) of a knowledge base \(\mathcal{K}\) should not increase the degree of inconsistency of \(\mathcal{K}\) regardless of its existence, so \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\) for \(\alpha \in Free(\mathcal{K})\). Free in this context then means that the formula \(\alpha\) is not part of a minimal inconsistent subset \(I_{\min}(\mathcal{K})\).
 
 \begin{definition}
     Let \(\mathcal{K}\) be a monotonic knowledge base. A formula \(\alpha \in \mathcal{K}\) is called free if\\
-    \(\alpha \in \mathcal{K} \backslash \bigcup\limits_{\mathcal{H} \in I_{\min}(\mathcal{K})} \mathcal{H}\).
+    \(\alpha \in \mathcal{K} \backslash \bigcup\limits_{\mathcal{H} \in I_{\min}(\mathcal{K})} \mathcal{H}\).\\
+    Let \(Free(\mathcal{K})\) be the set of all free formulas of \(\mathcal{K}\).
 \end{definition}
 
 To generalize the definition of free to non-monotonic logics as well, the concepts of hitting set duality and strong inconsistency can be applied. This results in the minimal inconsistent subset \(I_{\min}(\mathcal{K})\) to be replaced with \(SI_{\min}(\mathcal{K})\) and instead of \(\alpha\) having to appear in any minimal hitting set of \(SI_{\min}(\mathcal{K})\) one can assume \(\alpha\) to be present in all maximal consistent sets \(\mathcal{H} \in C_{\max}(\mathcal{K})\). This leads to the following definition:
 
 \begin{definition}
     Let \(\mathcal{K}\) be a knowledge base. A formula \(\alpha \in \mathcal{K}\) is called free with respect to strong inconsistency (or SI-free or simply free if there is no risk of confusion) if\\
-    \(\alpha \in \mathcal{K} \backslash \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} = \bigcap\limits_{\mathcal{H} \in C_{\max}(\mathcal{K})} \mathcal{H}\).
+    \(\alpha \in \mathcal{K} \backslash \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} = \bigcap\limits_{\mathcal{H} \in C_{\max}(\mathcal{K})} \mathcal{H}\).\\
+    Let \(Free_{SI}(\mathcal{K})\) be the set of all SI-free formulas of \(\mathcal{K}\).
 \end{definition}
 
 [Example here]
 
-Given the similarities between \(Free(\mathcal{K})\) and \(Free_{SI}(\mathcal{K})\) a revised postulate for free formula independence is proposed by \cite{ulbricht_handling_2020}. This SI-Free postulate suggests that a free formula \(\alpha\) not only does not increase the degree of inconsistency but also does not introduce strongly inconsistent subsets.
+Given the similarities between \(Free(\mathcal{K})\) and \(Free_{SI}(\mathcal{K})\), a revised postulate for free formula independence is proposed by \cite{ulbricht_handling_2020}. This SI-Free postulate suggests that a free formula \(\alpha\) not only does not increase the degree of inconsistency but also does not introduce strongly inconsistent subsets.
 \\
 \textbf{SI-Free}
 If \(\alpha \in Free_{SI}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
+
+One problem in using this postulate stems from the fact that ordinary inconsistency of a subset \(\mathcal{H} \subseteq \mathcal{K}\) only depends on \(\mathcal{H}\), whereas strong inconsistency relates to the whole knowledgebase base \(\mathcal{K}\). The removal of formulas in \(Free_{SI}(\mathcal{K})\) may affect the structure of \(SI_{\min}(\mathcal{K})\).
+
+    [Example here]
+
+This shows that it is hard to predict what might happen when an SI-free formula is removed. Notably, \(SI_{\min}(\mathcal{K}) = SI_{\min}(\mathcal{K} \backslash \{\alpha\})\) is not true for all \(\alpha \in Free_{SI}(\mathcal{K})\), which shows that not even previously introduced \(\mathcal{I}_{\text{MSI}}\) satisfies this SI-free postulate. In non-monotonic logics, an SI-free formula \(\alpha\) could resolve conflicts, which is why \cite{brewka_strong_2017} introduces the notion of neutral formulas to further strengthen the condition.
+
+\begin{definition}
+    Let \(\mathcal{K}\) be a knowledge base. A formula \(\alpha \in \mathcal{K}\) is called neutral if it satisfies\\
+    \(\forall \mathcal{H} \subseteq \mathcal{K}: \mathcal{H} \in C(\mathcal{K}) \Leftrightarrow \mathcal{H} \cup \{\alpha\} \in C(\mathcal{K})\).\\
+    Let \(Ntr(\mathcal{K})\) be the set of all neutral formulas of \(\mathcal{K}\).
+\end{definition}
+
+Neutral formulas do not make use of strong inconsistency, in contrast to SI-free formulas. Since neutral formulas do not depend as much on the structure of the knowledge base, they do not influence \(\mathcal{K}\) or \(SI_{\min}(\mathcal{K})\). Like SI-free formulas, a neutral formula \(\alpha \in \mathcal{K}\) does not increase the degree of inconsistency of \(\mathcal{K}\) but also does not resolve any conflicts either, which leads to the independence postulate.
 \\
 \textbf{Independence}
 If \(\alpha \in Ntr(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
-\\
-\textbf{Dominance}
+
+The only postulate not mentioned yet is the dominance postulate \cite{hunter_measure_2010}. It tries to formulate the intuition that a formula carrying more information is also more likely to be involved in conflicts. It is highly contested, even for propositional settings, see \cite{ferme_revisiting_2014}, and \cite{ulbricht_measuring_2018} questions its use altogether for non-monotonic settings. Since for non-monotonic logics more information can even resolve conflicts in a knowledge base it is unfounded to consider such a formula to be more problematic.
+
+This concludes the discussion on basic postulates.
 
 \subsection{Extended Postulates}
 text
@@ -161,6 +179,8 @@ text
 \textbf{Separability}
 \\
 \textbf{Strong Super-Additivity}
+
+\section{Evaluation of Measures}
 
 \section{[Optional] Repair Knowledge Bases}
 "We extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledgebases can be repaired by adding information" in section 7 of \cite{ulbricht_handling_2020}
