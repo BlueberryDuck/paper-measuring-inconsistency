@@ -168,19 +168,28 @@ The only postulate not mentioned yet is the dominance postulate \cite{hunter_mea
 This concludes the discussion on basic postulates.
 
 \subsection{Extended Postulates}
-text
-\\
+"Many concrete approaches to inconsistency measurement depend on the syntax of a knowledge base. The most common example is the difference between the conjunction \(\{a \land b\}\) and two formulas \(\{a, b\}\)."
+"There are thus rationality postulates in the literature that are concerned about the behavior of inconsistency measures when dealing with equivalent formulas resp. equivalent knowledge bases. Of course, it is desirable that a measure \(\mathcal{I}\) is robust wrt. the syntax of \(\mathcal{K}\)."
+"The postulate adjunction invariance \cite{ferme_revisiting_2014} formalizes the idea that there should be no difference between \(\{a \land b\}\) and \(\{a, b\}\), i.e., \(\mathcal{I}(\mathcal{K} \cup \{a \land b\}) = \mathcal{I}(\mathcal{K} \cup \{a, b\})\)."
+"In non-monotonic frameworks, a notion of equivalence of the form “\(\mathcal{K}\) has the same models as \(\mathcal{K}'\)” is too weak as conclusions can be withdrawn due to non-monotonicity. This observation has led to the development of strong equivalence \cite{lifschitz_strongly_2001}. Strong equivalence can be generalized to arbitrary logics in the following way \cite{brewka_strong_2019}:"
+
+\begin{definition}
+    Let \(\mathcal{L} = (\text{WF, BS, INC, ACC})\) be a logic. The knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are strongly equivalent, denoted by \(\mathcal{K} \equiv_S  \mathcal{K}'\), if \(ACC(\mathcal{K} \cup \mathcal{G}) = ACC(\mathcal{K}' \cup \mathcal{G})\) for each knowledge base \(\mathcal{G}\).
+\end{definition}
+% \\
 \textbf{Strong Equivalence}
+If \(\mathcal{K} \equiv_S \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
 \\
 \textbf{FW-Strong Equivalence}
+If \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
 \\
 \textbf{Strong Equivalence Replacement}
+If \(\{\alpha\} \equiv_S \{\alpha'\}\) and \(\alpha \notin \mathcal{K}\) as well as \(\alpha' \notin \mathcal{K}\), then \(\mathcal{I}(\mathcal{K} \cup \{\alpha\}) = \mathcal{I}(\mathcal{K} \cup \{\alpha'\})\).
 \\
 \textbf{Separability}
+If \(SI_{\min}(\mathcal{K} \cup \mathcal{K}') = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}')\) and \(SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') = \emptyset\), then \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}')\).
 \\
 \textbf{Strong Super-Additivity}
+If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each others's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(\mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K'}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
 
 \section{Evaluation of Measures}
-
-\section{[Optional] Repair Knowledge Bases}
-"We extend the hitting set duality from previous work \cite{brewka_strong_2019} to situations where knowledgebases can be repaired by adding information" in section 7 of \cite{ulbricht_handling_2020}
