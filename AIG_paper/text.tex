@@ -70,7 +70,7 @@ The restriction to limit the measure to non-negative numbers stems from its inte
 One extension of this approach is taking the size of a set \(\mathcal{H} \in SI_{\min}(\mathcal{K})\) into account. An inconsistency should be considered more severe, the smaller a minimal inconsistent subset is, which means that the contradiction can be represented with fewer formulas.
 
 The lottery paradox \cite{kyburg_probability_1961} highlights this issue.
-Assume a lottery with \(n\) tickets and statements \(t_1, ..., t_n\) whether their respective ticket is the winner. As the lottery is fair and has exactly one winner (\(t_1 \lor ... \lor t_n\)) and it is reasonable to assume a specific ticket \(t_i\) is likely to lose which can be applied to all tickets (\(\neg t_1, ..., \neg t_n\)) it results in an inconsistent knowledgebase \(\mathcal{K}_n = \{ t_1 \lor ... \lor t_n, \neg t_1, ..., \neg t_n \}\). Looking at two lotteries with \(n = 1\) and \(n = 1000000\) it doesn't seem as reasonable anymore to assume \(t_1\) loses in the first lottery compared to the latter. Although \(\mathcal{K}_1\) and \(\mathcal{K}_{1000000}\) are still both inconsistent \(\mathcal{K}_1\) seems a lot more unreasonable.
+Assume a lottery with \(n\) tickets and statements \(t_1, ..., t_n\) whether their respective ticket is the winner. As the lottery is fair and has exactly one winner (\(t_1 \lor ... \lor t_n\)) and it is reasonable to assume a specific ticket \(t_i\) is likely to lose which can be applied to all tickets (\(\neg t_1, ..., \neg t_n\)) it results in an inconsistent knowledge base \(\mathcal{K}_n = \{ t_1 \lor ... \lor t_n, \neg t_1, ..., \neg t_n \}\). Looking at two lotteries with \(n = 1\) and \(n = 1000000\) it doesn't seem as reasonable anymore to assume \(t_1\) loses in the first lottery compared to the latter. Although \(\mathcal{K}_1\) and \(\mathcal{K}_{1000000}\) are still both inconsistent \(\mathcal{K}_1\) seems a lot more unreasonable.
 
 Coming back to the measure at hand, this intuition is not represented by \(\mathcal{I}_{\text{MSI}}\), as it provides \(\mathcal{I}_{\text{MSI}}(\mathcal{K}_n) = 1\) for all lotteries, no matter their size. To combat this \cite{ulbricht_handling_2020} proposes two further measures \(\mathcal{I}_{\text{MSI}^\text{C}}\) and \(\mathcal{I}_{\text{p}}\) by applying strong inconsistency to them.
 
@@ -146,7 +146,7 @@ Given the similarities between \(Free(\mathcal{K})\) and \(Free_{SI}(\mathcal{K}
 \textbf{SI-Free}
 If \(\alpha \in Free_{SI}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
 
-One problem in using this postulate stems from the fact that ordinary inconsistency of a subset \(\mathcal{H} \subseteq \mathcal{K}\) only depends on \(\mathcal{H}\), whereas strong inconsistency relates to the whole knowledgebase base \(\mathcal{K}\). The removal of formulas in \(Free_{SI}(\mathcal{K})\) may affect the structure of \(SI_{\min}(\mathcal{K})\).
+One problem in using this postulate stems from the fact that ordinary inconsistency of a subset \(\mathcal{H} \subseteq \mathcal{K}\) only depends on \(\mathcal{H}\), whereas strong inconsistency relates to the whole knowledge base \(\mathcal{K}\). The removal of formulas in \(Free_{SI}(\mathcal{K})\) may affect the structure of \(SI_{\min}(\mathcal{K})\).
 
     [Example here]
 
@@ -168,15 +168,15 @@ The only postulate not mentioned yet is the dominance postulate \cite{hunter_mea
 This concludes the discussion on basic postulates.
 
 \subsection{Extended Postulates}
-"Many concrete approaches to inconsistency measurement depend on the syntax of a knowledge base. The most common example is the difference between the conjunction \(\{a \land b\}\) and two formulas \(\{a, b\}\)."
-"There are thus rationality postulates in the literature that are concerned about the behavior of inconsistency measures when dealing with equivalent formulas resp. equivalent knowledge bases. Of course, it is desirable that a measure \(\mathcal{I}\) is robust wrt. the syntax of \(\mathcal{K}\)."
-"The postulate adjunction invariance \cite{ferme_revisiting_2014} formalizes the idea that there should be no difference between \(\{a \land b\}\) and \(\{a, b\}\), i.e., \(\mathcal{I}(\mathcal{K} \cup \{a \land b\}) = \mathcal{I}(\mathcal{K} \cup \{a, b\})\)."
-"In non-monotonic frameworks, a notion of equivalence of the form “\(\mathcal{K}\) has the same models as \(\mathcal{K}'\)” is too weak as conclusions can be withdrawn due to non-monotonicity. This observation has led to the development of strong equivalence \cite{lifschitz_strongly_2001}. Strong equivalence can be generalized to arbitrary logics in the following way \cite{brewka_strong_2019}:"
+For many approaches to inconsistency measurements, syntax is a decisive factor. One common example of this is the difference between the conjunction \(\{a \land b\}\) and two formulas \(\{a, b\}\). It is therefore desirable to be able to find equivalent formulas and knowledge bases for which a measure \(\mathcal{I}\) is robust with regards to the syntax of \(\mathcal{K}\). One of the postulates that enables this is the adjunction invariance by \cite{ferme_revisiting_2014} which formalizes this idea as \(\mathcal{I}(\mathcal{K} \cup \{a \land b\}) = \mathcal{I}(\mathcal{K} \cup \{a, b\})\).
+To adjust this postulate for non-monotonic logics the term equivalence as in "two knowledge bases have the same model" is too weak. \cite{lifschitz_strongly_2001} developed the notion of strong equivalence to combat this problem, while \cite{brewka_strong_2019} added to this by generalizing it to an arbitrary logic.
 
 \begin{definition}
     Let \(\mathcal{L} = (\text{WF, BS, INC, ACC})\) be a logic. The knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are strongly equivalent, denoted by \(\mathcal{K} \equiv_S  \mathcal{K}'\), if \(ACC(\mathcal{K} \cup \mathcal{G}) = ACC(\mathcal{K}' \cup \mathcal{G})\) for each knowledge base \(\mathcal{G}\).
 \end{definition}
-% \\
+
+Following this definition, a subset \(\mathcal{H}\) of a knowledge base \(\mathcal{K}\) can be swapped out with a strongly equivalent subset \(\mathcal{H}'\) without changing the inferences one can draw from \(\mathcal{K}\), which in turn means that it shouldn't affect the inconsistency they contribute to \(\mathcal{K}\). Applied to the whole knowledge base, this means that two strongly equivalent knowledge bases should have the same inconsistency measure.
+\\
 \textbf{Strong Equivalence}
 If \(\mathcal{K} \equiv_S \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
 \\
