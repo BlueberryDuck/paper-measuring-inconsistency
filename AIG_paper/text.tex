@@ -30,7 +30,7 @@ Let \(\mathcal{K}\) be the knowledge base of an explicit logic.
 
 \(I(\mathcal{K})\) denotes the set of all inconsistent subsets, \(I_{\min}(\mathcal{K})\) the set of all minimal inconsistent subsets, \(C(\mathcal{K})\) the set of all consistent, and \(C_{\max}(\mathcal{K})\) the set of all maximal \(\mathcal{K}\)-consistent subsets of \(\mathcal{K}\). In weakly monotonic logics if a knowledge base \(\mathcal{K} \subseteq \mathcal{K}'\) is inconsistent then so is \(\mathcal{K}'\). Additionally, a specific duality between minimal inconsistent and maximal consistent sets holds true.
 
-Let \(\mathcal{M}\) be a set of sets. We call \(\mathcal{H}\) a hitting set of \(\mathcal{M}\) if \(\mathcal{H}\) and all subsets \(M\) have a common intersection (\(\mathcal{H} \cap M \neq \emptyset | M \in \mathcal{M}\)). A minimal hitting set \(\mathcal{H}\) of \(\mathcal{M}\) further requires that no elements in \(\mathcal{H}\) can be dropped without losing its hitting set characteristic (\(\mathcal{H}' \subsetneq \mathcal{H}\) implies \(\mathcal{H}'\) is not a hitting set of \(\mathcal{M}\)).
+Let \(\mathcal{M}\) be a set of sets. \(\mathcal{H}\) is called a hitting set of \(\mathcal{M}\) if \(\mathcal{H}\) and all subsets \(M\) have a common intersection (\(\mathcal{H} \cap M \neq \emptyset | M \in \mathcal{M}\)). A minimal hitting set \(\mathcal{H}\) of \(\mathcal{M}\) further requires that no elements in \(\mathcal{H}\) can be dropped without losing its hitting set characteristic (\(\mathcal{H}' \subsetneq \mathcal{H}\) implies \(\mathcal{H}'\) is not a hitting set of \(\mathcal{M}\)).
 
 \begin{theorem}
     TODO:
@@ -179,17 +179,36 @@ Following this definition, a subset \(\mathcal{H}\) of a knowledge base \(\mathc
 \\
 \textbf{Strong Equivalence}
 If \(\mathcal{K} \equiv_S \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
+
+    [Example here]
+
+In some cases, the above postulate is too strong resulting in \(\mathcal{K} \equiv_S \mathcal{K}'\) for any two inconsistent knowledge bases, which is why a more fine-grained notion of equivalence is needed. To achieve this a similar approach as in \cite{thimm_inconsistency_2013} can be used to define:
+
+\begin{definition}
+    Let \(\mathcal{K}\) and \(\mathcal{K}'\) be two knowledge bases. \(\mathcal{K}\) and \(\mathcal{K}'\) are called formula-wise strongly equivalent, denoted by \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\), if there is a bijection \(\rho : \mathcal{K} \rightarrow \mathcal{K}'\) such that \(\{\alpha\} \equiv_S \{\rho(\alpha)\}\) holds for all \(\alpha \in \mathcal{K}\).
+\end{definition}
+
+Applying this notion to the previously defined strong equivalence, a new rationality postulate can be formed, which considers a formula-wise equivalence (FW=formula-wise):
 \\
 \textbf{FW-Strong Equivalence}
 If \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
+\cite{ulbricht_handling_2020} further refines this notion by considering the replacement of a formula \(\alpha\) with a strongly equivalent formula \(\alpha'\), resulting in:
 \\
 \textbf{Strong Equivalence Replacement}
 If \(\{\alpha\} \equiv_S \{\alpha'\}\) and \(\alpha \notin \mathcal{K}\) as well as \(\alpha' \notin \mathcal{K}\), then \(\mathcal{I}(\mathcal{K} \cup \{\alpha\}) = \mathcal{I}(\mathcal{K} \cup \{\alpha'\})\).
+
+Addressing the modularization of a knowledge base \(\mathcal{K}\) \cite{ulbricht_measuring_2018} considers two more postulates. The separability postulate by \cite{hunter_measure_2010} can be easily applied to strongly inconsistent subsets.
 \\
 \textbf{Separability}
 If \(SI_{\min}(\mathcal{K} \cup \mathcal{K}') = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}')\) and \(SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') = \emptyset\), then \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}')\).
+
+This postulate ensures that the inconsistency values of \(\mathcal{K}\) and \(\mathcal{K}'\) should sum up to the value of their union because their respective conflicts should be independent of one another.
+
+Lastly, the super-additivity postulate by \cite{thimm_measuring_2009} can be adjusted to the notion of strong monotonicity, by accounting for the fact that adding information might resolve conflicts for non-monotonic logics. This can be achieved by adding conflict preservation as an additional condition.
 \\
 \textbf{Strong Super-Additivity}
 If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each others's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(\mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K'}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
+
+This concludes the discussion of rationality postulates with a generalization of monotonicity for non-monotonic logics.
 
 \section{Evaluation of Measures}
