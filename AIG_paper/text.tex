@@ -16,12 +16,25 @@ Many other inconsistency measures expand on that idea. For example, \cite{jabbou
 \section{Definition Weakly Monotonic and Non-Monotonic Logics}
  [Both terms are used without definition in a later chapter]
 
-\section{Definition Answer Set Programming}
+\section{Answer Set Programming}
  [Possibly defined here for continuous use as an example throughout the rest of the paper]
 \\
 "Some examples of such formalisms are, e.g. [...] answer set programming \cite{gelfond_logic_2002} [...]"
-\\
-see Example 2.2 in \cite{ulbricht_measuring_2018}
+
+\begin{example}
+    Consider the program P, which will be used as an example throughout the rest of the paper:
+    \[\begin{array}{rrr}
+            P: & a \lor b.                  & a \leftarrow b.                 \\
+               & c \leftarrow \text{not b}. & \neg c \leftarrow \text{not b}.
+        \end{array}\]
+    This program has no answer set. Consider \{a\}, \{b\} and \{a,b\} as the candidates with
+    \[\begin{array}{rrrrr}
+            P^{\{a\}}:   & a \lor b. & a \leftarrow b. & c. & \neg c. \\
+            P^{\{b\}}:   & a \lor b. & a \leftarrow b.                \\
+            P^{\{a,b\}}: & a \lor b. & a \leftarrow b.
+        \end{array}\]
+    In this case \{a\} is not a model of \(P^{\{a\}}\), \{b\} is not a model of \(P^{\{b\}}\), and \{a,b\} is a model of \(P^{\{a,b\}}\) but is not minimal.
+\end{example}
 
 \section{Strong Inconsistency}
 Let \(\mathcal{K}\) be the knowledge base of an explicit logic.
@@ -217,6 +230,8 @@ To close out the paper the behavior of the three provided measures are evaluated
 \begin{proposition}[\cite{ulbricht_measuring_2018}]
     The measures \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}^\text{C}}\) and \(\mathcal{I}_{\text{p}}\) satisfy consistency, strong monotonicity, independence, FW-strong equivalence, strong equivalent replacement, and strong super-additivity. The measures \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}^\text{C}}\) also satisfy seperability.
 \end{proposition}
+
+[Examples here]
 
 \begin{table}[h]
     \centering
