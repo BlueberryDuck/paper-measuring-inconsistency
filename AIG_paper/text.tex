@@ -17,9 +17,11 @@ Many other inconsistency measures expand on that idea. For example, \cite{jabbou
  [Both terms are used without definition in a later chapter]
 
 \section{Answer Set Programming}
- [Possibly defined here for continuous use as an example throughout the rest of the paper]
-\\
-"Some examples of such formalisms are, e.g. [...] answer set programming \cite{gelfond_logic_2002} [...]"
+Answer set programming (ASP) \cite{gelfond_logic_2002} is a form of declarative programming, originally intended for complex combinatorial search problems. It has its roots in the field of non-monotonic reasoning and logic programming and provides a framework for knowledge representation with well-defined declarative semantics, allowing for the construction of knowledge bases that are adaptable to changes in information.
+
+Inconsistencies in ASP can occur for two reasons, according to \cite{calimeri_characterising_2015}. Incoherence occurs if two complementary literals (\(l\) and \(\neg l\)) can be derived from one set of rules. Instability occurs if a literal, previously assumed to be false, is again derived due to the use of default negation.
+
+TODO: disjunction in the head of rules; model; program; answer set
 
 \begin{example}
     Consider the program P, which will be used as an example throughout the rest of the paper:
@@ -181,7 +183,7 @@ The only postulate not mentioned yet is the dominance postulate \cite{hunter_mea
 This concludes the discussion on basic postulates.
 
 \subsection{Extended Postulates}
-For many approaches to inconsistency measurements, syntax is a decisive factor. One common example of this is the difference between the conjunction \(\{a \land b\}\) and two formulas \(\{a, b\}\). It is therefore desirable to be able to find equivalent formulas and knowledge bases for which a measure \(\mathcal{I}\) is robust with regards to the syntax of \(\mathcal{K}\). One of the postulates that enables this is the adjunction invariance by \cite{ferme_revisiting_2014} which formalizes this idea as \(\mathcal{I}(\mathcal{K} \cup \{a \land b\}) = \mathcal{I}(\mathcal{K} \cup \{a, b\})\).
+For many approaches to inconsistency measurements, syntax is a decisive factor. One common example of this is the difference between the conjunction \(\{a \land b\}\) and two formulas \(\{a, b\}\). It is therefore desirable to be able to find equivalent formulas and knowledge bases for which a measure \(\mathcal{I}\) is robust with regards to the syntax of \(\mathcal{K}\). One of the postulates that enable this is the adjunction invariance by \cite{ferme_revisiting_2014} which formalizes this idea as \(\mathcal{I}(\mathcal{K} \cup \{a \land b\}) = \mathcal{I}(\mathcal{K} \cup \{a, b\})\).
 To adjust this postulate for non-monotonic logics the term equivalence as in "two knowledge bases have the same model" is too weak. \cite{lifschitz_strongly_2001} developed the notion of strong equivalence to combat this problem, while \cite{brewka_strong_2019} added to this by generalizing it to an arbitrary logic.
 
 \begin{definition}
