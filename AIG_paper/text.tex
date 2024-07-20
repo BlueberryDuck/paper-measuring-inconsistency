@@ -21,10 +21,22 @@ Answer set programming (ASP) \cite{gelfond_logic_2002} is a form of declarative 
 
 Inconsistencies in ASP can occur for two reasons, according to \cite{calimeri_characterising_2015}. Incoherence occurs if two complementary literals (\(l\) and \(\neg l\)) can be derived from one set of rules. Instability occurs if a literal, previously assumed to be false, is again derived due to the use of default negation.
 
-TODO: disjunction in the head of rules; model; program; answer set
+Extended disjunctive databases, further only referred to as logic programs, contain a disjunction in the head of rules and use two kinds of negation. Strong negation (\(\neg\)) and default negation (not). A logic program \(P\) consists of a finite set of rules \(r\) which always follow the form \(l_0 \lor \dots \lor l_k \leftarrow l_{k+1}, \dots, l_m, \text{not } l_{m+1}, \dots, \text{not }l_n\). This form can be split into three parts \(head(r) = \{l_0, \dots, l_k\}\), \(pos(r) = \{l_{k+1}, \dots, l_m\}\), and \(neg(r) = \{l_{m+1}, \dots, l_n\}\), resulting in an alternative notation \(head(r) \leftarrow pos(r), neg(r)\). If \(pos(r) \cup neg(r) = \emptyset\), then \(r\) is written "\(head(r)\)" instead of "\(head(r) \leftarrow\)".
+
+Given this knowledge one can define an answer set as follows.
+
+\begin{definition}[\cite{ulbricht_handling_2020}]
+    Let \(P\) be a logic program over \(A\) such that \(neg(r) = \emptyset\) holds for each rule \(r \in P\). Then, a set \(M\) of literals is a model of \(P\) if for all \(r \in P\) the following is true: If \(pos(r) \subseteq M\), then \(head(r) \cap M \neq \emptyset\). If \(M\) is a model of \(P\) containing two complementary literals, then \(M\) is extended to \(M = Lit(A)\). A model \(M\) is minimal if for all proper subsets \(M'\) of \(M\), \(M'\) is not a model. A minimal model of \(P\) is called an answer set of \(P\).
+\end{definition}
+
+To extend this definition to arbitrary logic programs, \cite{ulbricht_handling_2020} introduces the notion of the reduct of \(P\).
+
+\begin{definition}
+    Let \(P\) be a logic program over \(A\) and \(M\) be a set of literals. Let \[P^M = \{head(r) \leftarrow pos(r) | head(r) \leftarrow pos(r), neg(r) \in P, neg(r) \cap M = \emptyset\}\] be the reduct of \(P\) with regards to \(M\). \(M\) is an answer set of \(P\) if \(M\) is an answer set of \(P^M\).
+\end{definition}
 
 \begin{example}
-    Consider the program P, which will be used as an example throughout the rest of the paper:
+    Consider the following logic program P, which will be used as an example throughout the rest of the paper:
     \[\begin{array}{rrr}
             P: & a \lor b.                  & a \leftarrow b.                 \\
                & c \leftarrow \text{not b}. & \neg c \leftarrow \text{not b}.
@@ -85,7 +97,7 @@ The restriction to limit the measure to non-negative numbers stems from its inte
 One extension of this approach is taking the size of a set \(\mathcal{H} \in SI_{\min}(\mathcal{K})\) into account. An inconsistency should be considered more severe, the smaller a minimal inconsistent subset is, which means that the contradiction can be represented with fewer formulas.
 
 The lottery paradox \cite{kyburg_probability_1961} highlights this issue.
-Assume a lottery with \(n\) tickets and statements \(t_1, ..., t_n\) whether their respective ticket is the winner. As the lottery is fair and has exactly one winner (\(t_1 \lor ... \lor t_n\)) and it is reasonable to assume a specific ticket \(t_i\) is likely to lose which can be applied to all tickets (\(\neg t_1, ..., \neg t_n\)) it results in an inconsistent knowledge base \(\mathcal{K}_n = \{ t_1 \lor ... \lor t_n, \neg t_1, ..., \neg t_n \}\). Looking at two lotteries with \(n = 1\) and \(n = 1000000\) it doesn't seem as reasonable anymore to assume \(t_1\) loses in the first lottery compared to the latter. Although \(\mathcal{K}_1\) and \(\mathcal{K}_{1000000}\) are still both inconsistent \(\mathcal{K}_1\) seems a lot more unreasonable.
+Assume a lottery with \(n\) tickets and statements \(t_1, \dots, t_n\) whether their respective ticket is the winner. As the lottery is fair and has exactly one winner (\(t_1 \lor \dots \lor t_n\)) and it is reasonable to assume a specific ticket \(t_i\) is likely to lose which can be applied to all tickets (\(\neg t_1, \dots, \neg t_n\)) it results in an inconsistent knowledge base \(\mathcal{K}_n = \{ t_1 \lor \dots \lor t_n, \neg t_1, \dots, \neg t_n \}\). Looking at two lotteries with \(n = 1\) and \(n = 1000000\) it doesn't seem as reasonable anymore to assume \(t_1\) loses in the first lottery compared to the latter. Although \(\mathcal{K}_1\) and \(\mathcal{K}_{1000000}\) are still both inconsistent \(\mathcal{K}_1\) seems a lot more unreasonable.
 
 Coming back to the measure at hand, this intuition is not represented by \(\mathcal{I}_{\text{MSI}}\), as it provides \(\mathcal{I}_{\text{MSI}}(\mathcal{K}_n) = 1\) for all lotteries, no matter their size. To combat this \cite{ulbricht_handling_2020} proposes two further measures \(\mathcal{I}_{\text{MSI}^\text{C}}\) and \(\mathcal{I}_{\text{p}}\) by applying strong inconsistency to them.
 
