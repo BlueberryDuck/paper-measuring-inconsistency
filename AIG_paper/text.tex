@@ -14,7 +14,9 @@ So when using a set of all minimal inconsistent subsets of a knowledge base \(I_
 Many other inconsistency measures expand on that idea. For example, \cite{jabbour_mis_2016} uses minimal inconsistent subset partitions to be able to differentiate within the subsets how strong conflicts between them are. This means that not all subsets count equally towards the inconsistency score, which provides an even finer measure.
 
 \section{Definition Weakly Monotonic and Non-Monotonic Logics}
- [Both terms are used without definition in a later chapter]
+\begin{definition}[\cite{brewka_strong_2019}]
+    A logic \(L\) is a tuple \(L = (WF, BS, INC, ACC)\), where \(WF\) is a set of well-formed formulas, \(BS\) is a set of belief sets, \(INC \subseteq BS\) is an upward closed set of inconsistent belief sets, and \(ACC: 2^{WF} \rightarrow 2^{BS}\) assigns a collection of belief sets to each subset of \(WF\). A knowledge base \(\mathcal{K}\) of \(L\) is finite subset of \(WF\). A knowledge base \(\mathcal{K}\) is called inconsistent if \(ACC(\mathcal{K}) \subseteq INC\).
+\end{definition}
 
 \section{Answer Set Programming}
 Answer set programming (ASP) \cite{gelfond_logic_2002} is a form of declarative programming, originally intended for complex combinatorial search problems. It has its roots in the field of non-monotonic reasoning and logic programming and provides a framework for knowledge representation with well-defined declarative semantics, allowing for the construction of knowledge bases that are adaptable to changes in information.
@@ -34,6 +36,8 @@ To extend this definition to arbitrary logic programs, \cite{ulbricht_handling_2
 \begin{definition}
     Let \(P\) be a logic program over \(A\) and \(M\) be a set of literals. Let \[P^M = \{head(r) \leftarrow pos(r) | head(r) \leftarrow pos(r), neg(r) \in P, neg(r) \cap M = \emptyset\}\] be the reduct of \(P\) with regards to \(M\). \(M\) is an answer set of \(P\) if \(M\) is an answer set of \(P^M\).
 \end{definition}
+
+Logic programs can be modeled regarding a set \(A\) of propositional atoms as logic \(L_A^{ASP} = (WF_A^{ASP}, BS_A^{ASP}, INC_A^{ASP}, ACC_A^{ASP})\). \(WF_A^{ASP}\) is the set of all rules over \(A\), \(BS_A^{ASP}\) consists of the sets of literals over \(A\), \(INC_A^{ASP} = \{Lit(A)\}\), and \(ACC_A^{ASP}\) assigns the sets of all answers sets to its respective logic program.
 
 \begin{example}
     Consider the following logic program P, which will be used as an example throughout the rest of the paper:
@@ -66,7 +70,14 @@ Let \(\mathcal{M}\) be a set of sets. \(\mathcal{H}\) is called a hitting set of
 
 In non-monotonic logics neither the statement that \(\mathcal{K}'\) must be inconsistent, nor the hitting set duality has to be true because additional information can resolve inconsistency in a knowledge base, which opens up the possibility of consistent knowledge bases to contain inconsistent subsets.
 
-    [Example here]
+\begin{example}
+    Consider the propositional signature \(A = \{a, b\}\) and the logic programs \(P\), \(P'\)
+    \[\begin{array}{rrrr}
+            P:  & a. & b. & \neg b \leftarrow \text{not a}. \\
+            P': &    & b. & \neg b \leftarrow \text{not a}.
+        \end{array}\]
+    Then \(ACC_A^{ASP}(P) = \{\{a,b\}\}\) and \(ACC_A^{ASP}(P') = \{\}\). Observe that \(P\) is consistent while \(P'\) is inconsistent.
+\end{example}
 
 For this reason, a refined notion of inconsistent subsets of a knowledge base was defined by \cite{brewka_strong_2017}.
 \begin{definition}
