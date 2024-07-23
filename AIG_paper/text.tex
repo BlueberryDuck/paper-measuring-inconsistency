@@ -1,5 +1,5 @@
 \section{Introduction}
-text
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 
 \section{Inconsistency Measures}
 Not all inconsistent knowledge bases contain no information at all or the same amount of, just because they are inconsistent as a whole. This can be deduced as two inconsistent knowledge bases can provide different conclusions, implying they contain different information \cite{bertossi_approaches_2005}.
@@ -15,7 +15,7 @@ Many other inconsistency measures expand on that idea. For example, \cite{jabbou
 
 \section{Definition Weakly Monotonic and Non-Monotonic Logics}
 \begin{definition}[\cite{brewka_strong_2019}]
-    A logic \(L\) is a tuple \(L = (WF, BS, INC, ACC)\), where \(WF\) is a set of well-formed formulas, \(BS\) is a set of belief sets, \(INC \subseteq BS\) is an upward closed set of inconsistent belief sets, and \(ACC: 2^{WF} \rightarrow 2^{BS}\) assigns a collection of belief sets to each subset of \(WF\). A knowledge base \(\mathcal{K}\) of \(L\) is finite subset of \(WF\). A knowledge base \(\mathcal{K}\) is called inconsistent if \(ACC(\mathcal{K}) \subseteq INC\).
+    A logic \(L\) is a tuple \(L = (\text{WF, BS, INC, ACC})\), where \(\text{WF}\) is a set of well-formed formulas, \(\text{BS}\) is a set of belief sets, \(\text{INC} \subseteq \text{BS}\) is an upward closed set of inconsistent belief sets, and \(\text{ACC}: 2^{\text{WF}} \rightarrow 2^{\text{BS}}\) assigns a collection of belief sets to each subset of \(\text{WF}\). A knowledge base \(\mathcal{K}\) of \(L\) is a finite subset of \(\text{WF}\). A knowledge base \(\mathcal{K}\) is called inconsistent if \(\text{ACC}(\mathcal{K}) \subseteq \text{INC}\).
 \end{definition}
 
 \section{Answer Set Programming}
@@ -37,7 +37,7 @@ To extend this definition to arbitrary logic programs, \cite{ulbricht_handling_2
     Let \(P\) be a logic program over \(A\) and \(M\) be a set of literals. Let \[P^M = \{head(r) \leftarrow pos(r) | head(r) \leftarrow pos(r), neg(r) \in P, neg(r) \cap M = \emptyset\}\] be the reduct of \(P\) with regards to \(M\). \(M\) is an answer set of \(P\) if \(M\) is an answer set of \(P^M\).
 \end{definition}
 
-Logic programs can be modeled regarding a set \(A\) of propositional atoms as logic \(L_A^{ASP} = (WF_A^{ASP}, BS_A^{ASP}, INC_A^{ASP}, ACC_A^{ASP})\). \(WF_A^{ASP}\) is the set of all rules over \(A\), \(BS_A^{ASP}\) consists of the sets of literals over \(A\), \(INC_A^{ASP} = \{Lit(A)\}\), and \(ACC_A^{ASP}\) assigns the sets of all answers sets to its respective logic program.
+Logic programs can be modeled regarding a set \(A\) of propositional atoms as logic \(L_A^{ASP} = (\text{WF}_A^{ASP}, \text{BS}_A^{ASP}, \text{INC}_A^{ASP}, \text{ACC}_A^{ASP})\). \(\text{WF}_A^{ASP}\) is the set of all rules over \(A\), \(\text{BS}_A^{ASP}\) consists of the sets of literals over \(A\), \(\text{INC}_A^{ASP} = \{Lit(A)\}\), and \(\text{ACC}_A^{ASP}\) assigns the sets of all answers sets to its respective logic program.
 
 \begin{example}
     Consider the following logic program P, which will be used as an example throughout the rest of the paper:
@@ -55,17 +55,12 @@ Logic programs can be modeled regarding a set \(A\) of propositional atoms as lo
 \end{example}
 
 \section{Strong Inconsistency}
-Let \(\mathcal{K}\) be the knowledge base of an explicit logic.
-
-    [Example here]
-
-\(I(\mathcal{K})\) denotes the set of all inconsistent subsets, \(I_{\min}(\mathcal{K})\) the set of all minimal inconsistent subsets, \(C(\mathcal{K})\) the set of all consistent, and \(C_{\max}(\mathcal{K})\) the set of all maximal \(\mathcal{K}\)-consistent subsets of \(\mathcal{K}\). In weakly monotonic logics if a knowledge base \(\mathcal{K} \subseteq \mathcal{K}'\) is inconsistent then so is \(\mathcal{K}'\). Additionally, a specific duality between minimal inconsistent and maximal consistent sets holds true.
+Consider the following notations with regards to a knowledge base \(\mathcal{K}\). \(I(\mathcal{K})\) denotes the set of all inconsistent subsets, \(I_{\min}(\mathcal{K})\) the set of all minimal inconsistent subsets, \(C(\mathcal{K})\) the set of all consistent, and \(C_{\max}(\mathcal{K})\) the set of all maximal \(\mathcal{K}\)-consistent subsets of \(\mathcal{K}\). In classical monotonic logics if a knowledge base \(\mathcal{K} \subseteq \mathcal{K}'\) is inconsistent then so is \(\mathcal{K}'\). Additionally, the hitting set duality establishes a relationship between minimal inconsistent sets and maximal consistent sets.
 
 Let \(\mathcal{M}\) be a set of sets. \(\mathcal{H}\) is called a hitting set of \(\mathcal{M}\) if \(\mathcal{H}\) and all subsets \(M\) have a common intersection (\(\mathcal{H} \cap M \neq \emptyset | M \in \mathcal{M}\)). A minimal hitting set \(\mathcal{H}\) of \(\mathcal{M}\) further requires that no elements in \(\mathcal{H}\) can be dropped without losing its hitting set characteristic (\(\mathcal{H}' \subsetneq \mathcal{H}\) implies \(\mathcal{H}'\) is not a hitting set of \(\mathcal{M}\)).
 
 \begin{theorem}
-    TODO:
-    The MinHS duality \cite{reiter_theory_1987} implies \(\mathcal{H}\) is a minimal hitting set of \(I_{\min}(\mathcal{K})\) only if the knowledge base without the elements of \(\mathcal{H}\) forms the maximal consistent subset (\(\mathcal{K} \backslash \mathcal{H} \in C_{\max}(\mathcal{K})\)).
+    Let \(\mathcal{K}\) be a knowledge base, \(I_{\min}(\mathcal{K})\) be the set of minimal inconsistent subsets of \(\mathcal{K}\), and \(C_{\max}(\mathcal{K})\) be the set of maximal consistent subsets of \(\mathcal{K}\). According to the MinHS duality \cite{reiter_theory_1987}, \(\mathcal{H} \subseteq \mathcal{K}\) is a minimal hitting set of \(I_{\min}(\mathcal{K})\) if and only if \(\mathcal{K} \backslash \mathcal{H} \in C_{\max}(\mathcal{K})\).
 \end{theorem}
 
 In non-monotonic logics neither the statement that \(\mathcal{K}'\) must be inconsistent, nor the hitting set duality has to be true because additional information can resolve inconsistency in a knowledge base, which opens up the possibility of consistent knowledge bases to contain inconsistent subsets.
@@ -76,28 +71,27 @@ In non-monotonic logics neither the statement that \(\mathcal{K}'\) must be inco
             P:  & a. & b. & \neg b \leftarrow \text{not a}. \\
             P': &    & b. & \neg b \leftarrow \text{not a}.
         \end{array}\]
-    Then \(ACC_A^{ASP}(P) = \{\{a,b\}\}\) and \(ACC_A^{ASP}(P') = \{\}\). Observe that \(P\) is consistent while \(P'\) is inconsistent.
+    Then \(\text{ACC}_A^{ASP}(P) = \{\{a,b\}\}\) and \(\text{ACC}_A^{ASP}(P') = \{\}\). Observe that \(P\) is consistent while \(P'\) is inconsistent.
 \end{example}
 
 For this reason, a refined notion of inconsistent subsets of a knowledge base was defined by \cite{brewka_strong_2017}.
 \begin{definition}
-    TODO:
-    Following this definition, a subset of a knowledge base \(\mathcal{K}\) is strongly \(\mathcal{K}\)-inconsistent if all its supersets within the knowledge base are inconsistent as well. This introduces the denotations \(SI(K)\) as the set of all strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) and \(SI_{\min}(\mathcal{K})\) as the set of all minimal strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\).
+    A subset of a knowledge base \(\mathcal{K}\) is strongly \(\mathcal{K}\)-inconsistent if all its supersets within the knowledge base are inconsistent as well. The set of all strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) is denoted by \(SI(K)\). The set of all minimal strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) is denoted by \(SI_{\min}(\mathcal{K})\).
 \end{definition}
 
-This opens up the possibility of exploring the measurement of inconsistency in non-monotonic logics, a subject that has only been examined comparatively recently \cite{ulbricht_measuring_2018} \cite{brewka_strong_2019} \cite{ulbricht_handling_2020}.
+Exploring the measurement of inconsistency in non-monotonic logics is now possible, a subject that has only been examined comparatively recently \cite{ulbricht_measuring_2018} \cite{brewka_strong_2019} \cite{ulbricht_handling_2020}.
 
 \section{Three Measures based on Minimal Inconsistent Sets}
 The term strong inconsistency faithfully generalizes classical inconsistency to arbitrary logic, as shown by \cite{brewka_strong_2017}. The definition can still be applied to monotonic logics and further deems the existence of a strongly \(\mathcal{K}\)-inconsistent subset of \(\mathcal{K}\) as a necessary and sufficient condition for the inconsistency of \(\mathcal{K}\) itself.
 
 \begin{theorem}
-    TODO:
-    Additionally, the hitting set duality now also applies to any logic as well, meaning removing a hitting set of \(SI_{\min}(\mathcal{K})\) from \(\mathcal{K}\) results in a maximal consistent subset of \(\mathcal{K}\).
+    The following statement holds when applying \(SI_{\min}(\mathcal{K})\) to the hitting set set duality:
+    Removing a hitting set of \(SI_{\min}(\mathcal{K})\) from \(\mathcal{K}\) results in a maximal consistent subset of \(\mathcal{K}\).
 \end{theorem}
 
 This section focuses on three measures of inconsistency which have been extended using strong inconsistency to apply to non-monotonic logics by \cite{ulbricht_handling_2020}.
 
-Let \(L\) be a [example here] logic. A simple but popular approach to measuring inconsistency in classical logics is the use of minimal inconsistent subsets of a knowledge base \(\mathcal{K}\) because they represent "atomic conflicts" within it. This would be simply taking the value \(\left| I_{\min}(\mathcal{K}) \right|\). Applying strong inconsistency to this measure introduces the measure \(\mathcal{I}_{\text{MSI}}\) as follows.
+Let \(L\) be a [Example here] logic. A simple but popular approach to measuring inconsistency in classical logics is the use of minimal inconsistent subsets of a knowledge base \(\mathcal{K}\) because they represent "atomic conflicts" within it. This would be simply taking the value \(\left| I_{\min}(\mathcal{K}) \right|\). Applying strong inconsistency to this measure introduces the measure \(\mathcal{I}_{\text{MSI}}\) as follows.
 
 \begin{definition}
     \(\mathcal{I}_{\text{MSI}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{MSI}}(\mathcal{K}) = \left| SI_{\min}(\mathcal{K}) \right|\)
@@ -144,8 +138,7 @@ If \(\mathcal{K}\) and \(\mathcal{K}'\) are knowledge bases, then \(\mathcal{I}(
 
 Monotonicity is a usually widely accepted postulate, which describes the intuition that a superset of a knowledge base cannot reduce inconsistency, only increase it, since more information is likely to be accompanied by more conflicts.
 
-For non-monotonic logics, however, monotonicity does not make sense as new information might resolve conflicts in \(\mathcal{K}\). Monotonic behavior should only appear if \(\mathcal{K}'\) does not resolve any conflicts in \(\mathcal{K}\). If \(\mathcal{H} \subseteq \mathcal{K}\) is strongly inconsistent, so \(\mathcal{H} \in \text{SI}(\mathcal{K})\), then there should not exist a \(\mathcal{H}' \subseteq \mathcal{K}'\), such that \(\mathcal{H} \cup \mathcal{H}'\) is consistent. If there was, \(\mathcal{H}\) might not contribute to \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\), which in turn questions the comparability of \(\mathcal{I}(\mathcal{K})\) and \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
-
+For non-monotonic logics, however, monotonicity does not make sense as new information might resolve conflicts in \(\mathcal{K}\). Monotonic behavior should only appear if \(\mathcal{K}'\) does not resolve any conflicts in \(\mathcal{K}\). If \(\mathcal{H} \subseteq \mathcal{K}\) is strongly inconsistent, so \(\mathcal{H} \in SI(\mathcal{K})\), then there should not exist a \(\mathcal{H}' \subseteq \mathcal{K}'\), such that \(\mathcal{H} \cup \mathcal{H}'\) is consistent. If there was, \(\mathcal{H}\) might not contribute to \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\), which in turn questions the comparability of \(\mathcal{I}(\mathcal{K})\) and \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
 
 Consider the following example as an illustration:
 [Example here]
@@ -153,7 +146,7 @@ Consider the following example as an illustration:
 This results in the need for a rephrased monotonicity postulate that recognizes the preservation of conflicts as a condition for monotonicity in non-monotonic logics. Using the concept of strongly inconsistent subsets, preserving conflicts is defined as follows:
 
 \begin{definition}
-    Let \(\mathcal{K}\) and \(\mathcal{K}'\) be knowledge bases. \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\) if \(\mathcal{H} \in \text{SI}(\mathcal{K} \cup \mathcal{K}')\) for any \(\mathcal{H} \in \text{SI}(\mathcal{K})\).
+    Let \(\mathcal{K}\) and \(\mathcal{K}'\) be knowledge bases. \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\) if \(\mathcal{H} \in SI(\mathcal{K} \cup \mathcal{K}')\) for any \(\mathcal{H} \in SI(\mathcal{K})\).
 \end{definition}
 
 Applying this concept of conflict preservation, \cite{ulbricht_handling_2020} provides the rephrased monotonicity postulate under the name strong monotonicity.
@@ -210,7 +203,7 @@ For many approaches to inconsistency measurements, syntax is a decisive factor. 
 To adjust this postulate for non-monotonic logics the term equivalence as in "two knowledge bases have the same model" is too weak. \cite{lifschitz_strongly_2001} developed the notion of strong equivalence to combat this problem, while \cite{brewka_strong_2019} added to this by generalizing it to an arbitrary logic.
 
 \begin{definition}
-    Let \(\mathcal{L} = (\text{WF, BS, INC, ACC})\) be a logic. The knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are strongly equivalent, denoted by \(\mathcal{K} \equiv_S  \mathcal{K}'\), if \(ACC(\mathcal{K} \cup \mathcal{G}) = ACC(\mathcal{K}' \cup \mathcal{G})\) for each knowledge base \(\mathcal{G}\).
+    Let \(\mathcal{L} = (\text{WF, BS, INC, ACC})\) be a logic. The knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are strongly equivalent, denoted by \(\mathcal{K} \equiv_S  \mathcal{K}'\), if \(\text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})\) for each knowledge base \(\mathcal{G}\).
 \end{definition}
 
 Following this definition, a subset \(\mathcal{H}\) of a knowledge base \(\mathcal{K}\) can be swapped out with a strongly equivalent subset \(\mathcal{H}'\) without changing the inferences one can draw from \(\mathcal{K}\), which in turn means that it shouldn't affect the inconsistency they contribute to \(\mathcal{K}\). Applied to the whole knowledge base, this means that two strongly equivalent knowledge bases should have the same inconsistency measure.
