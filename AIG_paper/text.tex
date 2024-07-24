@@ -13,7 +13,7 @@ So when using a set of all minimal inconsistent subsets of a knowledge base \(I_
 
 Many other inconsistency measures expand on that idea. For example, \cite{jabbour_mis_2016} uses minimal inconsistent subset partitions to be able to differentiate within the subsets how strong conflicts between them are. This means that not all subsets count equally towards the inconsistency score, which provides an even finer measure.
 
-\section{Definition Weakly Monotonic and Non-Monotonic Logics}
+TODO
 \begin{definition}[\cite{brewka_strong_2019}]
     A logic \(L\) is a tuple \(L = (\text{WF, BS, INC, ACC})\), where \(\text{WF}\) is a set of well-formed formulas, \(\text{BS}\) is a set of belief sets, \(\text{INC} \subseteq \text{BS}\) is an upward closed set of inconsistent belief sets, and \(\text{ACC}: 2^{\text{WF}} \rightarrow 2^{\text{BS}}\) assigns a collection of belief sets to each subset of \(\text{WF}\). A knowledge base \(\mathcal{K}\) of \(L\) is a finite subset of \(\text{WF}\). A knowledge base \(\mathcal{K}\) is called inconsistent if \(\text{ACC}(\mathcal{K}) \subseteq \text{INC}\).
 \end{definition}
@@ -43,7 +43,7 @@ Logic programs can be modeled regarding a set \(A\) of propositional atoms as lo
     Consider the following logic program P, which will be used as an example throughout the rest of the paper:
     \[\begin{array}{rrr}
             P: & a \lor b.                  & a \leftarrow b.                 \\
-               & c \leftarrow \text{not b}. & \neg c \leftarrow \text{not b}.
+               & c \leftarrow \text{not }b. & \neg c \leftarrow \text{not }b.
         \end{array}\]
     This program has no answer set. Consider \{a\}, \{b\} and \{a,b\} as the candidates with
     \[\begin{array}{rrrrr}
@@ -52,6 +52,7 @@ Logic programs can be modeled regarding a set \(A\) of propositional atoms as lo
             P^{\{a,b\}}: & a \lor b. & a \leftarrow b.
         \end{array}\]
     In this case \{a\} is not a model of \(P^{\{a\}}\), \{b\} is not a model of \(P^{\{b\}}\), and \{a,b\} is a model of \(P^{\{a,b\}}\) but is not minimal.
+    \label{ex:program}
 \end{example}
 
 \section{Strong Inconsistency}
@@ -68,8 +69,8 @@ In non-monotonic logics neither the statement that \(\mathcal{K}'\) must be inco
 \begin{example}
     Consider the propositional signature \(A = \{a, b\}\) and the logic programs \(P\), \(P'\)
     \[\begin{array}{rrrr}
-            P:  & a. & b. & \neg b \leftarrow \text{not a}. \\
-            P': &    & b. & \neg b \leftarrow \text{not a}.
+            P:  & a. & b. & \neg b \leftarrow \text{not }a. \\
+            P': &    & b. & \neg b \leftarrow \text{not }a.
         \end{array}\]
     Then \(\text{ACC}_A^{ASP}(P) = \{\{a,b\}\}\) and \(\text{ACC}_A^{ASP}(P') = \{\}\). Observe that \(P\) is consistent while \(P'\) is inconsistent.
 \end{example}
@@ -91,7 +92,7 @@ The term strong inconsistency faithfully generalizes classical inconsistency to 
 
 This section focuses on three measures of inconsistency which have been extended using strong inconsistency to apply to non-monotonic logics by \cite{ulbricht_handling_2020}.
 
-Let \(L\) be a [Example here] logic. A simple but popular approach to measuring inconsistency in classical logics is the use of minimal inconsistent subsets of a knowledge base \(\mathcal{K}\) because they represent "atomic conflicts" within it. This would be simply taking the value \(\left| I_{\min}(\mathcal{K}) \right|\). Applying strong inconsistency to this measure introduces the measure \(\mathcal{I}_{\text{MSI}}\) as follows.
+A simple but popular approach to measuring inconsistency in classical logics is the use of minimal inconsistent subsets of a knowledge base \(\mathcal{K}\) because they represent "atomic conflicts" within it. This would be simply taking the value \(\left| I_{\min}(\mathcal{K}) \right|\). Applying strong inconsistency to this measure introduces the measure \(\mathcal{I}_{\text{MSI}}\) as follows.
 
 \begin{definition}
     \(\mathcal{I}_{\text{MSI}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{MSI}}(\mathcal{K}) = \left| SI_{\min}(\mathcal{K}) \right|\)
@@ -140,10 +141,16 @@ Monotonicity is a usually widely accepted postulate, which describes the intuiti
 
 For non-monotonic logics, however, monotonicity does not make sense as new information might resolve conflicts in \(\mathcal{K}\). Monotonic behavior should only appear if \(\mathcal{K}'\) does not resolve any conflicts in \(\mathcal{K}\). If \(\mathcal{H} \subseteq \mathcal{K}\) is strongly inconsistent, so \(\mathcal{H} \in SI(\mathcal{K})\), then there should not exist a \(\mathcal{H}' \subseteq \mathcal{K}'\), such that \(\mathcal{H} \cup \mathcal{H}'\) is consistent. If there was, \(\mathcal{H}\) might not contribute to \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\), which in turn questions the comparability of \(\mathcal{I}(\mathcal{K})\) and \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
 
-Consider the following example as an illustration:
-[Example here]
+\begin{example}
+    Recall the logic program \(P\) from example \ref{ex:program}
+    \[\begin{array}{rrr}
+            P: & a \lor b.                  & a \leftarrow b.                 \\
+               & c \leftarrow \text{not }b. & \neg c \leftarrow \text{not }b.
+        \end{array}\]
+    The subprogram \(H \in SI_{\min}(P)\) consists of \(H = \{c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b., a \leftarrow b.\}\). Now consider \(P' = \{b., d., \neg d.\}\) and \(H' = \{b.\} \subseteq P\) which resolves the conflict within P. \(H\) is not strongly (\(P \cup P'\))-inconsistent due to the consistent superprogram \(H \cup H'\). To be precise, \(P \cup \{b.\}\) is consistent but \(P'\) involves the conflict of \(d.\) and \(\neg d.\). In \(SI_{\min}(P \cup P') = \{\{d., \neg d.\}\}\) only the conflict within \(P'\) is represented which renders a comparison of \(P\) and \(P \cup P'\) unreasonable.
+\end{example}
 
-This results in the need for a rephrased monotonicity postulate that recognizes the preservation of conflicts as a condition for monotonicity in non-monotonic logics. Using the concept of strongly inconsistent subsets, preserving conflicts is defined as follows:
+Acknowledging the issue with the classic monotonicity postulate results in the need for a rephrased monotonicity postulate that recognizes the preservation of conflicts as a condition for monotonicity in non-monotonic logics. Using the concept of strongly inconsistent subsets, preserving conflicts is defined as follows:
 
 \begin{definition}
     Let \(\mathcal{K}\) and \(\mathcal{K}'\) be knowledge bases. \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\) if \(\mathcal{H} \in SI(\mathcal{K} \cup \mathcal{K}')\) for any \(\mathcal{H} \in SI(\mathcal{K})\).
@@ -170,7 +177,20 @@ To generalize the definition of free to non-monotonic logics as well, the concep
     Let \(Free_{SI}(\mathcal{K})\) be the set of all SI-free formulas of \(\mathcal{K}\).
 \end{definition}
 
-[Example here]
+\begin{example}
+    Recall the logic program \(P\) from example \ref{ex:program}
+    \[\begin{array}{rrr}
+            P: & a \lor b.                  & a \leftarrow b.                 \\
+               & c \leftarrow \text{not }b. & \neg c \leftarrow \text{not }b.
+        \end{array}\]
+    As previously seen \(SI_{\min}(P) = \{c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b., a \leftarrow b.\}\). To show that the formula \(\alpha = \{a \lor b\}\) is free, consider
+    \begin{align*}
+        C_{\max}(P) = \{ & \{a \lor b., a \leftarrow b., c \leftarrow \text{not }b.\},                   \\
+                         & \{a \lor b., a \leftarrow b., \neg c \leftarrow \text{not }b.\},              \\
+                         & \{a \lor b., c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b.\}\}.
+    \end{align*}
+    Since \(\alpha\) is the only formula occurring in all maximal consistent sets, it shows \(\bigcap_{H \in C_{\max}(P)} H = \{a \lor b\}\).
+\end{example}
 
 Given the similarities between \(Free(\mathcal{K})\) and \(Free_{SI}(\mathcal{K})\), a revised postulate for free formula independence is proposed by \cite{ulbricht_handling_2020}. This SI-Free postulate suggests that a free formula \(\alpha\) not only does not increase the degree of inconsistency but also does not introduce strongly inconsistent subsets.
 \\
@@ -242,8 +262,8 @@ If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each others's conflicts and \(\
 
 This concludes the discussion of rationality postulates with a generalization of monotonicity for non-monotonic logics.
 
-\section{Evaluation of Measures}
-To close out the paper the behavior of the three provided measures are evaluated with regards to the previously presented rationality postulates. In cases where the postulates are not satisfied, examples of the logic used throughout the paper are given to illustrate.
+\section{Compliance of Measures}
+To close out the paper the behavior of the three provided measures are evaluated with regards to the previously presented rationality postulates. In cases where the postulates are not satisfied, examples of a logic program as defined in the paper are given to illustrate.
 
 \begin{proposition}[\cite{ulbricht_measuring_2018}]
     The measures \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}^\text{C}}\) and \(\mathcal{I}_{\text{p}}\) satisfy consistency, strong monotonicity, independence, FW-strong equivalence, strong equivalent replacement, and strong super-additivity. The measures \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}^\text{C}}\) also satisfy seperability.
