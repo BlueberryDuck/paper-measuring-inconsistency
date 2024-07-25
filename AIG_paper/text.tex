@@ -183,7 +183,7 @@ To generalize the definition of free to non-monotonic logics as well, the concep
             P: & a \lor b.                  & a \leftarrow b.                 \\
                & c \leftarrow \text{not }b. & \neg c \leftarrow \text{not }b.
         \end{array}\]
-    As previously seen \(SI_{\min}(P) = \{c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b., a \leftarrow b.\}\). To show that the formula \(\alpha = \{a \lor b\}\) is free, consider
+    As previously seen \(SI_{\min}(P) = \{c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b., a \leftarrow b.\}\). To show that the formula \(\alpha = \{a \lor b.\}\) is free, consider
     \begin{align*}
         C_{\max}(P) = \{ & \{a \lor b., a \leftarrow b., c \leftarrow \text{not }b.\},                   \\
                          & \{a \lor b., a \leftarrow b., \neg c \leftarrow \text{not }b.\},              \\
@@ -199,9 +199,13 @@ If \(\alpha \in Free_{SI}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \
 
 One problem in using this postulate stems from the fact that ordinary inconsistency of a subset \(\mathcal{H} \subseteq \mathcal{K}\) only depends on \(\mathcal{H}\), whereas strong inconsistency relates to the whole knowledge base \(\mathcal{K}\). The removal of formulas in \(Free_{SI}(\mathcal{K})\) may affect the structure of \(SI_{\min}(\mathcal{K})\).
 
-    [Example here]
+\begin{example}
+    Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c., d \leftarrow \text{not }d., b., c., d.\}\) which has \(SI_{\min}(P) = \{\{a \leftarrow \text{not }a,b., b., c.\}\}\). The formulas \(\alpha = \{d.\}\) and \(\beta = \{a \leftarrow \text{not }c.\}\) are in \(Free_{SI}(P)\). Although they are free, removing them affects \(SI_{\min}(P)\): Removing \(\alpha\) turns \(\{d \leftarrow \text{not }d.\}\) into a strongly inconsistent subset, while removing \(\beta\) makes \(\{c.\}\) irrelevant regarding the present conflict, so \(SI_{\min}(P \backslash \{\alpha, \beta\}) = \{\{a \leftarrow \text{not }a,b., b.\}, \{d \leftarrow \text{not }d.\}\}\).
+\end{example}
 
-This shows that it is hard to predict what might happen when an SI-free formula is removed. Notably, \(SI_{\min}(\mathcal{K}) = SI_{\min}(\mathcal{K} \backslash \{\alpha\})\) is not true for all \(\alpha \in Free_{SI}(\mathcal{K})\), which shows that not even previously introduced \(\mathcal{I}_{\text{MSI}}\) satisfies this SI-free postulate. In non-monotonic logics, an SI-free formula \(\alpha\) could resolve conflicts, which is why \cite{brewka_strong_2017} introduces the notion of neutral formulas to further strengthen the condition.
+The example shows that it is hard to predict what might happen when an SI-free formula is removed. Notably, \(SI_{\min}(\mathcal{K}) = SI_{\min}(\mathcal{K} \backslash \{\alpha\})\) is not true for all \(\alpha \in Free_{SI}(\mathcal{K})\), which shows that not even previously introduced \(\mathcal{I}_{\text{MSI}}\) satisfies this SI-free postulate.
+
+In non-monotonic logics, an SI-free formula \(\alpha\) could resolve conflicts, which is why \cite{brewka_strong_2017} introduces the notion of neutral formulas to further strengthen the condition.
 
 \begin{definition}
     Let \(\mathcal{K}\) be a knowledge base. A formula \(\alpha \in \mathcal{K}\) is called neutral if it satisfies\\
@@ -214,7 +218,7 @@ Neutral formulas do not make use of strong inconsistency, in contrast to SI-free
 \textbf{Independence}
 If \(\alpha \in Ntr(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
 
-The only postulate not mentioned yet is the dominance postulate \cite{hunter_measure_2010}. It tries to formulate the intuition that a formula carrying more information is also more likely to be involved in conflicts. It is highly contested, even for propositional settings, see \cite{ferme_revisiting_2014}, and \cite{ulbricht_measuring_2018} questions its use altogether for non-monotonic settings. Since for non-monotonic logics more information can even resolve conflicts in a knowledge base it is unfounded to consider such a formula to be more problematic.
+The only basic postulate from \cite{hunter_measure_2010} not mentioned yet is the dominance postulate. It tries to formulate the intuition that a formula carrying more information is also more likely to be involved in conflicts. It is highly contested, even for propositional settings, see \cite{ferme_revisiting_2014}, and \cite{ulbricht_measuring_2018} questions its use altogether for non-monotonic settings. Since for non-monotonic logics more information can even resolve conflicts in a knowledge base it is unfounded to consider such a formula to be more problematic.
 
 This concludes the discussion on basic postulates.
 
@@ -230,8 +234,6 @@ Following this definition, a subset \(\mathcal{H}\) of a knowledge base \(\mathc
 \\
 \textbf{Strong Equivalence}
 If \(\mathcal{K} \equiv_S \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
-
-    [Example here]
 
 In some cases, the above postulate is too strong resulting in \(\mathcal{K} \equiv_S \mathcal{K}'\) for any two inconsistent knowledge bases, which is why a more fine-grained notion of equivalence is needed. To achieve this a similar approach as in \cite{thimm_inconsistency_2013} can be used to define:
 
