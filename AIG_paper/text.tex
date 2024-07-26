@@ -77,7 +77,7 @@ In non-monotonic logics neither the statement that \(\mathcal{K}'\) must be inco
 
 For this reason, a refined notion of inconsistent subsets of a knowledge base was defined by \cite{brewka_strong_2017}.
 \begin{definition}
-    A subset of a knowledge base \(\mathcal{K}\) is strongly \(\mathcal{K}\)-inconsistent if all its supersets within the knowledge base are inconsistent as well. The set of all strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) is denoted by \(SI(K)\). The set of all minimal strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) is denoted by \(SI_{\min}(\mathcal{K})\).
+    A subset of a knowledge base \(\mathcal{K}\) is strongly \(\mathcal{K}\)-inconsistent if all its supersets within the knowledge base are inconsistent as well. The set of all strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) is denoted by \(SI(\mathcal{K})\). The set of all minimal strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) is denoted by \(SI_{\min}(\mathcal{K})\).
 \end{definition}
 
 Exploring the measurement of inconsistency in non-monotonic logics is now possible, a subject that has only been examined comparatively recently \cite{ulbricht_measuring_2018} \cite{brewka_strong_2019} \cite{ulbricht_handling_2020}.
@@ -152,7 +152,7 @@ For non-monotonic logics, however, monotonicity does not make sense as new infor
 
 Acknowledging the issue with the classic monotonicity postulate results in the need for a rephrased monotonicity postulate that recognizes the preservation of conflicts as a condition for monotonicity in non-monotonic logics. Using the concept of strongly inconsistent subsets, preserving conflicts is defined as follows:
 
-\begin{definition}
+\begin{definition}\label{def:monotonic}
     Let \(\mathcal{K}\) and \(\mathcal{K}'\) be knowledge bases. \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\) if \(\mathcal{H} \in SI(\mathcal{K} \cup \mathcal{K}')\) for any \(\mathcal{H} \in SI(\mathcal{K})\).
 \end{definition}
 
@@ -174,7 +174,7 @@ To generalize the definition of free to non-monotonic logics as well, the concep
 \begin{definition}
     Let \(\mathcal{K}\) be a knowledge base. A formula \(\alpha \in \mathcal{K}\) is called free with respect to strong inconsistency (or SI-free or simply free if there is no risk of confusion) if\\
     \(\alpha \in \mathcal{K} \backslash \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} = \bigcap\limits_{\mathcal{H} \in C_{\max}(\mathcal{K})} \mathcal{H}\).\\
-    Let \(Free_{SI}(\mathcal{K})\) be the set of all SI-free formulas of \(\mathcal{K}\).
+    Let \(Free_{\text{SI}}(\mathcal{K})\) be the set of all SI-free formulas of \(\mathcal{K}\).
 \end{definition}
 
 \begin{example}
@@ -192,22 +192,22 @@ To generalize the definition of free to non-monotonic logics as well, the concep
     Since \(\alpha\) is the only formula occurring in all maximal consistent sets, it shows \(\bigcap_{H \in C_{\max}(P)} H = \{a \lor b\}\).
 \end{example}
 
-Given the similarities between \(Free(\mathcal{K})\) and \(Free_{SI}(\mathcal{K})\), a revised postulate for free formula independence is proposed by \cite{ulbricht_handling_2020}. This SI-Free postulate suggests that a free formula \(\alpha\) not only does not increase the degree of inconsistency but also does not introduce strongly inconsistent subsets.
+Given the similarities between \(Free(\mathcal{K})\) and \(Free_{\text{SI}}(\mathcal{K})\), a revised postulate for free formula independence is proposed by \cite{ulbricht_handling_2020}. This SI-Free postulate suggests that a free formula \(\alpha\) not only does not increase the degree of inconsistency but also does not introduce strongly inconsistent subsets.
 \\
 \textbf{SI-Free}
-If \(\alpha \in Free_{SI}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
+If \(\alpha \in Free_{\text{SI}}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
 
-One problem in using this postulate stems from the fact that ordinary inconsistency of a subset \(\mathcal{H} \subseteq \mathcal{K}\) only depends on \(\mathcal{H}\), whereas strong inconsistency relates to the whole knowledge base \(\mathcal{K}\). The removal of formulas in \(Free_{SI}(\mathcal{K})\) may affect the structure of \(SI_{\min}(\mathcal{K})\).
+One problem in using this postulate stems from the fact that ordinary inconsistency of a subset \(\mathcal{H} \subseteq \mathcal{K}\) only depends on \(\mathcal{H}\), whereas strong inconsistency relates to the whole knowledge base \(\mathcal{K}\). The removal of formulas in \(Free_{\text{SI}}(\mathcal{K})\) may affect the structure of \(SI_{\min}(\mathcal{K})\).
 
 \begin{example}
-    Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c., d \leftarrow \text{not }d., b., c., d.\}\) which has \(SI_{\min}(P) = \{\{a \leftarrow \text{not }a,b., b., c.\}\}\). The formulas \(\alpha = \{d.\}\) and \(\beta = \{a \leftarrow \text{not }c.\}\) are in \(Free_{SI}(P)\). Although they are free, removing them affects \(SI_{\min}(P)\): Removing \(\alpha\) turns \(\{d \leftarrow \text{not }d.\}\) into a strongly inconsistent subset, while removing \(\beta\) makes \(\{c.\}\) irrelevant regarding the present conflict, so \(SI_{\min}(P \backslash \{\alpha, \beta\}) = \{\{a \leftarrow \text{not }a,b., b.\}, \{d \leftarrow \text{not }d.\}\}\).
+    Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c., d \leftarrow \text{not }d., b., c., d.\}\) which has \(SI_{\min}(P) = \{\{a \leftarrow \text{not }a,b., b., c.\}\}\). The formulas \(\alpha = \{d.\}\) and \(\beta = \{a \leftarrow \text{not }c.\}\) are in \(Free_{\text{SI}}(P)\). Although they are free, removing them affects \(SI_{\min}(P)\): Removing \(\alpha\) turns \(\{d \leftarrow \text{not }d.\}\) into a strongly inconsistent subset, while removing \(\beta\) makes \(\{c.\}\) irrelevant regarding the present conflict, so \(SI_{\min}(P \backslash \{\alpha, \beta\}) = \{\{a \leftarrow \text{not }a,b., b.\}, \{d \leftarrow \text{not }d.\}\}\).
 \end{example}
 
-The example shows that it is hard to predict what might happen when an SI-free formula is removed. Notably, \(SI_{\min}(\mathcal{K}) = SI_{\min}(\mathcal{K} \backslash \{\alpha\})\) is not true for all \(\alpha \in Free_{SI}(\mathcal{K})\), which shows that not even previously introduced \(\mathcal{I}_{\text{MSI}}\) satisfies this SI-free postulate.
+The example shows that it is hard to predict what might happen when an SI-free formula is removed. Notably, \(SI_{\min}(\mathcal{K}) = SI_{\min}(\mathcal{K} \backslash \{\alpha\})\) is not true for all \(\alpha \in Free_{\text{SI}}(\mathcal{K})\), which shows that not even previously introduced \(\mathcal{I}_{\text{MSI}}\) satisfies this SI-free postulate.
 
 In non-monotonic logics, an SI-free formula \(\alpha\) could resolve conflicts, which is why \cite{brewka_strong_2017} introduces the notion of neutral formulas to further strengthen the condition.
 
-\begin{definition}
+\begin{definition}\label{def:independence}
     Let \(\mathcal{K}\) be a knowledge base. A formula \(\alpha \in \mathcal{K}\) is called neutral if it satisfies\\
     \(\forall \mathcal{H} \subseteq \mathcal{K}: \mathcal{H} \in C(\mathcal{K}) \Leftrightarrow \mathcal{H} \cup \{\alpha\} \in C(\mathcal{K})\).\\
     Let \(Ntr(\mathcal{K})\) be the set of all neutral formulas of \(\mathcal{K}\).
@@ -227,7 +227,7 @@ For many approaches to inconsistency measurements, syntax is a decisive factor. 
 To adjust this postulate for non-monotonic logics the term equivalence as in "two knowledge bases have the same model" is too weak. \cite{lifschitz_strongly_2001} developed the notion of strong equivalence to combat this problem, while \cite{brewka_strong_2019} added to this by generalizing it to an arbitrary logic.
 
 \begin{definition}
-    Let \(\mathcal{L} = (\text{WF, BS, INC, ACC})\) be a logic. The knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are strongly equivalent, denoted by \(\mathcal{K} \equiv_S  \mathcal{K}'\), if \(\text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})\) for each knowledge base \(\mathcal{G}\).
+    Let \(L = (\text{WF, BS, INC, ACC})\) be a logic. The knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are strongly equivalent, denoted by \(\mathcal{K} \equiv_S  \mathcal{K}'\), if \(\text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})\) for each knowledge base \(\mathcal{G}\).
 \end{definition}
 
 Following this definition, a subset \(\mathcal{H}\) of a knowledge base \(\mathcal{K}\) can be swapped out with a strongly equivalent subset \(\mathcal{H}'\) without changing the inferences one can draw from \(\mathcal{K}\), which in turn means that it shouldn't affect the inconsistency they contribute to \(\mathcal{K}\). Applied to the whole knowledge base, this means that two strongly equivalent knowledge bases should have the same inconsistency measure.
@@ -237,7 +237,7 @@ If \(\mathcal{K} \equiv_S \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mat
 
 In some cases, the above postulate is too strong resulting in \(\mathcal{K} \equiv_S \mathcal{K}'\) for any two inconsistent knowledge bases, which is why a more fine-grained notion of equivalence is needed. To achieve this a similar approach as in \cite{thimm_inconsistency_2013} can be used to define:
 
-\begin{definition}
+\begin{definition}\label{def:fwequivalent}
     Let \(\mathcal{K}\) and \(\mathcal{K}'\) be two knowledge bases. \(\mathcal{K}\) and \(\mathcal{K}'\) are called formula-wise strongly equivalent, denoted by \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\), if there is a bijection \(\rho : \mathcal{K} \rightarrow \mathcal{K}'\) such that \(\{\alpha\} \equiv_S \{\rho(\alpha)\}\) holds for all \(\alpha \in \mathcal{K}\).
 \end{definition}
 
@@ -245,6 +245,7 @@ Applying this notion to the previously defined strong equivalence, a new rationa
 \\
 \textbf{FW-Strong Equivalence}
 If \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
+
 \cite{ulbricht_handling_2020} further refines this notion by considering the replacement of a formula \(\alpha\) with a strongly equivalent formula \(\alpha'\), resulting in:
 \\
 \textbf{Strong Equivalence Replacement}
@@ -260,35 +261,54 @@ This postulate ensures that the inconsistency values of \(\mathcal{K}\) and \(\m
 Lastly, the super-additivity postulate by \cite{thimm_measuring_2009} can be adjusted to the notion of strong monotonicity, by accounting for the fact that adding information might resolve conflicts for non-monotonic logics. This can be achieved by adding conflict preservation as an additional condition.
 \\
 \textbf{Strong Super-Additivity}
-If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each others's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(\mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K'}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
+If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each others's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(\mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
 
 This concludes the discussion of rationality postulates with a generalization of monotonicity for non-monotonic logics.
 
 \section{Compliance of Measures}
-To close out the paper the behavior of the three provided measures are evaluated with regards to the previously presented rationality postulates. In cases where the postulates are not satisfied, examples of a logic program as defined in the paper are given to illustrate.
+To close out the paper the compliance of the three provided measures are evaluated with regards to the previously presented rationality postulates. In cases where the postulates are not satisfied, examples of a logic program as defined in the paper are given to illustrate.
 
 \begin{proposition}[\cite{ulbricht_measuring_2018}]
     The measures \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}^\text{C}}\) and \(\mathcal{I}_{\text{p}}\) satisfy consistency, strong monotonicity, independence, FW-strong equivalence, strong equivalent replacement, and strong super-additivity. The measures \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}^\text{C}}\) also satisfy seperability.
 \end{proposition}
-
-[Examples here]
-
 \begin{table}[h]
     \centering
-    \caption{Compliance of measures with rationality postulates}
+    \caption{Compliance of measures with rationality postulates \cite{ulbricht_measuring_2018}}
     \begin{tabular}{lccc}
         \toprule
-                                      & \(\mathcal{I}_{\text{MSI}}\) & \(\mathcal{I}_{\text{MSI}^\text{C}}\) & \(\mathcal{I}_{\text{p}}\) \\
+                                       & \(\mathcal{I}_{\text{MSI}}\) & \(\mathcal{I}_{\text{MSI}^\text{C}}\) & \(\mathcal{I}_{\text{p}}\) \\
         \midrule
-        Consistency                   & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        Strong monotonicity           & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        SI-Free                       & \ding{55}                    & \ding{55}                             & \ding{55}                  \\
-        Independence                  & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        Strong Equivalence            & \ding{55}                    & \ding{55}                             & \ding{55}                  \\
-        FW-Strong Equivalence         & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        Strong Equivalent Replacement & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        Separability                  & \ding{51}                    & \ding{51}                             & \ding{55}                  \\
-        Strong Super-Additivity       & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Consistency                    & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Strong monotonicity            & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        SI-Free                        & \ding{55}                    & \ding{55}                             & \ding{55}                  \\
+        Independence                   & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Strong Equivalence             & \ding{55}                    & \ding{55}                             & \ding{55}                  \\
+        FW-Strong Equivalence          & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Strong Equivalence Replacement & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Separability                   & \ding{51}                    & \ding{51}                             & \ding{55}                  \\
+        Strong Super-Additivity        & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
         \bottomrule
     \end{tabular}
 \end{table}
+
+Consistency is satisfied by all measures because \(SI_{\min}(\mathcal{K}) = \emptyset\) if and only if \(\mathcal{K}\) is consistent.
+
+Strong monotonicity is satisfied by all measures because \(\mathcal{I}(\mathcal{K} \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}'))\) for knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\), such that \(\mathcal{K}'\) preserves consflicts of \(\mathcal{K}\). This can be seen by considering \(\mathcal{H} \in SI_{\min}(\mathcal{K})\) and applying definition \ref{def:monotonic} to get \(\mathcal{H} \in SI_{\min}(\mathcal{K} \cup \mathcal{K}')\).
+
+SI-free is not satisfied by any of the measures.
+\begin{example}
+    Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c, \text{not }d., b., c., d.\}\) which has \(SI_{\min}(P) = \{\{a \leftarrow \text{not }a,b., b., c.\}, \{a \leftarrow \text{not }a, b., b., d.\}\}\) and \(\alpha = \{a \leftarrow \text{not }c, \text{not }d.\} \in Free_{\text{SI}}(P)\). The measures evaluate to \(\mathcal{I}_{\text{MSI}}(P) = 2\), \(\mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{2}{3}\), and \(\mathcal{I}_{\text{p}}(P) = 4\). But if \(\alpha\) is removed they evaluate to \(\mathcal{I}_{\text{MSI}}(P \backslash \{\alpha\}) = 1\), \(\mathcal{I}_{\text{MSI}^\text{C}}(P \backslash \{\alpha\}) = \frac{1}{2}\), and \(\mathcal{I}_{\text{p}}(P \backslash \{\alpha\}) = 2\).
+\end{example}
+
+Independence in turn is satisfied by all measures because \(SI_{\min}(\mathcal{K}) = SI_{\min}(\mathcal{K} \backslash \{\alpha\})\) for \(\alpha \in Ntr(\mathcal{K})\) by applying definition \ref{def:independence}.
+
+Strong equivalence is not satisfied by any of the measures.
+\begin{example}
+    Consider the logic programs \(P = \{a., \neg a.\}\) and \(P' = \{a., \neg a., a \leftarrow \neg a., \neg a \leftarrow a.\}\). Both programs cannot be repaired by any extension of them, so \(P \equiv_S P'\), but \(\mathcal{I}(P) \neq \mathcal{I}(P')\) for all measures.
+\end{example}
+
+FW-strong equivalence and strong equivalence replacement are satisfied by all measures as there exists a bijection \(\rho\) such that \(\{\alpha\} \equiv_S \{\rho(\alpha)\}\) holds for all formulas \(\alpha \in \mathcal{K}\), which is needed according to definition \ref{def:fwequivalent}. For detailed proof please refer to \cite{ulbricht_handling_2020}.
+
+Separability is satisfied only by measures \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}^\text{C}}\) but not by \(\mathcal{I}_{\text{p}}\) as this measure does not even comply in the propositional case, see \cite{thimm_compliance_2017}.
+
+Strong super-additivity is satisfied by all measures because of proposition 4.4 in \cite{ulbricht_handling_2020} one can consider if given two knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) where \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(SI_{\min}(\mathcal{K}) \subseteq SI_{\min}(\mathcal{K} \cup \mathcal{K}')\). This implies \(SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}') \subseteq SI_{\min}(\mathcal{K} \cup \mathcal{K}')\). Now if \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') = \emptyset\) which constitutes strong super-additivity.
