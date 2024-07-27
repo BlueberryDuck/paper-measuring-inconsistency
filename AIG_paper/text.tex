@@ -1,9 +1,8 @@
 \section{Introduction}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+tbd
 
 \section{Inconsistency Measures}
-TODO:
-Not all inconsistent knowledge bases contain no information at all or the same amount of, just because they are inconsistent as a whole. This can be deduced as two inconsistent knowledge bases can provide different conclusions, implying they contain different information \cite{bertossi_approaches_2005}.
+Contrary to classical semantics, not all inconsistent knowledge bases contain the same amount of information, nor do they necessarily lead to the same conclusions. In paraconsistent logic, two inconsistent knowledge bases can yield different conclusions, indicating that they convey different information \cite{bertossi_approaches_2005}.
 
 A binary measure, commonly used for example in classical inference, only provides information on whether a knowledge base is consistent or inconsistent. Other logics that can work with inconsistent knowledge bases would profit from more fine-grained measures.
 One example of such logic is the quasi-classical logic \cite{grant_measuring_2006} which extends the first-order logic to enable the quantification of equality and more importantly inconsistency in a knowledge base by determining "degrees of inconsistency".
@@ -14,17 +13,18 @@ So when using a set of all minimal inconsistent subsets of a knowledge base \(I_
 
 Many other inconsistency measures expand on that idea. For example, \cite{jabbour_mis_2016} uses minimal inconsistent subset partitions to be able to differentiate within the subsets how strong conflicts between them are. This means that not all subsets count equally towards the inconsistency score, which provides an even finer measure.
 
-TODO
-\begin{definition}[\cite{brewka_strong_2019}]
+\section{Logic and Answer Set Programming}
+In this paper arbitrary and non-monotonic frameworks are to be discussed, which is why an abstract definition of logic will be given, based on \cite{brewka_strong_2019}.
+
+\begin{definition}
     A logic \(L\) is a tuple \(L = (\text{WF, BS, INC, ACC})\), where \(\text{WF}\) is a set of well-formed formulas, \(\text{BS}\) is a set of belief sets, \(\text{INC} \subseteq \text{BS}\) is an upward closed set of inconsistent belief sets, and \(\text{ACC}: 2^{\text{WF}} \rightarrow 2^{\text{BS}}\) assigns a collection of belief sets to each subset of \(\text{WF}\). A knowledge base \(\mathcal{K}\) of \(L\) is a finite subset of \(\text{WF}\). A knowledge base \(\mathcal{K}\) is called inconsistent if \(\text{ACC}(\mathcal{K}) \subseteq \text{INC}\).
 \end{definition}
 
-\section{Answer Set Programming}
 Answer set programming (ASP) \cite{gelfond_logic_2002} is a form of declarative programming, originally intended for complex combinatorial search problems. It has its roots in the field of non-monotonic reasoning and logic programming and provides a framework for knowledge representation with well-defined declarative semantics, allowing for the construction of knowledge bases that are adaptable to changes in information.
 
-Inconsistencies in ASP can occur for two reasons, according to \cite{calimeri_characterising_2015}. Incoherence occurs if two complementary literals (\(l\) and \(\neg l\)) can be derived from one set of rules. Instability occurs if a literal, previously assumed to be false, is again derived due to the use of default negation.
+Inconsistencies in ASP can occur for two reasons, according to \cite{calimeri_characterising_2015}: Incoherence occurs if two complementary literals (\(l\) and \(\neg l\)) can be derived from one set of rules. Instability occurs if a literal, previously assumed to be false, is again derived due to the use of default negation.
 
-Extended disjunctive databases, further only referred to as logic programs, contain a disjunction in the head of rules and use two kinds of negation. Strong negation (\(\neg\)) and default negation (not). A logic program \(P\) consists of a finite set of rules \(r\) which always follow the form \(l_0 \lor \dots \lor l_k \leftarrow l_{k+1}, \dots, l_m, \text{not } l_{m+1}, \dots, \text{not }l_n\). This form can be split into three parts \(head(r) = \{l_0, \dots, l_k\}\), \(pos(r) = \{l_{k+1}, \dots, l_m\}\), and \(neg(r) = \{l_{m+1}, \dots, l_n\}\), resulting in an alternative notation \(head(r) \leftarrow pos(r), neg(r)\). If \(pos(r) \cup neg(r) = \emptyset\), then \(r\) is written "\(head(r)\)" instead of "\(head(r) \leftarrow\)".
+Extended disjunctive databases, further only referred to as logic programs, contain a disjunction in the head of rules and use two kinds of negation. Strong negation (\(\neg\)) and default negation (not). A logic program \(P\) consists of a finite set of rules \(r\) which follow the form \(l_0 \lor \dots \lor l_k \leftarrow l_{k+1}, \dots, l_m, \text{not } l_{m+1}, \dots, \text{not }l_n\). This form can be split into three parts \(head(r) = \{l_0, \dots, l_k\}\), \(pos(r) = \{l_{k+1}, \dots, l_m\}\), and \(neg(r) = \{l_{m+1}, \dots, l_n\}\), resulting in an alternative notation \(head(r) \leftarrow pos(r), neg(r)\). If \(pos(r) \cup neg(r) = \emptyset\), then \(r\) is written "\(head(r)\)" instead of "\(head(r) \leftarrow\)".
 
 Given this knowledge one can define an answer set as follows.
 
@@ -41,12 +41,7 @@ To extend this definition to arbitrary logic programs, \cite{ulbricht_handling_2
 Logic programs can be modeled regarding a set \(A\) of propositional atoms as logic \(L_A^{ASP} = (\text{WF}_A^{ASP}, \text{BS}_A^{ASP}, \text{INC}_A^{ASP}, \text{ACC}_A^{ASP})\). \(\text{WF}_A^{ASP}\) is the set of all rules over \(A\), \(\text{BS}_A^{ASP}\) consists of the sets of literals over \(A\), \(\text{INC}_A^{ASP} = \{Lit(A)\}\), and \(\text{ACC}_A^{ASP}\) assigns the sets of all answers sets to its respective logic program.
 
 \begin{example}
-    Consider the following logic program P, which will be used as an example throughout the rest of the paper:
-    \[\begin{array}{rrr}
-            P: & a \lor b.                  & a \leftarrow b.                 \\
-               & c \leftarrow \text{not }b. & \neg c \leftarrow \text{not }b.
-        \end{array}\]
-    This program has no answer set. Consider \{a\}, \{b\} and \{a,b\} as the candidates with
+    Consider the following logic program \(P = \{a \lor b., a \leftarrow b., c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b.\}\) This program has no answer set. Consider \{a\}, \{b\} and \{a,b\} as the candidates with
     \[\begin{array}{rrrrr}
             P^{\{a\}}:   & a \lor b. & a \leftarrow b. & c. & \neg c. \\
             P^{\{b\}}:   & a \lor b. & a \leftarrow b.                \\
@@ -68,12 +63,7 @@ Let \(\mathcal{M}\) be a set of sets. \(\mathcal{H}\) is called a hitting set of
 In non-monotonic logics neither the statement that \(\mathcal{K}'\) must be inconsistent, nor the hitting set duality has to be true because additional information can resolve inconsistency in a knowledge base, which opens up the possibility of consistent knowledge bases to contain inconsistent subsets.
 
 \begin{example}
-    Consider the propositional signature \(A = \{a, b\}\) and the logic programs \(P\), \(P'\)
-    \[\begin{array}{rrrr}
-            P:  & a. & b. & \neg b \leftarrow \text{not }a. \\
-            P': &    & b. & \neg b \leftarrow \text{not }a.
-        \end{array}\]
-    Then \(\text{ACC}_A^{ASP}(P) = \{\{a,b\}\}\) and \(\text{ACC}_A^{ASP}(P') = \{\}\). Observe that \(P\) is consistent while \(P'\) is inconsistent.
+    Consider the propositional signature \(A = \{a, b\}\) and the logic programs \(P = \{a., b., \neg b \leftarrow \text{not }a.\}\) and \(P' = \{b., \neg b \leftarrow \text{not }a.\}\). Then \(\text{ACC}_A^{ASP}(P) = \{\{a,b\}\}\) and \(\text{ACC}_A^{ASP}(P') = \{\}\). Observe that \(P\) is consistent while \(P'\) is inconsistent.
 \end{example}
 
 For this reason, a refined notion of inconsistent subsets of a knowledge base was defined by \cite{brewka_strong_2017}.
@@ -143,12 +133,7 @@ Monotonicity is a usually widely accepted postulate, which describes the intuiti
 For non-monotonic logics, however, monotonicity does not make sense as new information might resolve conflicts in \(\mathcal{K}\). Monotonic behavior should only appear if \(\mathcal{K}'\) does not resolve any conflicts in \(\mathcal{K}\). If \(\mathcal{H} \subseteq \mathcal{K}\) is strongly inconsistent, so \(\mathcal{H} \in SI(\mathcal{K})\), then there should not exist a \(\mathcal{H}' \subseteq \mathcal{K}'\), such that \(\mathcal{H} \cup \mathcal{H}'\) is consistent. If there was, \(\mathcal{H}\) might not contribute to \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\), which in turn questions the comparability of \(\mathcal{I}(\mathcal{K})\) and \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
 
 \begin{example}
-    Recall the logic program \(P\) from example \ref{ex:program}
-    \[\begin{array}{rrr}
-            P: & a \lor b.                  & a \leftarrow b.                 \\
-               & c \leftarrow \text{not }b. & \neg c \leftarrow \text{not }b.
-        \end{array}\]
-    The subprogram \(H \in SI_{\min}(P)\) consists of \(H = \{c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b., a \leftarrow b.\}\). Now consider \(P' = \{b., d., \neg d.\}\) and \(H' = \{b.\} \subseteq P\) which resolves the conflict within P. \(H\) is not strongly (\(P \cup P'\))-inconsistent due to the consistent superprogram \(H \cup H'\). To be precise, \(P \cup \{b.\}\) is consistent but \(P'\) involves the conflict of \(d.\) and \(\neg d.\). In \(SI_{\min}(P \cup P') = \{\{d., \neg d.\}\}\) only the conflict within \(P'\) is represented which renders a comparison of \(P\) and \(P \cup P'\) unreasonable.
+    Recall the logic program \(P = \{a \lor b., a \leftarrow b., c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b.\}\) from example \ref{ex:program}. The subprogram \(H \in SI_{\min}(P)\) consists of \(H = \{c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b., a \leftarrow b.\}\). Now consider \(P' = \{b., d., \neg d.\}\) and \(H' = \{b.\} \subseteq P\) which resolves the conflict within P. \(H\) is not strongly (\(P \cup P'\))-inconsistent due to the consistent superprogram \(H \cup H'\). To be precise, \(P \cup \{b.\}\) is consistent but \(P'\) involves the conflict of \(d.\) and \(\neg d.\). In \(SI_{\min}(P \cup P') = \{\{d., \neg d.\}\}\) only the conflict within \(P'\) is represented which renders a comparison of \(P\) and \(P \cup P'\) unreasonable.
 \end{example}
 
 Acknowledging the issue with the classic monotonicity postulate results in the need for a rephrased monotonicity postulate that recognizes the preservation of conflicts as a condition for monotonicity in non-monotonic logics. Using the concept of strongly inconsistent subsets, preserving conflicts is defined as follows:
@@ -179,12 +164,7 @@ To generalize the definition of free to non-monotonic logics as well, the concep
 \end{definition}
 
 \begin{example}
-    Recall the logic program \(P\) from example \ref{ex:program}
-    \[\begin{array}{rrr}
-            P: & a \lor b.                  & a \leftarrow b.                 \\
-               & c \leftarrow \text{not }b. & \neg c \leftarrow \text{not }b.
-        \end{array}\]
-    As previously seen \(SI_{\min}(P) = \{c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b., a \leftarrow b.\}\). To show that the formula \(\alpha = \{a \lor b.\}\) is free, consider
+    Recall the logic program \(P = \{a \lor b., a \leftarrow b., c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b.\}\) from example \ref{ex:program}. As previously seen \(SI_{\min}(P) = \{c \leftarrow \text{not }b., \neg c \leftarrow \text{not }b., a \leftarrow b.\}\). To show that the formula \(\alpha = \{a \lor b.\}\) is free, consider
     \begin{align*}
         C_{\max}(P) = \{ & \{a \lor b., a \leftarrow b., c \leftarrow \text{not }b.\},                   \\
                          & \{a \lor b., a \leftarrow b., \neg c \leftarrow \text{not }b.\},              \\
@@ -294,7 +274,7 @@ To close out the paper the compliance of the three provided measures are evaluat
 
 Consistency is satisfied by all measures because \(SI_{\min}(\mathcal{K}) = \emptyset\) if and only if \(\mathcal{K}\) is consistent.
 
-Strong monotonicity is satisfied by all measures because \(\mathcal{I}(\mathcal{K} \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}'))\) for knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\), such that \(\mathcal{K}'\) preserves consflicts of \(\mathcal{K}\). This can be seen by considering \(\mathcal{H} \in SI_{\min}(\mathcal{K})\) and applying definition \ref{def:monotonic} to get \(\mathcal{H} \in SI_{\min}(\mathcal{K} \cup \mathcal{K}')\).
+Strong monotonicity is satisfied by all measures because \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\) for knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) such that \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\). This can be seen by considering \(\mathcal{H} \in SI_{\min}(\mathcal{K})\) and applying definition \ref{def:monotonic} to get \(\mathcal{H} \in SI_{\min}(\mathcal{K} \cup \mathcal{K}')\).
 
 SI-free is not satisfied by any of the measures.
 \begin{example}
