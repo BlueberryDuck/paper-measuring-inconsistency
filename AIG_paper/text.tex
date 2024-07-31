@@ -14,15 +14,7 @@ So when using a set of all minimal inconsistent subsets of a knowledge base \(I_
 Many other inconsistency measures expand on that idea. For example, \cite{jabbour_mis_2016} uses minimal inconsistent subset partitions to be able to differentiate within the subsets how strong conflicts between them are. This means that not all subsets count equally towards the inconsistency score, which provides an even finer measure.
 
 \section{Logic and Answer Set Programming}
-In this paper arbitrary and non-monotonic frameworks are to be discussed, which is why an abstract definition of logic will be given, based on \cite{brewka_strong_2019}.
-
-\begin{definition}
-    A logic \(L\) is a tuple \(L = (\text{WF, BS, INC, ACC})\), where \(\text{WF}\) is a set of well-formed formulas, \(\text{BS}\) is a set of belief sets, \(\text{INC} \subseteq \text{BS}\) is an upward closed set of inconsistent belief sets, and \(\text{ACC}: 2^{\text{WF}} \rightarrow 2^{\text{BS}}\) assigns a collection of belief sets to each subset of \(\text{WF}\). A knowledge base \(\mathcal{K}\) of \(L\) is a finite subset of \(\text{WF}\). A knowledge base \(\mathcal{K}\) is called inconsistent if \(\text{ACC}(\mathcal{K}) \subseteq \text{INC}\).
-\end{definition}
-
-Answer set programming (ASP) \cite{gelfond_logic_2002} is a form of declarative programming, originally intended for complex combinatorial search problems. It has its roots in the field of non-monotonic reasoning and logic programming and provides a framework for knowledge representation with well-defined declarative semantics, allowing for the construction of knowledge bases that are adaptable to changes in information.
-
-Inconsistencies in ASP can occur for two reasons, according to \cite{calimeri_characterising_2015}: Incoherence occurs if two complementary literals (\(l\) and \(\neg l\)) can be derived from one set of rules. Instability occurs if a literal, previously assumed to be false, is again derived due to the use of default negation.
+In this paper, arbitrary and non-monotonic frameworks are to be discussed, with a focus on logic programming. Although the concept can be extended to cover a broader range of logics, this discussion will center on logic programming's foundational aspects. Answer set programming (ASP) \cite{gelfond_logic_2002}, a form of declarative programming initially intended for complex combinatorial search problems, exemplifies this focus. Rooted in non-monotonic reasoning and logic programming, ASP provides a framework for knowledge representation with well-defined declarative semantics, allowing for the construction of knowledge bases that are adaptable to changes in information.
 
 Extended disjunctive databases, further only referred to as logic programs, contain a disjunction in the head of rules and use two kinds of negation. Strong negation (\(\neg\)) and default negation (not). A logic program \(P\) consists of a finite set of rules \(r\) which follow the form \(l_0 \lor \dots \lor l_k \leftarrow l_{k+1}, \dots, l_m, \text{not } l_{m+1}, \dots, \text{not }l_n\). This form can be split into three parts \(head(r) = \{l_0, \dots, l_k\}\), \(pos(r) = \{l_{k+1}, \dots, l_m\}\), and \(neg(r) = \{l_{m+1}, \dots, l_n\}\), resulting in an alternative notation \(head(r) \leftarrow pos(r), neg(r)\). If \(pos(r) \cup neg(r) = \emptyset\), then \(r\) is written "\(head(r)\)" instead of "\(head(r) \leftarrow\)".
 
@@ -52,12 +44,12 @@ Logic programs can be modeled regarding a set \(A\) of propositional atoms as lo
 \end{example}
 
 \section{Strong Inconsistency}
-Consider the following notations with regards to a knowledge base \(\mathcal{K}\). \(I(\mathcal{K})\) denotes the set of all inconsistent subsets, \(I_{\min}(\mathcal{K})\) the set of all minimal inconsistent subsets, \(C(\mathcal{K})\) the set of all consistent, and \(C_{\max}(\mathcal{K})\) the set of all maximal \(\mathcal{K}\)-consistent subsets of \(\mathcal{K}\). In classical monotonic logics if a knowledge base \(\mathcal{K} \subseteq \mathcal{K}'\) is inconsistent then so is \(\mathcal{K}'\). Additionally, the hitting set duality establishes a relationship between minimal inconsistent sets and maximal consistent sets.
+Consider the following notations with regards to a knowledge base \(\mathcal{K}\) in the context of propositional logic. \(I(\mathcal{K})\) denotes the set of all inconsistent subsets, \(I_{\min}(\mathcal{K})\) the set of all minimal inconsistent subsets, \(C(\mathcal{K})\) the set of all consistent, and \(C_{\max}(\mathcal{K})\) the set of all maximal \(\mathcal{K}\)-consistent subsets of \(\mathcal{K}\). In classical monotonic logics if a knowledge base \(\mathcal{K} \subseteq \mathcal{K}'\) is inconsistent then so is \(\mathcal{K}'\). Additionally, the hitting set duality establishes a relationship between minimal inconsistent sets and maximal consistent sets.
 
-Let \(\mathcal{M}\) be a set of sets. \(\mathcal{H}\) is called a hitting set of \(\mathcal{M}\) if \(\mathcal{H}\) and all subsets \(M\) have a common intersection (\(\mathcal{H} \cap M \neq \emptyset | M \in \mathcal{M}\)). A minimal hitting set \(\mathcal{H}\) of \(\mathcal{M}\) further requires that no elements in \(\mathcal{H}\) can be dropped without losing its hitting set characteristic (\(\mathcal{H}' \subsetneq \mathcal{H}\) implies \(\mathcal{H}'\) is not a hitting set of \(\mathcal{M}\)).
+Let \(\mathcal{M}\) be a set of sets. \(\mathcal{H}\) is called a hitting set of \(\mathcal{M}\) if \(\mathcal{H}\) and all subsets \(M\) have a common intersection (\(\mathcal{H} \cap M \neq \emptyset | M \in \mathcal{M}\)). A minimal hitting set \(\mathcal{H}\) of \(\mathcal{M}\) further requires that no elements in \(\mathcal{H}\) can be dropped without losing its hitting set characteristic (\(\mathcal{H}' \subsetneq \mathcal{H}\) implies \(\mathcal{H}'\) is not a hitting set of \(\mathcal{M}\)). The following theorem, formulated within the context of propositional logic, is due to Reiter \cite{reiter_theory_1987}:
 
 \begin{theorem}
-    Let \(\mathcal{K}\) be a knowledge base, \(I_{\min}(\mathcal{K})\) be the set of minimal inconsistent subsets of \(\mathcal{K}\), and \(C_{\max}(\mathcal{K})\) be the set of maximal consistent subsets of \(\mathcal{K}\). According to the MinHS duality \cite{reiter_theory_1987}, \(\mathcal{H} \subseteq \mathcal{K}\) is a minimal hitting set of \(I_{\min}(\mathcal{K})\) if and only if \(\mathcal{K} \backslash \mathcal{H} \in C_{\max}(\mathcal{K})\).
+    Let \(\mathcal{K}\) be a knowledge base in propositional logic, \(I_{\min}(\mathcal{K})\) be the set of minimal inconsistent subsets of \(\mathcal{K}\), and \(C_{\max}(\mathcal{K})\) be the set of maximal consistent subsets of \(\mathcal{K}\). \(\mathcal{H} \subseteq \mathcal{K}\) is a minimal hitting set of \(I_{\min}(\mathcal{K})\) if and only if \(\mathcal{K} \backslash \mathcal{H} \in C_{\max}(\mathcal{K})\).
 \end{theorem}
 
 In non-monotonic logics neither the statement that \(\mathcal{K}'\) must be inconsistent, nor the hitting set duality has to be true because additional information can resolve inconsistency in a knowledge base, which opens up the possibility of consistent knowledge bases to contain inconsistent subsets.
@@ -66,18 +58,19 @@ In non-monotonic logics neither the statement that \(\mathcal{K}'\) must be inco
     Consider the propositional signature \(A = \{a, b\}\) and the logic programs \(P = \{a., b., \neg b \leftarrow \text{not }a.\}\) and \(P' = \{b., \neg b \leftarrow \text{not }a.\}\). Then \(\text{ACC}_A^{ASP}(P) = \{\{a,b\}\}\) and \(\text{ACC}_A^{ASP}(P') = \{\}\). Observe that \(P\) is consistent while \(P'\) is inconsistent.
 \end{example}
 
-For this reason, a refined notion of inconsistent subsets of a knowledge base was defined by \cite{brewka_strong_2017}.
+For this reason, a refined notion of inconsistent subsets of a knowledge base, specifically for non-monotonic logics, was defined by \cite{brewka_strong_2017}.
 \begin{definition}
     A subset of a knowledge base \(\mathcal{K}\) is strongly \(\mathcal{K}\)-inconsistent if all its supersets within the knowledge base are inconsistent as well. The set of all strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) is denoted by \(SI(\mathcal{K})\). The set of all minimal strongly \(\mathcal{K}\)-inconsistent subsets of \(\mathcal{K}\) is denoted by \(SI_{\min}(\mathcal{K})\).
 \end{definition}
 
 Exploring the measurement of inconsistency in non-monotonic logics is now possible, a subject that has only been examined comparatively recently \cite{ulbricht_measuring_2018} \cite{brewka_strong_2019} \cite{ulbricht_handling_2020}.
 
+[Example here how to identify and measure strongly \(\mathcal{K}\)-inconsistent subsets]
+
 \section{Three Measures based on Minimal Inconsistent Sets}
 The term strong inconsistency faithfully generalizes classical inconsistency to arbitrary logic, as shown by \cite{brewka_strong_2017}. The definition can still be applied to monotonic logics and further deems the existence of a strongly \(\mathcal{K}\)-inconsistent subset of \(\mathcal{K}\) as a necessary and sufficient condition for the inconsistency of \(\mathcal{K}\) itself.
 
 \begin{theorem}
-    The following statement holds when applying \(SI_{\min}(\mathcal{K})\) to the hitting set set duality:
     Removing a hitting set of \(SI_{\min}(\mathcal{K})\) from \(\mathcal{K}\) results in a maximal consistent subset of \(\mathcal{K}\).
 \end{theorem}
 
@@ -110,6 +103,8 @@ The second measure \(\mathcal{I}_{\text{p}}\) is based on \cite{liu_measuring_20
     \(\mathcal{I}_{\text{p}}: 2^{\text{WF}} \rightarrow \mathbb{R}_{\geq 0}^{\infty} \text{ via } \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|\)
 \end{definition}
 
+[Examples here]
+
 \section{Rationality Postulates}
 As described above, an inconsistency measure should indicate how much inconsistency a knowledge base carries. However, not just any function can be used for this purpose. A list of requirements is needed that an inconsistency measure must fulfill to be useful, these requirements are called rationality postulates.
 
@@ -119,14 +114,16 @@ This is also the case in the context of inconsistency measures for non-monotonic
 
 \subsection{Basic Postulates}
 There are four basic postulates - Consistency, Monotony, Free Formula Independence, and Dominance - which a basic inconsistency measure should have, according to \cite{hunter_measure_2010}. Based on these, \cite{ulbricht_handling_2020} phrases the following basic postulates for non-monotonic logics.
-\\
-\textbf{Consistency}
-For any knowledge base \(\mathcal{K} \subseteq \text{WF}\), \(\mathcal{I}(\mathcal{K}) = 0\) if and only if \(\mathcal{K}\) is consistent.
+
+\begin{description}
+    \item[Consistency] For any knowledge base \(\mathcal{K} \subseteq \text{WF}\), \(\mathcal{I}(\mathcal{K}) = 0\) if and only if \(\mathcal{K}\) is consistent.
+\end{description}
 
 This requires an inconsistency measure to be able to distinguish between consistent and inconsistent knowledge bases and is true for non-monotonic logics without any modifications.
-\\
-\textit{\textbf{Monotonicity}}
-If \(\mathcal{K}\) and \(\mathcal{K}'\) are knowledge bases, then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+
+\begin{description}
+    \item[\textit{Monotonicity}] If \(\mathcal{K}\) and \(\mathcal{K}'\) are knowledge bases, then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+\end{description}
 
 Monotonicity is a usually widely accepted postulate, which describes the intuition that a superset of a knowledge base cannot reduce inconsistency, only increase it, since more information is likely to be accompanied by more conflicts.
 
@@ -143,9 +140,10 @@ Acknowledging the issue with the classic monotonicity postulate results in the n
 \end{definition}
 
 Applying this concept of conflict preservation, \cite{ulbricht_handling_2020} provides the rephrased monotonicity postulate under the name strong monotonicity.
-\\
-\textbf{Strong Monotonicity}
-If \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+
+\begin{description}
+    \item[Strong Monotonicity] If \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K \cup \mathcal{K}'})\).
+\end{description}
 
 Now coming to the free formula independence postulate which states that a free formula \(\alpha\) of a knowledge base \(\mathcal{K}\) should not increase the degree of inconsistency of \(\mathcal{K}\) regardless of its existence, so \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\) for \(\alpha \in Free(\mathcal{K})\). Free in this context then means that the formula \(\alpha\) is not part of a minimal inconsistent subset \(I_{\min}(\mathcal{K})\).
 
@@ -174,9 +172,10 @@ To generalize the definition of free to non-monotonic logics as well, the concep
 \end{example}
 
 Given the similarities between \(Free(\mathcal{K})\) and \(Free_{\text{SI}}(\mathcal{K})\), a revised postulate for free formula independence is proposed by \cite{ulbricht_handling_2020}. This SI-Free postulate suggests that a free formula \(\alpha\) not only does not increase the degree of inconsistency but also does not introduce strongly inconsistent subsets.
-\\
-\textbf{SI-Free}
-If \(\alpha \in Free_{\text{SI}}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
+
+\begin{description}
+    \item[SI-Free] If \(\alpha \in Free_{\text{SI}}(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
+\end{description}
 
 One problem in using this postulate stems from the fact that ordinary inconsistency of a subset \(\mathcal{H} \subseteq \mathcal{K}\) only depends on \(\mathcal{H}\), whereas strong inconsistency relates to the whole knowledge base \(\mathcal{K}\). The removal of formulas in \(Free_{\text{SI}}(\mathcal{K})\) may affect the structure of \(SI_{\min}(\mathcal{K})\).
 
@@ -195,9 +194,10 @@ In non-monotonic logics, an SI-free formula \(\alpha\) could resolve conflicts, 
 \end{definition}
 
 Neutral formulas do not make use of strong inconsistency, in contrast to SI-free formulas. Since neutral formulas do not depend as much on the structure of the knowledge base, they do not influence \(\mathcal{K}\) or \(SI_{\min}(\mathcal{K})\). Like SI-free formulas, a neutral formula \(\alpha \in \mathcal{K}\) does not increase the degree of inconsistency of \(\mathcal{K}\) but also does not resolve any conflicts either, which leads to the independence postulate.
-\\
-\textbf{Independence}
-If \(\alpha \in Ntr(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
+
+\begin{description}
+    \item[Independence] If \(\alpha \in Ntr(\mathcal{K})\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})\).
+\end{description}
 
 The only basic postulate from \cite{hunter_measure_2010} not mentioned yet is the dominance postulate. It tries to formulate the intuition that a formula carrying more information is also more likely to be involved in conflicts. It is highly contested, even for propositional settings, see \cite{ferme_revisiting_2014}, and \cite{ulbricht_measuring_2018} questions its use altogether for non-monotonic settings. Since for non-monotonic logics more information can even resolve conflicts in a knowledge base it is unfounded to consider such a formula to be more problematic.
 
@@ -212,9 +212,10 @@ To adjust this postulate for non-monotonic logics the term equivalence as in "tw
 \end{definition}
 
 Following this definition, a subset \(\mathcal{H}\) of a knowledge base \(\mathcal{K}\) can be swapped out with a strongly equivalent subset \(\mathcal{H}'\) without changing the inferences one can draw from \(\mathcal{K}\), which in turn means that it shouldn't affect the inconsistency they contribute to \(\mathcal{K}\). Applied to the whole knowledge base, this means that two strongly equivalent knowledge bases should have the same inconsistency measure.
-\\
-\textbf{Strong Equivalence}
-If \(\mathcal{K} \equiv_S \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
+
+\begin{description}
+    \item[Strong Equivalence] If \(\mathcal{K} \equiv_S \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
+\end{description}
 
 In some cases, the above postulate is too strong resulting in \(\mathcal{K} \equiv_S \mathcal{K}'\) for any two inconsistent knowledge bases, which is why a more fine-grained notion of equivalence is needed. To achieve this a similar approach as in \cite{thimm_inconsistency_2013} can be used to define:
 
@@ -223,31 +224,35 @@ In some cases, the above postulate is too strong resulting in \(\mathcal{K} \equ
 \end{definition}
 
 Applying this notion to the previously defined strong equivalence, a new rationality postulate can be formed, which considers a formula-wise equivalence (FW=formula-wise):
-\\
-\textbf{FW-Strong Equivalence}
-If \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
+
+\begin{description}
+    \item[FW-Strong Equivalence] If \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\), then \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')\).
+\end{description}
 
 \cite{ulbricht_handling_2020} further refines this notion by considering the replacement of a formula \(\alpha\) with a strongly equivalent formula \(\alpha'\), resulting in:
-\\
-\textbf{Strong Equivalence Replacement}
-If \(\{\alpha\} \equiv_S \{\alpha'\}\) and \(\alpha \notin \mathcal{K}\) as well as \(\alpha' \notin \mathcal{K}\), then \(\mathcal{I}(\mathcal{K} \cup \{\alpha\}) = \mathcal{I}(\mathcal{K} \cup \{\alpha'\})\).
+
+\begin{description}
+    \item[Strong Equivalence Replacement] If \(\{\alpha\} \equiv_S \{\alpha'\}\) and \(\alpha \notin \mathcal{K}\) as well as \(\alpha' \notin \mathcal{K}\), then \(\mathcal{I}(\mathcal{K} \cup \{\alpha\}) = \mathcal{I}(\mathcal{K} \cup \{\alpha'\})\).
+\end{description}
 
 Addressing the modularization of a knowledge base \(\mathcal{K}\) \cite{ulbricht_measuring_2018} considers two more postulates. The separability postulate by \cite{hunter_measure_2010} can be easily applied to strongly inconsistent subsets.
-\\
-\textbf{Separability}
-If \(SI_{\min}(\mathcal{K} \cup \mathcal{K}') = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}')\) and \(SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') = \emptyset\), then \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}')\).
+
+\begin{description}
+    \item[Separability] If \(SI_{\min}(\mathcal{K} \cup \mathcal{K}') = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}')\) and \(SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') = \emptyset\), then \(\mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}')\).
+\end{description}
 
 This postulate ensures that the inconsistency values of \(\mathcal{K}\) and \(\mathcal{K}'\) should sum up to the value of their union because their respective conflicts should be independent of one another.
 
 Lastly, the super-additivity postulate by \cite{thimm_measuring_2009} can be adjusted to the notion of strong monotonicity, by accounting for the fact that adding information might resolve conflicts for non-monotonic logics. This can be achieved by adding conflict preservation as an additional condition.
-\\
-\textbf{Strong Super-Additivity}
-If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each others's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(\mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
+
+\begin{description}
+    \item[Strong Super-Additivity] If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each others's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(\mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
+\end{description}
 
 This concludes the discussion of rationality postulates with a generalization of monotonicity for non-monotonic logics.
 
 \section{Compliance of Measures}
-To close out the paper the compliance of the three provided measures are evaluated with regards to the previously presented rationality postulates. In cases where the postulates are not satisfied, examples of a logic program as defined in the paper are given to illustrate.
+To close out the paper, the compliance of the three provided measures are evaluated with regards to the previously presented rationality postulates. In cases where the postulates are not satisfied, examples of a logic program as defined in the paper are given to illustrate.
 
 \begin{proposition}[\cite{ulbricht_measuring_2018}]
     The measures \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}^\text{C}}\) and \(\mathcal{I}_{\text{p}}\) satisfy consistency, strong monotonicity, independence, FW-strong equivalence, strong equivalent replacement, and strong super-additivity. The measures \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}^\text{C}}\) also satisfy seperability.
