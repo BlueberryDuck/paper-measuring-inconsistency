@@ -24,10 +24,10 @@ Given this knowledge one can define an answer set as follows.
     Let \(P\) be a logic program over \(A\) such that \(neg(r) = \emptyset\) holds for each rule \(r \in P\). Then, a set \(M\) of literals is a model of \(P\) if for all \(r \in P\) the following is true: If \(pos(r) \subseteq M\), then \(head(r) \cap M \neq \emptyset\). If \(M\) is a model of \(P\) containing two complementary literals, then \(M\) is extended to \(M = Lit(A)\). A model \(M\) is minimal if for all proper subsets \(M'\) of \(M\), \(M'\) is not a model. A minimal model of \(P\) is called an answer set of \(P\).
 \end{definition}
 
-To extend this definition to arbitrary logic programs, \cite{ulbricht_handling_2020} introduces the notion of the reduct of \(P\).
+To extend the concept of answer sets to more complex logic programs, \cite{gelfond_classical_1991} defines the reduct of a program \(P\) with respect to a set \(M\), denoted as \(P^M\), which is essential for determining the answer sets of \(P\).
 
 \begin{definition}
-    Let \(P\) be a logic program over \(A\) and \(M\) be a set of literals. Let \[P^M = \{head(r) \leftarrow pos(r) | head(r) \leftarrow pos(r), neg(r) \in P, neg(r) \cap M = \emptyset\}\] be the reduct of \(P\) with regards to \(M\). \(M\) is an answer set of \(P\) if \(M\) is an answer set of \(P^M\).
+    Let \(P\) be a logic program and \(M\) be a set of literals. Let \[P^M = \{head(r) \leftarrow pos(r) | head(r) \leftarrow pos(r), neg(r) \in P, neg(r) \cap M = \emptyset\}\] be the reduct of \(P\) with regards to \(M\). \(M\) is an answer set of \(P\) if \(M\) is an answer set of \(P^M\).
 \end{definition}
 
 Logic programs can be modeled regarding a set \(A\) of propositional atoms as logic \(L_A^{ASP} = (\text{WF}_A^{ASP}, \text{BS}_A^{ASP}, \text{INC}_A^{ASP}, \text{ACC}_A^{ASP})\). \(\text{WF}_A^{ASP}\) is the set of all rules over \(A\), \(\text{BS}_A^{ASP}\) consists of the sets of literals over \(A\), \(\text{INC}_A^{ASP} = \{Lit(A)\}\), and \(\text{ACC}_A^{ASP}\) assigns the sets of all answers sets to its respective logic program.
@@ -249,52 +249,13 @@ Lastly, the super-additivity postulate by \cite{thimm_measuring_2009} can be adj
     \item[Strong Super-Additivity] If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each others's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(\mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
 \end{description}
 
-This concludes the discussion of rationality postulates with a generalization of monotonicity for non-monotonic logics.
-
-\section{Compliance of Measures}
-To close out the paper, the compliance of the three provided measures are evaluated with regards to the previously presented rationality postulates. In cases where the postulates are not satisfied, examples of a logic program as defined in the paper are given to illustrate.
+This concludes the discussion of rationality postulates with a generalization of monotonicity for non-monotonic logics. To evaluate the effectiveness of these postulates, the compliance regarding the proposed measures is considered:
 
 \begin{proposition}[\cite{ulbricht_measuring_2018}]
     The measures \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}^\text{C}}\) and \(\mathcal{I}_{\text{p}}\) satisfy consistency, strong monotonicity, independence, FW-strong equivalence, strong equivalent replacement, and strong super-additivity. The measures \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}^\text{C}}\) also satisfy seperability.
 \end{proposition}
-\begin{table}[h]
-    \centering
-    \caption{Compliance of measures with rationality postulates \cite{ulbricht_measuring_2018}}
-    \begin{tabular}{lccc}
-        \toprule
-                                       & \(\mathcal{I}_{\text{MSI}}\) & \(\mathcal{I}_{\text{MSI}^\text{C}}\) & \(\mathcal{I}_{\text{p}}\) \\
-        \midrule
-        Consistency                    & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        Strong monotonicity            & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        SI-Free                        & \ding{55}                    & \ding{55}                             & \ding{55}                  \\
-        Independence                   & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        Strong Equivalence             & \ding{55}                    & \ding{55}                             & \ding{55}                  \\
-        FW-Strong Equivalence          & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        Strong Equivalence Replacement & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        Separability                   & \ding{51}                    & \ding{51}                             & \ding{55}                  \\
-        Strong Super-Additivity        & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
-        \bottomrule
-    \end{tabular}
-\end{table}
 
-Consistency is satisfied by all measures because \(SI_{\min}(\mathcal{K}) = \emptyset\) if and only if \(\mathcal{K}\) is consistent.
+These results highlight the strengths and limitations of the proposed measures in measuring inconsistencies in non-monotonic logics, specifically noting the lack of SI-free compliance.
 
-Strong monotonicity is satisfied by all measures because \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\) for knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) such that \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\). This can be seen by considering \(\mathcal{H} \in SI_{\min}(\mathcal{K})\) and applying definition \ref{def:monotonic} to get \(\mathcal{H} \in SI_{\min}(\mathcal{K} \cup \mathcal{K}')\).
-
-SI-free is not satisfied by any of the measures.
-\begin{example}
-    Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c, \text{not }d., b., c., d.\}\) which has \(SI_{\min}(P) = \{\{a \leftarrow \text{not }a,b., b., c.\}, \{a \leftarrow \text{not }a, b., b., d.\}\}\) and \(\alpha = \{a \leftarrow \text{not }c, \text{not }d.\} \in Free_{\text{SI}}(P)\). The measures evaluate to \(\mathcal{I}_{\text{MSI}}(P) = 2\), \(\mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{2}{3}\), and \(\mathcal{I}_{\text{p}}(P) = 4\). But if \(\alpha\) is removed they evaluate to \(\mathcal{I}_{\text{MSI}}(P \backslash \{\alpha\}) = 1\), \(\mathcal{I}_{\text{MSI}^\text{C}}(P \backslash \{\alpha\}) = \frac{1}{2}\), and \(\mathcal{I}_{\text{p}}(P \backslash \{\alpha\}) = 2\).
-\end{example}
-
-Independence in turn is satisfied by all measures because \(SI_{\min}(\mathcal{K}) = SI_{\min}(\mathcal{K} \backslash \{\alpha\})\) for \(\alpha \in Ntr(\mathcal{K})\) by applying definition \ref{def:independence}.
-
-Strong equivalence is not satisfied by any of the measures.
-\begin{example}
-    Consider the logic programs \(P = \{a., \neg a.\}\) and \(P' = \{a., \neg a., a \leftarrow \neg a., \neg a \leftarrow a.\}\). Both programs cannot be repaired by any extension of them, so \(P \equiv_S P'\), but \(\mathcal{I}(P) \neq \mathcal{I}(P')\) for all measures.
-\end{example}
-
-FW-strong equivalence and strong equivalence replacement are satisfied by all measures as there exists a bijection \(\rho\) such that \(\{\alpha\} \equiv_S \{\rho(\alpha)\}\) holds for all formulas \(\alpha \in \mathcal{K}\), which is needed according to definition \ref{def:fwequivalent}. For detailed proof please refer to \cite{ulbricht_handling_2020}.
-
-Separability is satisfied only by measures \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}^\text{C}}\) but not by \(\mathcal{I}_{\text{p}}\) as this measure does not even comply in the propositional case, see \cite{thimm_compliance_2017}.
-
-Strong super-additivity is satisfied by all measures because of proposition 4.4 in \cite{ulbricht_handling_2020} one can consider if given two knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) where \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\), then \(SI_{\min}(\mathcal{K}) \subseteq SI_{\min}(\mathcal{K} \cup \mathcal{K}')\). This implies \(SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}') \subseteq SI_{\min}(\mathcal{K} \cup \mathcal{K}')\). Now if \(\mathcal{K} \cap \mathcal{K}' = \emptyset\), then \(SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') = \emptyset\) which constitutes strong super-additivity.
+\section{Summary and Conclusion}
+tbd
