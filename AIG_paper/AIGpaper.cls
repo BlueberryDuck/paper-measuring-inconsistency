@@ -235,8 +235,8 @@
 
 
 \newcommand{\makestatement}[1]{
-    \clearpage
-    \pagestyle{empty}
+    \vfill
+    % \pagestyle{empty}
     \ifenglish
         \section*{Statement}
         I declare that I have written this seminar paper independently and without
