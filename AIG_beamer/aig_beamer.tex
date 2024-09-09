@@ -18,14 +18,15 @@
 \usecolortheme{aig}
 \usefonttheme{aig}
 
+\input{meta}
 
 %=========================================================================================================================
-\title{AIG Beamer Template}
+\title{Measuring Inconsistency in Non-Monotonic Logics}
 
-\author[S. Author]{Some Author}
+\author[\myAuthorAbbr]{\myAuthor}
 \institute{Artificial Intelligence Group,\\
 University of Hagen, Germany}
-\date{September 1, 2022}
+\date{\today}
 %=========================================================================================================================
 \logo{\includegraphics[width=3cm]{figures/logoaig.png}}
 %=========================================================================================================================
@@ -35,53 +36,14 @@ University of Hagen, Germany}
 %=========================================================================================================================
 
 \begin{frame}
-  \titlepage
+    \titlepage
 \end{frame}
 \nologo
 
-\section{Section}
-
-\begin{frame}{Blocks}
-    \begin{block}{Block}
-        This is a regular block.
-        \begin{itemize}
-            \item This is an item in a block.
-        \end{itemize}
-    \end{block}
-    
-    \begin{alertblock}{Block}
-        This is an alert block.
-        \begin{itemize}
-            \item This is an item in an alert block.
-        \end{itemize}
-    \end{alertblock}
-    
-    \begin{exampleblock}{Block}
-        This is an example block.
-        \begin{itemize}
-            \item This is an item in an example block.
-        \end{itemize}
-    \end{exampleblock}
-\end{frame}
-
-
-\subsection{Subsection}
-
-\begin{frame}{Highlighting Text}
-    We can \highlight{highlight} text. There are also a \darkhighlight{darker} option, and a \yellowhighlight{yellow} option.\\
-    The same options are also available in math mode: $\mathhighlight{a} + \darkmathhighlight{b} = \yellowmathhighlight{c}$
-\end{frame}
-
+\input{slides.tex}
 
 \appendix
 
-\section{Appendix}
-
-\begin{frame}{Appendix}
-    This is an appendix.
-    \begin{itemize}
-        \item Page numbers start from the beginning.
-    \end{itemize}
-\end{frame}
+\input{appendix.tex}
 
 \end{document}
