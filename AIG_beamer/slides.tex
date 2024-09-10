@@ -1,31 +1,166 @@
-\section{Section}
+% Section 1: Introduction
+\section{Introduction}
 
-\begin{frame}{Blocks}
-    \begin{block}{Block}
-        This is a regular block.
-        \begin{itemize}
-            \item This is an item in a block.
-        \end{itemize}
-    \end{block}
-
-    \begin{alertblock}{Block}
-        This is an alert block.
-        \begin{itemize}
-            \item This is an item in an alert block.
-        \end{itemize}
-    \end{alertblock}
-
-    \begin{exampleblock}{Block}
-        This is an example block.
-        \begin{itemize}
-            \item This is an item in an example block.
-        \end{itemize}
-    \end{exampleblock}
+\begin{frame}{Introduction}
+    \begin{itemize}
+        \item Handling inconsistent information is a major challenge in knowledge representation.
+        \item Classical logic views inconsistencies as catastrophic, but paraconsistent logics like ASP offer more nuanced treatment.
+        \item Inconsistency measures quantify the extent of inconsistencies in knowledge bases.
+        \item Focus: Extending these measures to non-monotonic frameworks like ASP.
+    \end{itemize}
 \end{frame}
 
-\subsection{Subsection}
+% Section 2: Inconsistency Measures
+\section{Inconsistency Measures}
 
-\begin{frame}{Highlighting Text}
-    We can \highlight{highlight} text. There are also a \darkhighlight{darker} option, and a \yellowhighlight{yellow} option.\\
-    The same options are also available in math mode: $\mathhighlight{a} + \darkmathhighlight{b} = \yellowmathhighlight{c}$
+\begin{frame}{Inconsistency Measures}
+    \begin{block}{Definition}
+        An inconsistency measure is a function \(\mathcal{I}(\mathcal{K})\) that increases with the number of inconsistencies in the knowledge base \(\mathcal{K}\).
+    \end{block}
+
+    \begin{itemize}
+        \item A popular approach is counting minimal inconsistent subsets: \(\mathcal{I}_{\text{MI}}(\mathcal{K}) = |I_{\min}(\mathcal{K})|\)
+        \item Minimal inconsistent subsets represent atomic conflicts.
+    \end{itemize}
+    \begin{block}{Example}
+        \begin{itemize}
+            \item Example of counting inconsistent subsets.
+            \item Using classical methods like [Hunter 2008].
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Section 3: Answer Set Programming (ASP)
+\section{Answer Set Programming (ASP)}
+
+\begin{frame}{Answer Set Programming (ASP)}
+    \begin{itemize}
+        \item ASP is a form of declarative programming used for complex search problems.
+        \item Syntax: Logic rules contain a disjunction in the head and use two types of negation.
+        \item Strong negation: \(\neg\), Default negation: not.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{ASP: Example of Answer Sets}
+    \begin{exampleblock}{Program Example}
+        \[
+            P = \{a \lor b., a \leftarrow b., c \leftarrow \text{not } b., \neg c \leftarrow \text{not } b.\}
+        \]
+        \begin{itemize}
+            \item This program has no answer set.
+            \item Candidate sets: \{a\}, \{b\}, \{a,b\}.
+        \end{itemize}
+    \end{exampleblock}
+
+    \begin{block}{Conclusion}
+        \begin{itemize}
+            \item \{a,b\} is a model but not minimal.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Section 4: Strong Inconsistency in Non-Monotonic Logics
+\section{Strong Inconsistency}
+
+\begin{frame}{Strong Inconsistency}
+    \begin{block}{Key Concept}
+        Strong inconsistency: Subsets of a knowledge base that remain inconsistent, even when additional information is added.
+    \end{block}
+
+    \begin{itemize}
+        \item Classical logics assume inconsistency is binary (consistent or inconsistent).
+        \item Non-monotonic logics allow more nuanced measures.
+        \item Measure: \(SI_{\min}(\mathcal{K})\) for minimal strongly inconsistent subsets.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Example of Strong Inconsistency}
+    \begin{itemize}
+        \item Program \(P = \{a., b., \neg b \leftarrow \text{not }a.\}\)
+        \item \(P\) is consistent, but a modified program \(P' = \{b., \neg b \leftarrow \text{not }a.\}\) is inconsistent.
+    \end{itemize}
+
+    \begin{alertblock}{Takeaway}
+        Non-monotonic logics require refined measures that classical logics cannot offer.
+    \end{alertblock}
+\end{frame}
+
+% Section 5: Measures Based on Minimal Inconsistent Subsets
+\section{Measures Based on Minimal Inconsistent Subsets}
+
+\begin{frame}{Strong Inconsistency Measures}
+    \begin{itemize}
+        \item \(\mathcal{I}_{\text{MSI}}(\mathcal{K}) = |SI_{\min}(\mathcal{K})|\): Counting minimal strongly inconsistent subsets.
+        \item \(\mathcal{I}_{\text{MSI}^C}(\mathcal{K}) = \sum_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}\): Adjusts for the size of inconsistent subsets.
+        \item \(\mathcal{I}_p(\mathcal{K}) = |\bigcup_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H}|\): Considers the number of problematic formulas.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Example of Measuring Strong Inconsistency}
+    \begin{itemize}
+        \item Consider the program \(P = \{a \leftarrow \text{not }a, b., a \leftarrow \text{not }c., \dots\}\)
+        \item \(SI_{\min}(P) = \{\{a \leftarrow \text{not }a, b., c.\}, \dots\}\)
+        \item Measures evaluate as: \(\mathcal{I}_{\text{MSI}}(P) = 2\), \(\mathcal{I}_{\text{MSI}^C}(P) = \frac{2}{3}\), and \(\mathcal{I}_p(P) = 4\).
+    \end{itemize}
+\end{frame}
+
+% Section 6: Rationality Postulates
+\section{Rationality Postulates}
+
+\subsection{Basic Postulates}
+
+\begin{frame}{Basic Postulates}
+    \begin{block}{Consistency}
+        For any knowledge base \( \mathcal{K} \subseteq \text{WF} \), \(\mathcal{I}(\mathcal{K}) = 0\) if and only if \( \mathcal{K} \) is consistent.
+    \end{block}
+
+    \begin{block}{Monotonicity}
+        If \( \mathcal{K} \) and \( \mathcal{K}' \) are knowledge bases, then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
+    \end{block}
+
+    \begin{block}{Free Formula Independence}
+        A free formula \( \alpha \) should not increase inconsistency: \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \setminus \{\alpha\})\) for \( \alpha \in Free(\mathcal{K})\).
+    \end{block}
+
+    \begin{block}{Dominance}
+        A formula carrying more information is more likely to be involved in conflicts.
+    \end{block}
+\end{frame}
+
+\subsection{Extended Postulates}
+
+\begin{frame}{Extended Postulates}
+    \begin{block}{Strong Monotonicity}
+        If \( \mathcal{K}' \) preserves conflicts of \( \mathcal{K} \), then \( \mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}') \).
+    \end{block}
+
+    \begin{block}{Strong Equivalence}
+        If \( \mathcal{K} \equiv_S \mathcal{K}' \), then \( \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}') \).
+    \end{block}
+
+    \begin{block}{Separability}
+        If \( SI_{\min}(\mathcal{K} \cup \mathcal{K}') = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}') \), then \( \mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \).
+    \end{block}
+
+    \begin{block}{Super-Additivity}
+        If \( \mathcal{K} \cap \mathcal{K}' = \emptyset \) and both preserve each other's conflicts, then \( \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}') \).
+    \end{block}
+\end{frame}
+
+% Section 7: Summary and Conclusion
+\section{Summary and Conclusion}
+
+\begin{frame}{Summary}
+    \begin{itemize}
+        \item Strong inconsistency offers a more refined approach to measuring conflicts in non-monotonic logics.
+        \item Three adapted measures: \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}^C}\), and \(\mathcal{I}_p\) are explored.
+        \item Rationality postulates ensure that these measures are theoretically sound.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+    \begin{itemize}
+        \item Further work is needed to refine these measures for SI-free compliance.
+        \item Practical applications include knowledge base repair and conflict resolution in AI systems.
+    \end{itemize}
 \end{frame}
