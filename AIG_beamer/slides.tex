@@ -1,166 +1,278 @@
-% Section 1: Introduction
 \section{Introduction}
 
-\begin{frame}{Introduction}
-    \begin{itemize}
-        \item Handling inconsistent information is a major challenge in knowledge representation.
-        \item Classical logic views inconsistencies as catastrophic, but paraconsistent logics like ASP offer more nuanced treatment.
-        \item Inconsistency measures quantify the extent of inconsistencies in knowledge bases.
-        \item Focus: Extending these measures to non-monotonic frameworks like ASP.
-    \end{itemize}
+\begin{frame}{Handling Inconsistent Information}
+    \begin{block}{Classical vs. Paraconsistent Logic}
+        \begin{itemize}
+            \item \darkhighlight{Classical logic} deems any inconsistency as catastrophic.
+            \item \darkhighlight{Paraconsistent logic} allows reasoning with inconsistent knowledge bases.
+            \item Inconsistencies can convey different amounts of information.
+        \end{itemize}
+    \end{block}
 \end{frame}
-
-% Section 2: Inconsistency Measures
-\section{Inconsistency Measures}
 
 \begin{frame}{Inconsistency Measures}
     \begin{block}{Definition}
-        An inconsistency measure is a function \(\mathcal{I}(\mathcal{K})\) that increases with the number of inconsistencies in the knowledge base \(\mathcal{K}\).
-    \end{block}
-
-    \begin{itemize}
-        \item A popular approach is counting minimal inconsistent subsets: \(\mathcal{I}_{\text{MI}}(\mathcal{K}) = |I_{\min}(\mathcal{K})|\)
-        \item Minimal inconsistent subsets represent atomic conflicts.
-    \end{itemize}
-    \begin{block}{Example}
         \begin{itemize}
-            \item Example of counting inconsistent subsets.
-            \item Using classical methods like [Hunter 2008].
+            \item An \darkhighlight{inconsistency measure} is a function $\mathcal{I}$ applied to a knowledge base $\mathcal{K}$.
+            \item Quantifies the extent and impact of conflicts within $\mathcal{K}$.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Minimal Inconsistent Subsets}
+        \begin{itemize}
+            \item $I_{\min}(\mathcal{K})$: Set of minimal inconsistent subsets.
+            \item Measure: $\mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|$.
+            \item $\mathcal{I}_{\text{MI}}(\mathcal{K}) = 0$ if $\mathcal{K}$ is consistent.
         \end{itemize}
     \end{block}
 \end{frame}
 
-% Section 3: Answer Set Programming (ASP)
-\section{Answer Set Programming (ASP)}
+\section{Answer Set Programming}
 
 \begin{frame}{Answer Set Programming (ASP)}
-    \begin{itemize}
-        \item ASP is a form of declarative programming used for complex search problems.
-        \item Syntax: Logic rules contain a disjunction in the head and use two types of negation.
-        \item Strong negation: \(\neg\), Default negation: not.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{ASP: Example of Answer Sets}
-    \begin{exampleblock}{Program Example}
-        \[
-            P = \{a \lor b., a \leftarrow b., c \leftarrow \text{not } b., \neg c \leftarrow \text{not } b.\}
-        \]
+    \begin{block}{Logic Programming}
         \begin{itemize}
-            \item This program has no answer set.
-            \item Candidate sets: \{a\}, \{b\}, \{a,b\}.
-        \end{itemize}
-    \end{exampleblock}
-
-    \begin{block}{Conclusion}
-        \begin{itemize}
-            \item \{a,b\} is a model but not minimal.
+            \item ASP is a form of declarative programming for complex combinatorial problems.
+            \item Logic programs contain disjunctions and two kinds of negation:
+                  \begin{itemize}
+                      \item \darkhighlight{Strong negation} ($\neg$)
+                      \item \darkhighlight{Default negation} (\texttt{not})
+                  \end{itemize}
         \end{itemize}
     \end{block}
 \end{frame}
 
-% Section 4: Strong Inconsistency in Non-Monotonic Logics
+\begin{frame}{Syntax of Logic Programs}
+    \begin{block}{Rule Structure}
+        A logic program $P$ consists of rules of the form:
+        \[
+            l_0 \lor \dots \lor l_k \leftarrow l_{k+1}, \dots, l_m, \text{not } l_{m+1}, \dots, \text{not } l_n
+        \]
+        Divided into:
+        \begin{itemize}
+            \item \darkhighlight{Head}: $head(r) = \{l_0, \dots, l_k\}$
+            \item \darkhighlight{Positive body}: $pos(r) = \{l_{k+1}, \dots, l_m\}$
+            \item \darkhighlight{Negative body}: $neg(r) = \{l_{m+1}, \dots, l_n\}$
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Answer Sets}
+    \begin{block}{Definition}
+        Let $P$ be a logic program over $A$ with $neg(r) = \emptyset$ for all $r \in P$.
+        \begin{itemize}
+            \item A set $M$ of literals is a \darkhighlight{model} of $P$ if:
+                  \begin{itemize}
+                      \item For all $r \in P$, if $pos(r) \subseteq M$, then $head(r) \cap M \neq \emptyset$.
+                  \end{itemize}
+            \item $M$ is an \darkhighlight{answer set} of $P$ if it is minimal among models.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Example}
+    \begin{exampleblock}{Logic Program with No Answer Set}
+        Consider $P = \{a \lor b.$, $a \leftarrow b.$, $c \leftarrow \text{not }b.$, $\neg c \leftarrow \text{not }b.\}$
+
+        Candidates: $\{a\}$, $\{b\}$, $\{a, b\}$.
+
+        \[
+            \begin{array}{lcl}
+                P^{\{a\}}   & : & a \lor b. \quad a \leftarrow b. \quad c. \quad \neg c. \\
+                P^{\{b\}}   & : & a \lor b. \quad a \leftarrow b.                        \\
+                P^{\{a,b\}} & : & a \lor b. \quad a \leftarrow b.
+            \end{array}
+        \]
+
+        None are minimal models; $P$ has no answer set.
+    \end{exampleblock}
+\end{frame}
+
 \section{Strong Inconsistency}
 
-\begin{frame}{Strong Inconsistency}
-    \begin{block}{Key Concept}
-        Strong inconsistency: Subsets of a knowledge base that remain inconsistent, even when additional information is added.
+\begin{frame}{Strong Inconsistency in Non-Monotonic Logics}
+    \begin{block}{Inconsistent Subsets}
+        \begin{itemize}
+            \item $I(\mathcal{K})$: All inconsistent subsets.
+            \item $I_{\min}(\mathcal{K})$: Minimal inconsistent subsets.
+            \item $C(\mathcal{K})$: Consistent subsets.
+            \item $C_{\max}(\mathcal{K})$: Maximal consistent subsets.
+        \end{itemize}
     \end{block}
-
-    \begin{itemize}
-        \item Classical logics assume inconsistency is binary (consistent or inconsistent).
-        \item Non-monotonic logics allow more nuanced measures.
-        \item Measure: \(SI_{\min}(\mathcal{K})\) for minimal strongly inconsistent subsets.
-    \end{itemize}
 \end{frame}
 
-\begin{frame}{Example of Strong Inconsistency}
-    \begin{itemize}
-        \item Program \(P = \{a., b., \neg b \leftarrow \text{not }a.\}\)
-        \item \(P\) is consistent, but a modified program \(P' = \{b., \neg b \leftarrow \text{not }a.\}\) is inconsistent.
-    \end{itemize}
-
-    \begin{alertblock}{Takeaway}
-        Non-monotonic logics require refined measures that classical logics cannot offer.
-    \end{alertblock}
+\begin{frame}{Hitting Set Duality}
+    \begin{block}{Theorem}
+        In propositional logic, $\mathcal{H} \subseteq \mathcal{K}$ is a minimal hitting set of $I_{\min}(\mathcal{K})$ if and only if $\mathcal{K} \setminus \mathcal{H} \in C_{\max}(\mathcal{K})$.
+    \end{block}
 \end{frame}
 
-% Section 5: Measures Based on Minimal Inconsistent Subsets
+\begin{frame}{Strongly $\mathcal{K}$-Inconsistent Subsets}
+    \begin{block}{Definition}
+        $\mathcal{H} \subseteq \mathcal{K}$ is \darkhighlight{strongly $\mathcal{K}$-inconsistent} if all its supersets within $\mathcal{K}$ are inconsistent.
+
+        Denoted as $SI(\mathcal{K})$.
+
+        Minimal strongly inconsistent subsets: $SI_{\min}(\mathcal{K})$.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Example}
+    \begin{exampleblock}{Resolving Inconsistency with Additional Information}
+        \begin{itemize}
+            \item $\mathcal{K} = \{b., \neg b \leftarrow \text{not } a.\}$
+            \item Adding $a.$ to $\mathcal{K}$ makes it consistent.
+            \item Shows that in non-monotonic logics, adding information can resolve conflicts.
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
 \section{Measures Based on Minimal Inconsistent Subsets}
 
-\begin{frame}{Strong Inconsistency Measures}
-    \begin{itemize}
-        \item \(\mathcal{I}_{\text{MSI}}(\mathcal{K}) = |SI_{\min}(\mathcal{K})|\): Counting minimal strongly inconsistent subsets.
-        \item \(\mathcal{I}_{\text{MSI}^C}(\mathcal{K}) = \sum_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}\): Adjusts for the size of inconsistent subsets.
-        \item \(\mathcal{I}_p(\mathcal{K}) = |\bigcup_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H}|\): Considers the number of problematic formulas.
-    \end{itemize}
+\begin{frame}{Inconsistency Measures for Non-Monotonic Logics}
+    \begin{block}{Measure $\mathcal{I}_{\text{MSI}}$}
+        \[
+            \mathcal{I}_{\text{MSI}}(\mathcal{K}) = \left| SI_{\min}(\mathcal{K}) \right|
+        \]
+        Counts the number of minimal strongly inconsistent subsets.
+    \end{block}
+    \begin{block}{Measure $\mathcal{I}_{\text{MSI}}^\text{C}$}
+        \[
+            \mathcal{I}_{\text{MSI}}^\text{C}(\mathcal{K}) = \sum_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}
+        \]
+        Considers the size of each minimal inconsistent subset.
+    \end{block}
 \end{frame}
 
-\begin{frame}{Example of Measuring Strong Inconsistency}
-    \begin{itemize}
-        \item Consider the program \(P = \{a \leftarrow \text{not }a, b., a \leftarrow \text{not }c., \dots\}\)
-        \item \(SI_{\min}(P) = \{\{a \leftarrow \text{not }a, b., c.\}, \dots\}\)
-        \item Measures evaluate as: \(\mathcal{I}_{\text{MSI}}(P) = 2\), \(\mathcal{I}_{\text{MSI}^C}(P) = \frac{2}{3}\), and \(\mathcal{I}_p(P) = 4\).
-    \end{itemize}
+\begin{frame}{Measure $\mathcal{I}_{\text{p}}$}
+    \begin{block}{Definition}
+        \[
+            \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|
+        \]
+        Counts the total number of problematic formulas.
+    \end{block}
 \end{frame}
 
-% Section 6: Rationality Postulates
+\begin{frame}{Example}
+    \begin{exampleblock}{Calculating Inconsistency Measures}
+        For $P = \{a \leftarrow \text{not } a, b.$, $a \leftarrow \text{not } c, \text{not } d.$, $b.$, $c.$, $d.\}$:
+
+        \begin{itemize}
+            \item $SI_{\min}(P) = \{\{a \leftarrow \text{not } a, b., b., c.\}, \{a \leftarrow \text{not } a, b., b., d.\}\}$
+            \item $\mathcal{I}_{\text{MSI}}(P) = 2$
+            \item $\mathcal{I}_{\text{MSI}}^\text{C}(P) = \frac{2}{3}$
+            \item $\mathcal{I}_{\text{p}}(P) = 4$
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
 \section{Rationality Postulates}
+
+\begin{frame}{Rationality Postulates}
+    \begin{block}{Purpose}
+        \begin{itemize}
+            \item Ensure inconsistency measures behave reasonably.
+            \item Provide guidelines for development and evaluation.
+        \end{itemize}
+    \end{block}
+\end{frame}
 
 \subsection{Basic Postulates}
 
 \begin{frame}{Basic Postulates}
     \begin{block}{Consistency}
-        For any knowledge base \( \mathcal{K} \subseteq \text{WF} \), \(\mathcal{I}(\mathcal{K}) = 0\) if and only if \( \mathcal{K} \) is consistent.
+        For any knowledge base $\mathcal{K}$:
+        \[
+            \mathcal{I}(\mathcal{K}) = 0 \quad \text{iff} \quad \mathcal{K} \text{ is consistent}
+        \]
     \end{block}
-
-    \begin{block}{Monotonicity}
-        If \( \mathcal{K} \) and \( \mathcal{K}' \) are knowledge bases, then \(\mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')\).
+    \begin{block}{Strong Monotonicity}
+        If $\mathcal{K}'$ \darkhighlight{preserves conflicts} of $\mathcal{K}$:
+        \[
+            \mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')
+        \]
     \end{block}
+\end{frame}
 
-    \begin{block}{Free Formula Independence}
-        A free formula \( \alpha \) should not increase inconsistency: \(\mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \setminus \{\alpha\})\) for \( \alpha \in Free(\mathcal{K})\).
+\begin{frame}{Independence Postulate}
+    \begin{block}{Neutral Formulas}
+        A formula $\alpha$ is \darkhighlight{neutral} if:
+        \[
+            \forall \mathcal{H} \subseteq \mathcal{K}: \mathcal{H} \in C(\mathcal{K}) \Leftrightarrow \mathcal{H} \cup \{\alpha\} \in C(\mathcal{K})
+        \]
     \end{block}
-
-    \begin{block}{Dominance}
-        A formula carrying more information is more likely to be involved in conflicts.
+    \begin{block}{Independence}
+        If $\alpha$ is neutral:
+        \[
+            \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})
+        \]
     \end{block}
 \end{frame}
 
 \subsection{Extended Postulates}
 
-\begin{frame}{Extended Postulates}
-    \begin{block}{Strong Monotonicity}
-        If \( \mathcal{K}' \) preserves conflicts of \( \mathcal{K} \), then \( \mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}') \).
+\begin{frame}{Strong Equivalence}
+    \begin{block}{Definition}
+        Knowledge bases $\mathcal{K}$ and $\mathcal{K}'$ are \darkhighlight{strongly equivalent} ($\mathcal{K} \equiv_S \mathcal{K}'$) if:
+        \[
+            \text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G}) \quad \forall \mathcal{G}
+        \]
     \end{block}
-
-    \begin{block}{Strong Equivalence}
-        If \( \mathcal{K} \equiv_S \mathcal{K}' \), then \( \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}') \).
-    \end{block}
-
-    \begin{block}{Separability}
-        If \( SI_{\min}(\mathcal{K} \cup \mathcal{K}') = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}') \), then \( \mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \).
-    \end{block}
-
-    \begin{block}{Super-Additivity}
-        If \( \mathcal{K} \cap \mathcal{K}' = \emptyset \) and both preserve each other's conflicts, then \( \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}') \).
+    \begin{block}{Postulate}
+        If $\mathcal{K} \equiv_S \mathcal{K}'$:
+        \[
+            \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')
+        \]
     \end{block}
 \end{frame}
 
-% Section 7: Summary and Conclusion
+\begin{frame}{Separability}
+    \begin{block}{Definition}
+        If $SI_{\min}(\mathcal{K} \cup \mathcal{K}') = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}')$ and $SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') = \emptyset$:
+        \[
+            \mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}')
+        \]
+    \end{block}
+\end{frame}
+
+\begin{frame}{Compliance of Measures}
+    \begin{block}{Proposition}
+        Measures $\mathcal{I}_{\text{MSI}}$, $\mathcal{I}_{\text{MSI}}^\text{C}$, and $\mathcal{I}_{\text{p}}$ satisfy:
+
+        \begin{itemize}
+            \item Consistency
+            \item Strong Monotonicity
+            \item Independence
+            \item FW-Strong Equivalence
+            \item Strong Equivalence Replacement
+            \item Strong Super-Additivity
+        \end{itemize}
+
+        Additionally, $\mathcal{I}_{\text{MSI}}$ and $\mathcal{I}_{\text{MSI}}^\text{C}$ satisfy Separability.
+    \end{block}
+\end{frame}
+
 \section{Summary and Conclusion}
 
 \begin{frame}{Summary}
     \begin{itemize}
-        \item Strong inconsistency offers a more refined approach to measuring conflicts in non-monotonic logics.
-        \item Three adapted measures: \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}^C}\), and \(\mathcal{I}_p\) are explored.
-        \item Rationality postulates ensure that these measures are theoretically sound.
+        \item Addressed measuring inconsistencies in non-monotonic knowledge bases.
+        \item Introduced \highlight{strong inconsistency} for non-monotonic logics.
+        \item Applied strong inconsistency to extend inconsistency measures.
+        \item Discussed rationality postulates for non-monotonic logics.
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Conclusion}
     \begin{itemize}
-        \item Further work is needed to refine these measures for SI-free compliance.
-        \item Practical applications include knowledge base repair and conflict resolution in AI systems.
+        \item Provided an overview of inconsistencies in non-monotonic logics.
+        \item Future work: Improve measures and compliance with rationality postulates.
+        \item Applications: Repairing knowledge bases by adding formulas.
     \end{itemize}
+\end{frame}
+
+% Thank You slide
+\begin{frame}
+    \begin{center}
+        \Huge{Thank You!}
+    \end{center}
 \end{frame}
