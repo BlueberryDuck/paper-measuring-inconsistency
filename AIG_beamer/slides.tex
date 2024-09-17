@@ -5,24 +5,28 @@
         \begin{itemize}
             \item \darkhighlight{Classical logic} deems any inconsistency as catastrophic.
             \item \darkhighlight{Paraconsistent logic} allows reasoning with inconsistent knowledge bases.
-            \item Inconsistencies can convey different amounts of information.
         \end{itemize}
     \end{block}
+    \begin{itemize}
+        \item Inconsistency measures quantify the extent of inconsistencies in knowledge bases.
+        \item Focus: Extending these measures to non-monotonic frameworks like ASP.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Inconsistency Measures}
     \begin{block}{Definition}
-        \begin{itemize}
-            \item An \darkhighlight{inconsistency measure} is a function $\mathcal{I}$ applied to a knowledge base $\mathcal{K}$.
-            \item Quantifies the extent and impact of conflicts within $\mathcal{K}$.
-        \end{itemize}
+        An \darkhighlight{inconsistency measure} is a function $\mathcal{I}(\mathcal{K})$ that increases with the number of inconsistencies in a knowledge base $\mathcal{K}$. $\mathcal{I}(\mathcal{K}) = 0$ if $\mathcal{K}$ is consistent.
     \end{block}
-    \begin{block}{Minimal Inconsistent Subsets}
-        \begin{itemize}
-            \item $I_{\min}(\mathcal{K})$: Set of minimal inconsistent subsets.
-            \item Measure: $\mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|$.
-            \item $\mathcal{I}_{\text{MI}}(\mathcal{K}) = 0$ if $\mathcal{K}$ is consistent.
-        \end{itemize}
+    \begin{itemize}
+        \item A popular approach is counting minimal inconsistent subsets: $\mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|$.
+        \item Minimal inconsistent subsets represent atomic conflicts.
+        \item [Example here]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Non-monotonic logics}
+    \begin{block}{Definition}
+        non-monotonic
     \end{block}
 \end{frame}
 
@@ -32,31 +36,31 @@
     \begin{block}{Logic Programming}
         \begin{itemize}
             \item ASP is a form of declarative programming for complex combinatorial problems.
-            \item Logic programs contain disjunctions and two kinds of negation:
+            \item Logic programs contain disjunctions in the head and two kinds of negation:
                   \begin{itemize}
-                      \item \darkhighlight{Strong negation} ($\neg$)
-                      \item \darkhighlight{Default negation} (\texttt{not})
+                      \item Strong negation ($\neg$)
+                      \item Default negation (\texttt{not})
                   \end{itemize}
         \end{itemize}
     \end{block}
 \end{frame}
 
-\begin{frame}{Syntax of Logic Programs}
-    \begin{block}{Rule Structure}
+\begin{frame}{Answer Set Programming (ASP)}
+    \begin{alertblock}{Rule Structure}
         A logic program $P$ consists of rules of the form:
         \[
-            l_0 \lor \dots \lor l_k \leftarrow l_{k+1}, \dots, l_m, \text{not } l_{m+1}, \dots, \text{not } l_n
+            \yellowmathhighlight{l_0 \lor \dots \lor l_k} \leftarrow \darkmathhighlight{l_{k+1}, \dots, l_m}, \mathhighlight{\text{not } l_{m+1}, \dots, \text{not } l_n}
         \]
         Divided into:
         \begin{itemize}
-            \item \darkhighlight{Head}: $head(r) = \{l_0, \dots, l_k\}$
+            \item \yellowhighlight{Head}: $head(r) = \{l_0, \dots, l_k\}$
             \item \darkhighlight{Positive body}: $pos(r) = \{l_{k+1}, \dots, l_m\}$
-            \item \darkhighlight{Negative body}: $neg(r) = \{l_{m+1}, \dots, l_n\}$
+            \item \highlight{Negative body}: $neg(r) = \{l_{m+1}, \dots, l_n\}$
         \end{itemize}
-    \end{block}
+    \end{alertblock}
 \end{frame}
 
-\begin{frame}{Answer Sets}
+\begin{frame}{Answer Set Programming (ASP)}
     \begin{block}{Definition}
         Let $P$ be a logic program over $A$ with $neg(r) = \emptyset$ for all $r \in P$.
         \begin{itemize}
