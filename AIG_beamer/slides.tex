@@ -26,7 +26,7 @@
 
 \begin{frame}{Non-monotonic logics}
     \begin{block}{Definition}
-        non-monotonic
+        TODO
     \end{block}
 \end{frame}
 
@@ -43,51 +43,59 @@
                   \end{itemize}
         \end{itemize}
     \end{block}
+    TODO
 \end{frame}
 
 \begin{frame}{Answer Set Programming (ASP)}
     \begin{alertblock}{Rule Structure}
         A logic program $P$ consists of rules of the form:
         \[
-            \yellowmathhighlight{l_0 \lor \dots \lor l_k} \leftarrow \darkmathhighlight{l_{k+1}, \dots, l_m}, \mathhighlight{\text{not } l_{m+1}, \dots, \text{not } l_n}
+            \darkmathhighlight{l_0 \lor \dots \lor l_k} \leftarrow \yellowmathhighlight{l_{k+1}, \dots, l_m}, \mathhighlight{\text{not } l_{m+1}, \dots, \text{not } l_n}
         \]
         Divided into:
         \begin{itemize}
-            \item \yellowhighlight{Head}: $head(r) = \{l_0, \dots, l_k\}$
-            \item \darkhighlight{Positive body}: $pos(r) = \{l_{k+1}, \dots, l_m\}$
+            \item \darkhighlight{Head}: $head(r) = \{l_0, \dots, l_k\}$
+            \item \yellowhighlight{Positive body}: $pos(r) = \{l_{k+1}, \dots, l_m\}$
             \item \highlight{Negative body}: $neg(r) = \{l_{m+1}, \dots, l_n\}$
         \end{itemize}
     \end{alertblock}
 \end{frame}
 
 \begin{frame}{Answer Set Programming (ASP)}
-    \begin{block}{Definition}
-        Let $P$ be a logic program over $A$ with $neg(r) = \emptyset$ for all $r \in P$.
+    \begin{block}{Reduct of a Logic Program}
+        To extend answer sets to logic programs with negation, we define the \darkhighlight{reduct} of a program $P$ with respect to a set of literals $M$:
+        \[
+            P^M = \{head(r) \leftarrow pos(r) \mid r \in P, \mathhighlight{neg(r) \cap M = \emptyset}\}
+        \]
+    \end{block}
+    \begin{block}{Answer Sets via Reduct}
+        A set $M$ of literals is an \darkhighlight{answer set} of a logic program $P$ if:
         \begin{itemize}
-            \item A set $M$ of literals is a \darkhighlight{model} of $P$ if:
-                  \begin{itemize}
-                      \item For all $r \in P$, if $pos(r) \subseteq M$, then $head(r) \cap M \neq \emptyset$.
-                  \end{itemize}
-            \item $M$ is an \darkhighlight{answer set} of $P$ if it is minimal among models.
+            \item $M$ is an answer set (minimal model) of the \darkhighlight{reduct} $P^M$.
         \end{itemize}
     \end{block}
 \end{frame}
 
 \begin{frame}{Example}
-    \begin{exampleblock}{Logic Program with No Answer Set}
-        Consider $P = \{a \lor b.$, $a \leftarrow b.$, $c \leftarrow \text{not }b.$, $\neg c \leftarrow \text{not }b.\}$
-
-        Candidates: $\{a\}$, $\{b\}$, $\{a, b\}$.
-
+    \begin{exampleblock}{Computing Answer Sets Using the Reduct}
+        Consider the logic program:
         \[
             \begin{array}{lcl}
-                P^{\{a\}}   & : & a \lor b. \quad a \leftarrow b. \quad c. \quad \neg c. \\
-                P^{\{b\}}   & : & a \lor b. \quad a \leftarrow b.                        \\
-                P^{\{a,b\}} & : & a \lor b. \quad a \leftarrow b.
+                a      & \leftarrow & \text{not } b \\
+                b      & \leftarrow & \text{not } a \\
+                c      & \leftarrow & a             \\
+                \neg c & \leftarrow & b
             \end{array}
         \]
-
-        None are minimal models; $P$ has no answer set.
+        Candidates are $M_1 = \{a, c\}$ and $M_2 = \{b, \neg c\}$\\
+        Reducts:
+        \[
+            \begin{array}{lcl}
+                P^{M_1} & = & \{a.\quad c \leftarrow a.\}      \\
+                P^{M_2} & = & \{b.\quad \neg c \leftarrow b.\}
+            \end{array}
+        \]
+        Both $M_1$ and $M_2$ are minimal models of their respective reducts; thus, both are \darkhighlight{answer sets} of $P$.
     \end{exampleblock}
 \end{frame}
 
