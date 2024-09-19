@@ -102,39 +102,24 @@
 \section{Strong Inconsistency}
 
 \begin{frame}{Strong Inconsistency in Non-Monotonic Logics}
-    \begin{block}{Inconsistent Subsets}
-        \begin{itemize}
-            \item $I(\mathcal{K})$: All inconsistent subsets.
-            \item $I_{\min}(\mathcal{K})$: Minimal inconsistent subsets.
-            \item $C(\mathcal{K})$: Consistent subsets.
-            \item $C_{\max}(\mathcal{K})$: Maximal consistent subsets.
-        \end{itemize}
+    \begin{block}{Key Concept}
+        Subsets of a knowledge base that remain insonsistent, even when additional information is added.
     \end{block}
-\end{frame}
 
-\begin{frame}{Hitting Set Duality}
-    \begin{block}{Theorem}
-        In propositional logic, $\mathcal{H} \subseteq \mathcal{K}$ is a minimal hitting set of $I_{\min}(\mathcal{K})$ if and only if $\mathcal{K} \setminus \mathcal{H} \in C_{\max}(\mathcal{K})$.
-    \end{block}
-\end{frame}
-
-\begin{frame}{Strongly $\mathcal{K}$-Inconsistent Subsets}
-    \begin{block}{Definition}
+    \begin{block}{Strongly $\mathcal{K}$-Inconsistent Subsets}
         $\mathcal{H} \subseteq \mathcal{K}$ is \darkhighlight{strongly $\mathcal{K}$-inconsistent} if all its supersets within $\mathcal{K}$ are inconsistent.
 
         Denoted as $SI(\mathcal{K})$.
 
-        Minimal strongly inconsistent subsets: $SI_{\min}(\mathcal{K})$.
+        Minimal strongly $\mathcal{K}$-inconsistent subsets: $SI_{\min}(\mathcal{K})$.
     \end{block}
-\end{frame}
 
-\begin{frame}{Example}
     \begin{exampleblock}{Resolving Inconsistency with Additional Information}
-        \begin{itemize}
-            \item $\mathcal{K} = \{b., \neg b \leftarrow \text{not } a.\}$
-            \item Adding $a.$ to $\mathcal{K}$ makes it consistent.
-            \item Shows that in non-monotonic logics, adding information can resolve conflicts.
-        \end{itemize}
+        $\mathcal{K} = \{b., \neg b \leftarrow \text{not } a.\}$
+
+        Adding $a.$ to $\mathcal{K}$ makes it consistent.
+
+        This shows that in non-monotonic logics, adding information can resolve conflicts.
     \end{exampleblock}
 \end{frame}
 
@@ -155,8 +140,8 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Measure $\mathcal{I}_{\text{p}}$}
-    \begin{block}{Definition}
+\begin{frame}{Inconsistency Measures for Non-Monotonic Logics}
+    \begin{block}{Measure $\mathcal{I}_{\text{p}}$}
         \[
             \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|
         \]
@@ -164,7 +149,7 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}{Inconsistency Measures for Non-Monotonic Logics}
     \begin{exampleblock}{Calculating Inconsistency Measures}
         For $P = \{a \leftarrow \text{not } a, b.$, $a \leftarrow \text{not } c, \text{not } d.$, $b.$, $c.$, $d.\}$:
 
