@@ -161,14 +161,14 @@
         \end{itemize}
     \end{exampleblock}
 \end{frame}
-
 \section{Rationality Postulates}
 
 \begin{frame}{Rationality Postulates}
     \begin{block}{Purpose}
         \begin{itemize}
-            \item Ensure inconsistency measures behave reasonably.
-            \item Provide guidelines for development and evaluation.
+            \item An inconsistency measure should indicate the degree of inconsistency in a knowledge base.
+            \item Not just any function can be used; we need requirements for usefulness.
+            \item These requirements are called \darkhighlight{rationality postulates}.
         \end{itemize}
     \end{block}
 \end{frame}
@@ -177,63 +177,233 @@
 
 \begin{frame}{Basic Postulates}
     \begin{block}{Consistency}
-        For any knowledge base $\mathcal{K}$:
+        For any knowledge base \(\mathcal{K}\):
         \[
-            \mathcal{I}(\mathcal{K}) = 0 \quad \text{iff} \quad \mathcal{K} \text{ is consistent}
+            \mathcal{I}(\mathcal{K}) = 0 \text{ if and only if } \mathcal{K} \text{ is consistent}
         \]
     \end{block}
+    \begin{alertblock}{Monotonicity}
+        For knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\):
+        \[
+            \mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')
+        \]
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Monotonicity Postulate}
+    \begin{block}{Classical Monotonicity}
+        \[
+            \mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K}')
+        \]
+        \begin{itemize}
+            \item Adding information cannot reduce inconsistency.
+            \item More information likely leads to more conflicts.
+        \end{itemize}
+    \end{block}
+    \begin{alertblock}{Issue in Non-Monotonic Logics}
+        \begin{itemize}
+            \item New information may \emph{resolve} inconsistencies.
+            \item Thus, \(\mathcal{I}(\mathcal{K}') < \mathcal{I}(\mathcal{K})\) is possible and expected.
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Example of Monotonicity Issue}
+    \begin{exampleblock}{Example}
+        Consider the logic program:
+        \[
+            P = \{a \lor b.,\ a \leftarrow b.,\ c \leftarrow \text{not }b.,\ \neg c \leftarrow \text{not }b.\}
+        \]
+        \begin{itemize}
+            \item \(H = \{c \leftarrow \text{not }b.,\ \neg c \leftarrow \text{not }b.,\ a \leftarrow b.\} \in SI_{\min}(P)\)
+            \item Adding \(P' = \{b.,\ d.,\ \neg d.\}\) resolves conflicts in \(P\).
+            \item Now \(SI_{\min}(P \cup P') = \{\{d.,\ \neg d.\}\}\)
+        \end{itemize}
+    \end{exampleblock}
+    \begin{alertblock}{Conclusion}
+        \begin{itemize}
+            \item Comparison of \(\mathcal{I}(P)\) and \(\mathcal{I}(P \cup P')\) becomes unreasonable.
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{Free Formula Independence}
+    Let \(\mathcal{K}\) and \(\mathcal{K}'\) be knowledge bases. \(\mathcal{K}'\) \highlight{preserves conflicts} of \(\mathcal{K}\) if:
+    \[
+        \forall \mathcal{H} \in SI(\mathcal{K}):\ \mathcal{H} \in SI(\mathcal{K} \cup \mathcal{K}')
+    \]
     \begin{block}{Strong Monotonicity}
-        If $\mathcal{K}'$ \darkhighlight{preserves conflicts} of $\mathcal{K}$:
+        If \(\mathcal{K}'\) preserves conflicts of \(\mathcal{K}\):
         \[
             \mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')
         \]
     \end{block}
 \end{frame}
 
-\begin{frame}{Independence Postulate}
-    \begin{block}{Neutral Formulas}
-        A formula $\alpha$ is \darkhighlight{neutral} if:
+\begin{frame}{Basic Postulates}
+    Let \(\mathcal{K}\) be a monotonic knowledge base. A formula \(\alpha \in \mathcal{K}\) is \highlight{free} if:
+    \[
+        \alpha \in \mathcal{K} \setminus \bigcup\limits_{\mathcal{H} \in I_{\min}(\mathcal{K})} \mathcal{H}
+    \]
+    Let \(Free(\mathcal{K})\) be the set of all free formulas of \(\mathcal{K}\).
+\end{frame}
+
+\begin{frame}{Generalization to Non-Monotonic Logics}
+    A formula \(\alpha \in \mathcal{K}\) is free with respect to strong inconsistency or \highlight{SI-free} if:
+    \[
+        \alpha \in \mathcal{K} \backslash \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} = \bigcap\limits_{\mathcal{H} \in C_{\max}(\mathcal{K})} \mathcal{H}
+    \]
+    Let \(Free_{\text{SI}}(\mathcal{K})\) be the set of all SI-free formulas of \(\mathcal{K}\).
+    \begin{block}{SI-Free}
+        If \(\alpha \in Free_{\text{SI}}(\mathcal{K})\):
         \[
-            \forall \mathcal{H} \subseteq \mathcal{K}: \mathcal{H} \in C(\mathcal{K}) \Leftrightarrow \mathcal{H} \cup \{\alpha\} \in C(\mathcal{K})
+            \mathcal{I}(\mathcal{K}) \leq \mathcal{I}(\mathcal{K} \backslash \{\alpha\})
         \]
     \end{block}
+\end{frame}
+
+\begin{frame}{Issue with SI-Free Postulate}
+    \begin{alertblock}{Issue with SI-Free Postulate}
+        \begin{itemize}
+            \item Removing SI-free formulas can affect the structure of \(SI_{\min}(\mathcal{K})\).
+            \item May introduce new conflicts or alter existing ones.
+        \end{itemize}
+    \end{alertblock}
+    \begin{exampleblock}{Example}
+        Consider the logic program:
+        \[
+            P = \{a \leftarrow \text{not } a,\ b.,\ a \leftarrow \text{not } c.,\ d \leftarrow \text{not } d.,\ c.,\ d.\}
+        \]
+        \begin{itemize}
+            \item \(\alpha = d.\) and \(\beta = a \leftarrow \text{not } c.\) are SI-free in \(P\).
+            \item Removing \(\alpha\) or \(\beta\) changes \(SI_{\min}(P)\).
+        \end{itemize}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}{Alternative to SI-Free}
+    A formula \(\alpha\) is \highlight{neutral} if:
+    \[
+        \forall \mathcal{H} \subseteq \mathcal{K}:\ \mathcal{H} \in C(\mathcal{K}) \Leftrightarrow \mathcal{H} \cup \{\alpha\} \in C(\mathcal{K})
+    \]
+    Let \(Ntr(\mathcal{K})\) be the set of all neutral formulas of \(\mathcal{K}\).
     \begin{block}{Independence}
-        If $\alpha$ is neutral:
+        If \(\alpha \in Ntr(\mathcal{K})\):
         \[
             \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})
         \]
     \end{block}
 \end{frame}
 
+\begin{frame}{Basic Posulates}
+    \begin{alertblock}{Dominance}
+        \begin{itemize}
+            \item Suggests that formulas carrying more information contribute more to inconsistency.
+            \item Highly contested, even in propositional settings.
+        \end{itemize}
+    \end{alertblock}
+    Generally disregarded in non-monotonic logics as more information can resolve conflicts.
+\end{frame}
+
 \subsection{Extended Postulates}
+
+\begin{frame}{Adjunction Invariance}
+    \begin{block}{Issue with Syntax}
+        \begin{itemize}
+            \item Syntax can affect inconsistency measures.
+            \item Example: \(\{a \land b\}\) vs. \(\{a,\ b\}\).
+        \end{itemize}
+    \end{block}
+    \begin{block}{Adjunction Invariance Postulate}
+        \[
+            \mathcal{I}(\mathcal{K} \cup \{a \land b\}) = \mathcal{I}(\mathcal{K} \cup \{a,\ b\})
+        \]
+    \end{block}
+\end{frame}
 
 \begin{frame}{Strong Equivalence}
     \begin{block}{Definition}
-        Knowledge bases $\mathcal{K}$ and $\mathcal{K}'$ are \darkhighlight{strongly equivalent} ($\mathcal{K} \equiv_S \mathcal{K}'$) if:
+        Knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are \darkhighlight{strongly equivalent} if:
         \[
-            \text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G}) \quad \forall \mathcal{G}
+            \forall \mathcal{G}:\ \text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})
         \]
     \end{block}
     \begin{block}{Postulate}
-        If $\mathcal{K} \equiv_S \mathcal{K}'$:
+        If \(\mathcal{K} \equiv_S \mathcal{K}'\):
         \[
             \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')
         \]
     \end{block}
 \end{frame}
 
+\begin{frame}{FW-Strong Equivalence}
+    \begin{block}{Definition}
+        \(\mathcal{K}\) and \(\mathcal{K}'\) are \darkhighlight{formula-wise strongly equivalent} if:
+        \[
+            \exists\ \rho : \mathcal{K} \rightarrow \mathcal{K}'\ \text{bijective},\ \text{such that}\ \{\alpha\} \equiv_S \{\rho(\alpha)\}\ \forall \alpha \in \mathcal{K}
+        \]
+    \end{block}
+    \begin{block}{Postulate}
+        If \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\):
+        \[
+            \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')
+        \]
+    \end{block}
+\end{frame}
+
+\begin{frame}{Strong Equivalence Replacement}
+    \begin{block}{Postulate}
+        If \(\{\alpha\} \equiv_S \{\alpha'\}\) and \(\alpha,\ \alpha' \notin \mathcal{K}\):
+        \[
+            \mathcal{I}(\mathcal{K} \cup \{\alpha\}) = \mathcal{I}(\mathcal{K} \cup \{\alpha'\})
+        \]
+    \end{block}
+    \begin{block}{Purpose}
+        \begin{itemize}
+            \item Inconsistency measure should be insensitive to replacement by strongly equivalent formulas.
+            \item Ensures consistency in measuring inconsistency.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
 \begin{frame}{Separability}
     \begin{block}{Definition}
-        If $SI_{\min}(\mathcal{K} \cup \mathcal{K}') = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}')$ and $SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') = \emptyset$:
+        If:
+        \begin{align*}
+            SI_{\min}(\mathcal{K} \cup \mathcal{K}')            & = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}') \\
+            SI_{\min}(\mathcal{K}) \cap SI_{\min}(\mathcal{K}') & = \emptyset
+        \end{align*}
+        Then:
         \[
             \mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}')
         \]
+    \end{block}
+    \begin{block}{Interpretation}
+        \begin{itemize}
+            \item Inconsistency contributions from \(\mathcal{K}\) and \(\mathcal{K}'\) are independent.
+            \item Total inconsistency is the sum of individual inconsistencies.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Strong Super-Additivity}
+    \begin{block}{Definition}
+        If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each other's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\):
+        \[
+            \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')
+        \]
+    \end{block}
+    \begin{block}{Purpose}
+        \begin{itemize}
+            \item Inconsistency can increase when combining knowledge bases.
+            \item Captures the potential interaction of conflicts.
+        \end{itemize}
     \end{block}
 \end{frame}
 
 \begin{frame}{Compliance of Measures}
     \begin{block}{Proposition}
-        Measures $\mathcal{I}_{\text{MSI}}$, $\mathcal{I}_{\text{MSI}}^\text{C}$, and $\mathcal{I}_{\text{p}}$ satisfy:
+        The measures \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}}^\text{C}\), and \(\mathcal{I}_{\text{p}}\) satisfy:
 
         \begin{itemize}
             \item Consistency
@@ -244,8 +414,14 @@
             \item Strong Super-Additivity
         \end{itemize}
 
-        Additionally, $\mathcal{I}_{\text{MSI}}$ and $\mathcal{I}_{\text{MSI}}^\text{C}$ satisfy Separability.
+        Additionally, \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}}^\text{C}\) satisfy Separability.
     \end{block}
+    \begin{alertblock}{Note}
+        \begin{itemize}
+            \item These measures do not satisfy the SI-Free postulate.
+            \item Highlights limitations in measuring inconsistencies in non-monotonic logics.
+        \end{itemize}
+    \end{alertblock}
 \end{frame}
 
 \section{Summary and Conclusion}
@@ -265,11 +441,4 @@
         \item Future work: Improve measures and compliance with rationality postulates.
         \item Applications: Repairing knowledge bases by adding formulas.
     \end{itemize}
-\end{frame}
-
-% Thank You slide
-\begin{frame}
-    \begin{center}
-        \Huge{Thank You!}
-    \end{center}
 \end{frame}
