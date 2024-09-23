@@ -302,33 +302,32 @@
             \item Highly contested, even in propositional settings.
         \end{itemize}
     \end{alertblock}
-    Generally disregarded in non-monotonic logics as more information can resolve conflicts.
+    \begin{itemize}
+        \item Generally disregarded in non-monotonic logics as more information can resolve conflicts.
+    \end{itemize}
 \end{frame}
 
 \subsection{Extended Postulates}
 
-\begin{frame}{Adjunction Invariance}
-    \begin{block}{Issue with Syntax}
+\begin{frame}{Extended Postulates}
+    \begin{alertblock}{Issue with Syntax}
         \begin{itemize}
             \item Syntax can affect inconsistency measures.
             \item Example: \(\{a \land b\}\) vs. \(\{a,\ b\}\).
         \end{itemize}
-    \end{block}
-    \begin{block}{Adjunction Invariance Postulate}
-        \[
-            \mathcal{I}(\mathcal{K} \cup \{a \land b\}) = \mathcal{I}(\mathcal{K} \cup \{a,\ b\})
-        \]
-    \end{block}
+    \end{alertblock}
+    Adjunction Invariance:
+    \[
+        \mathcal{I}(\mathcal{K} \cup \{a \land b\}) = \mathcal{I}(\mathcal{K} \cup \{a,\ b\})
+    \]
 \end{frame}
 
 \begin{frame}{Strong Equivalence}
-    \begin{block}{Definition}
-        Knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are \darkhighlight{strongly equivalent} if:
-        \[
-            \forall \mathcal{G}:\ \text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})
-        \]
-    \end{block}
-    \begin{block}{Postulate}
+    Knowledge bases \(\mathcal{K}\) and \(\mathcal{K}'\) are \highlight{strongly equivalent} if:
+    \[
+        \forall \mathcal{G}:\ \text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})
+    \]
+    \begin{block}{Strong Equivalence}
         If \(\mathcal{K} \equiv_S \mathcal{K}'\):
         \[
             \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')
@@ -337,13 +336,11 @@
 \end{frame}
 
 \begin{frame}{FW-Strong Equivalence}
-    \begin{block}{Definition}
-        \(\mathcal{K}\) and \(\mathcal{K}'\) are \darkhighlight{formula-wise strongly equivalent} if:
-        \[
-            \exists\ \rho : \mathcal{K} \rightarrow \mathcal{K}'\ \text{bijective},\ \text{such that}\ \{\alpha\} \equiv_S \{\rho(\alpha)\}\ \forall \alpha \in \mathcal{K}
-        \]
-    \end{block}
-    \begin{block}{Postulate}
+    \(\mathcal{K}\) and \(\mathcal{K}'\) are \highlight{formula-wise strongly equivalent} if:
+    \[
+        \exists\ \rho : \mathcal{K} \rightarrow \mathcal{K}'\ \text{bijective},\ \text{such that}\ \{\alpha\} \equiv_S \{\rho(\alpha)\}\ \forall \alpha \in \mathcal{K}
+    \]
+    \begin{block}{FW-Strong Equivalence}
         If \(\mathcal{K} \equiv_{\alpha} \mathcal{K}'\):
         \[
             \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K}')
@@ -352,22 +349,19 @@
 \end{frame}
 
 \begin{frame}{Strong Equivalence Replacement}
-    \begin{block}{Postulate}
+    \begin{block}{Strong Equivalence Replacement}
         If \(\{\alpha\} \equiv_S \{\alpha'\}\) and \(\alpha,\ \alpha' \notin \mathcal{K}\):
         \[
             \mathcal{I}(\mathcal{K} \cup \{\alpha\}) = \mathcal{I}(\mathcal{K} \cup \{\alpha'\})
         \]
     \end{block}
-    \begin{block}{Purpose}
-        \begin{itemize}
-            \item Inconsistency measure should be insensitive to replacement by strongly equivalent formulas.
-            \item Ensures consistency in measuring inconsistency.
-        \end{itemize}
-    \end{block}
+    \begin{itemize}
+        \item Inconsistency measure should be insensitive to replacement by strongly equivalent formulas.s
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Separability}
-    \begin{block}{Definition}
+    \begin{block}{Seperability}
         If:
         \begin{align*}
             SI_{\min}(\mathcal{K} \cup \mathcal{K}')            & = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}') \\
@@ -378,50 +372,64 @@
             \mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}')
         \]
     \end{block}
-    \begin{block}{Interpretation}
-        \begin{itemize}
-            \item Inconsistency contributions from \(\mathcal{K}\) and \(\mathcal{K}'\) are independent.
-            \item Total inconsistency is the sum of individual inconsistencies.
-        \end{itemize}
-    \end{block}
+    \begin{itemize}
+        \item Inconsistency contributions from \(\mathcal{K}\) and \(\mathcal{K}'\) are independent.
+        \item Total inconsistency is the sum of individual inconsistencies.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Strong Super-Additivity}
-    \begin{block}{Definition}
-        If \(\mathcal{K}\) and \(\mathcal{K}'\) preserve each other's conflicts and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\):
+    \begin{block}{Strong Super-Additivity}
+        If \(\mathcal{K}\) and \(\mathcal{K}'\) \darkhighlight{preserve each other's conflicts} and \(\mathcal{K} \cap \mathcal{K}' = \emptyset\):
         \[
             \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')
         \]
     \end{block}
-    \begin{block}{Purpose}
-        \begin{itemize}
-            \item Inconsistency can increase when combining knowledge bases.
-            \item Captures the potential interaction of conflicts.
-        \end{itemize}
-    \end{block}
+    \begin{itemize}
+        \item Inconsistency can increase when combining knowledge bases.
+        \item Captures the potential interaction of conflicts.
+    \end{itemize}
 \end{frame}
 
+\subsection{Compliance of Measures}
+
 \begin{frame}{Compliance of Measures}
-    \begin{block}{Proposition}
-        The measures \(\mathcal{I}_{\text{MSI}}\), \(\mathcal{I}_{\text{MSI}}^\text{C}\), and \(\mathcal{I}_{\text{p}}\) satisfy:
+    \centering
+    \begin{tabular}{lccc}
+        \toprule
+                                       & \(\mathcal{I}_{\text{MSI}}\) & \(\mathcal{I}_{\text{MSI}^\text{C}}\) & \(\mathcal{I}_{\text{p}}\) \\
+        \midrule
+        Consistency                    & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Strong monotonicity            & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        SI-Free                        & \ding{55}                    & \ding{55}                             & \ding{55}                  \\
+        Independence                   & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Strong Equivalence             & \ding{55}                    & \ding{55}                             & \ding{55}                  \\
+        FW-Strong Equivalence          & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Strong Equivalence Replacement & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        Separability                   & \ding{51}                    & \ding{51}                             & \ding{55}                  \\
+        Strong Super-Additivity        & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
+        \bottomrule
+    \end{tabular}
+\end{frame}
 
-        \begin{itemize}
-            \item Consistency
-            \item Strong Monotonicity
-            \item Independence
-            \item FW-Strong Equivalence
-            \item Strong Equivalence Replacement
-            \item Strong Super-Additivity
-        \end{itemize}
+\begin{frame}{SI-Free Postulate}
+    SI-free is not satisfied by any of the measures.
+    \begin{exampleblock}{Example}
+        Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c, \text{not }d., b., c., d.\}\), which has:
+        \[
+            SI_{\min}(P) = \{\{a \leftarrow \text{not }a, b., b., c.\}, \{a \leftarrow \text{not }a, b., b., d.\}\}
+        \]
+        and \(\alpha = \{a \leftarrow \text{not }c, \text{not }d.\} \in Free_{\text{SI}}(P)\).
 
-        Additionally, \(\mathcal{I}_{\text{MSI}}\) and \(\mathcal{I}_{\text{MSI}}^\text{C}\) satisfy Separability.
-    \end{block}
-    \begin{alertblock}{Note}
-        \begin{itemize}
-            \item These measures do not satisfy the SI-Free postulate.
-            \item Highlights limitations in measuring inconsistencies in non-monotonic logics.
-        \end{itemize}
-    \end{alertblock}
+        The measures evaluate to:
+        \[
+            \mathcal{I}_{\text{MSI}}(P) = 2,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{2}{3},\quad \mathcal{I}_{\text{p}}(P) = 4.
+        \]
+        But if \(\alpha\) is removed, they evaluate to:
+        \[
+            \mathcal{I}_{\text{MSI}}(P \backslash \{\alpha\}) = 1,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P \backslash \{\alpha\}) = \frac{1}{2},\quad \mathcal{I}_{\text{p}}(P \backslash \{\alpha\}) = 2.
+        \]
+    \end{exampleblock}
 \end{frame}
 
 \section{Summary and Conclusion}
@@ -429,7 +437,7 @@
 \begin{frame}{Summary}
     \begin{itemize}
         \item Addressed measuring inconsistencies in non-monotonic knowledge bases.
-        \item Introduced \highlight{strong inconsistency} for non-monotonic logics.
+        \item Introduced strong inconsistency for non-monotonic logics.
         \item Applied strong inconsistency to extend inconsistency measures.
         \item Discussed rationality postulates for non-monotonic logics.
     \end{itemize}
