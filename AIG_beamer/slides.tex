@@ -322,7 +322,7 @@
 \end{frame}
 
 \begin{frame}{Example: Calculating Inconsistency Measures}
-    \begin{exampleblock}{Knowledge Base \( P \)}
+    \begin{exampleblock}{Example}
         \[
             P = \left\{ \begin{array}{l}
                 a \leftarrow \text{not } a,                  \\
@@ -330,22 +330,20 @@
                 b., c., d.
             \end{array} \right\}
         \]
+        \textbf{Minimal Strongly Inconsistent Subsets}:
+        \[
+            SI_{\min}(P) = \left\{ \begin{array}{l}
+                \{ a \leftarrow \text{not } a,\ b.,\ c. \}, \\
+                \{ a \leftarrow \text{not } a,\ b.,\ d. \}
+            \end{array} \right\}
+        \]
+        \textbf{Calculations}:
+        \begin{itemize}
+            \item \( \mathcal{I}_{\text{MSI}}(P) = 2 \)
+            \item \( \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{1}{3} + \frac{1}{3} = \frac{2}{3} \)
+            \item \( \mathcal{I}_{\text{p}}(P) = 4 \)
+        \end{itemize}
     \end{exampleblock}
-    \begin{itemize}
-        \item \textbf{Minimal Strongly Inconsistent Subsets}:
-              \[
-                  SI_{\min}(P) = \left\{ \begin{array}{l}
-                      \{ a \leftarrow \text{not } a,\ b.,\ c. \}, \\
-                      \{ a \leftarrow \text{not } a,\ b.,\ d. \}
-                  \end{array} \right\}
-              \]
-        \item \textbf{Calculations}:
-              \begin{itemize}
-                  \item \( \mathcal{I}_{\text{MSI}}(P) = 2 \)
-                  \item \( \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{1}{3} + \frac{1}{3} = \frac{2}{3} \)
-                  \item \( \mathcal{I}_{\text{p}}(P) = 4 \)
-              \end{itemize}
-    \end{itemize}
 \end{frame}
 
 \section{Rationality Postulates}
@@ -605,7 +603,7 @@
     \end{itemize}
 \end{frame}
 
-\subsection{Compliance of Measures}
+\section{Compliance of Measures}
 
 \begin{frame}{Compliance of Measures}
     \centering
@@ -624,26 +622,6 @@
         Strong Super-Additivity        & \ding{51}                    & \ding{51}                             & \ding{51}                  \\
         \bottomrule
     \end{tabular}
-\end{frame}
-
-\begin{frame}{SI-Free Postulate}
-    SI-free is not satisfied by any of the measures.
-    \begin{exampleblock}{Example}
-        Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c, \text{not }d., b., c., d.\}\), which has:
-        \[
-            SI_{\min}(P) = \{\{a \leftarrow \text{not }a, b., b., c.\}, \{a \leftarrow \text{not }a, b., b., d.\}\}
-        \]
-        and \(\alpha = \{a \leftarrow \text{not }c, \text{not }d.\} \in Free_{\text{SI}}(P)\).
-
-        The measures evaluate to:
-        \[
-            \mathcal{I}_{\text{MSI}}(P) = 2,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{2}{3},\quad \mathcal{I}_{\text{p}}(P) = 4.
-        \]
-        But if \(\alpha\) is removed, they evaluate to:
-        \[
-            \mathcal{I}_{\text{MSI}}(P \backslash \{\alpha\}) = 1,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P \backslash \{\alpha\}) = \frac{1}{2},\quad \mathcal{I}_{\text{p}}(P \backslash \{\alpha\}) = 2.
-        \]
-    \end{exampleblock}
 \end{frame}
 
 \section{Summary and Conclusion}

@@ -1,8 +1,21 @@
 \section{Appendix}
 
-\begin{frame}{Appendix}
-    This is an appendix.
-    \begin{itemize}
-        \item Page numbers start from the beginning.
-    \end{itemize}
+\begin{frame}{SI-Free Postulate Compliance}
+    SI-free is not satisfied by any of the measures.
+    \begin{exampleblock}{Example}
+        Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c, \text{not }d., b., c., d.\}\), which has:
+        \[
+            SI_{\min}(P) = \{\{a \leftarrow \text{not }a, b., b., c.\}, \{a \leftarrow \text{not }a, b., b., d.\}\}
+        \]
+        and \(\alpha = \{a \leftarrow \text{not }c, \text{not }d.\} \in Free_{\text{SI}}(P)\).
+
+        The measures evaluate to:
+        \[
+            \mathcal{I}_{\text{MSI}}(P) = 2,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{2}{3},\quad \mathcal{I}_{\text{p}}(P) = 4.
+        \]
+        But if \(\alpha\) is removed, they evaluate to:
+        \[
+            \mathcal{I}_{\text{MSI}}(P \backslash \{\alpha\}) = 1,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P \backslash \{\alpha\}) = \frac{1}{2},\quad \mathcal{I}_{\text{p}}(P \backslash \{\alpha\}) = 2.
+        \]
+    \end{exampleblock}
 \end{frame}
