@@ -23,7 +23,7 @@
 \begin{frame}{Classical vs. Paraconsistent Logic}
     \begin{block}{Classical Logic}
         \begin{itemize}
-            \item \textbf{Principle of Explosion}: From a contradiction, anything can be inferred (\( \forall \phi, \psi: \{\phi, \neg \phi\} \vdash \psi \)).
+            \item \textbf{Principle of Explosion}: From a contradiction, anything can be inferred (\( \forall \phi, \psi: \{\phi, \neg \phi\} \vdash \psi \)). TODO
             \item Treats any inconsistency as catastrophic.
             \item Inconsistent knowledge bases are deemed invalid.
         \end{itemize}
@@ -90,7 +90,7 @@
                       \item All birds can fly.
                       \item Penguins are birds.
                   \end{itemize}
-            \item \textbf{Inference}:
+            \item \textbf{Conclusion}:
                   \begin{itemize}
                       \item Therefore, penguins can fly.
                   \end{itemize}
@@ -111,15 +111,10 @@
 
 \begin{frame}{Answer Set Programming (ASP)}
     \begin{itemize}
-        \item \textbf{Declarative Programming Paradigm}
-              \begin{itemize}
-                  \item ASP is a form of declarative programming focused on solving complex combinatorial problems.
-                  \item It emphasizes \textbf{what} the problem is rather than \textbf{how} to solve it.
-              \end{itemize}
         \item \textbf{Origins and Purpose}
               \begin{itemize}
                   \item Based on logic programming and non-monotonic reasoning.
-                  \item Suitable for knowledge representation and reasoning tasks.
+                  \item Used for knowledge representation and reasoning.
               \end{itemize}
         \item \textbf{Key Features}
               \begin{itemize}
@@ -138,7 +133,7 @@
     \begin{alertblock}{Rule Structure}
         A logic program \(P\) consists of rules of the form:
         \[
-            \darkmathhighlight{l_0 \lor \dots \lor l_k} \leftarrow \yellowmathhighlight{l_{k+1}, \dots, l_m}, \mathhighlight{\text{not } l_{m+1}, \dots, \text{not } l_n}
+            \darkmathhighlight{l_0 \lor \dots \lor l_k} \leftarrow \yellowmathhighlight{l_{k+1}, \dots, l_m}, \mathhighlight{\text{not }l_{m+1}, \dots, \text{not }l_n}
         \]
         Where:
         \begin{itemize}
@@ -172,24 +167,8 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Reduct of a Logic Program}
-    \begin{block}{Definition of Reduct}
-        For a logic program \(P\) and a set of literals \(M\), the \darkhighlight{reduct} \(P^M\) is defined as:
-        \[
-            P^M = \{head(r) \leftarrow pos(r) \mid r \in P, \mathhighlight{neg(r) \cap M = \emptyset}\}
-        \]
-        \begin{itemize}
-            \item All rules where the negative body is not contradicted by \(M\).
-            \item Removes default negation to simplify the program.
-        \end{itemize}
-    \end{block}
-    \begin{block}{Answer Sets via Reduct}
-        A set \(M\) is an \darkhighlight{answer set} of \(P\) if \(M\) is a minimal model of the reduct \(P^M\).
-    \end{block}
-\end{frame}
-
 \begin{frame}{Example: The Penguin Paradox in ASP}
-    \begin{exampleblock}{Logic Program Encoding}
+    \begin{exampleblock}{Example: The Penguin Paradox}
         \begin{itemize}
             \item \textbf{Facts}:
                   \[
@@ -197,8 +176,8 @@
                   \]
             \item \textbf{Rules}:
                   \begin{align*}
-                      \text{bird(X)}  & \leftarrow \text{penguin(X)}.                          \\
-                      \text{flies(X)} & \leftarrow \text{bird(X)}, \ \text{not } \text{ab(X)}. \\
+                      \text{bird(X)}  & \leftarrow \text{penguin(X)}.                         \\
+                      \text{flies(X)} & \leftarrow \text{bird(X)}, \ \text{not }\text{ab(X)}. \\
                       \text{ab(X)}    & \leftarrow \text{penguin(X)}.
                   \end{align*}
             \item \textbf{Interpretation}:
@@ -228,43 +207,19 @@
             \right\}
         \]
         \begin{itemize}
-            \item The rule for \text{flies(polly)} is excluded since \(\text{not } \text{ab(polly)}\) is not satisfied.
+            \item The rule for \text{flies(polly)} is excluded since \(\text{not }\text{ab(polly)}\) is not satisfied.
         \end{itemize}
     \end{block}
-\end{frame}
-
-\begin{frame}{Conclusion from the Example}
-    \begin{itemize}
-        \item In the reduct \(P^M\), \text{flies(polly)} cannot be derived.
-        \item The candidate \(M\) is a minimal model of \(P^M\).
-        \item Therefore, \(M\) is an \textbf{answer set} where \text{polly} does not fly.
-        \item This illustrates how ASP handles exceptions and default reasoning.
-    \end{itemize}
 \end{frame}
 
 \section{Strong Inconsistency}
 
 \begin{frame}{Strong Inconsistency in Non-Monotonic Logics}
     \begin{itemize}
-        \item \textbf{Non-Monotonic Logic Peculiarity}
-              \begin{itemize}
-                  \item Adding information can resolve inconsistencies.
-                  \item Contrasts with monotonic logics, where adding information cannot restore consistency.
-              \end{itemize}
-        \item \textbf{Need for Refined Notions}
-              \begin{itemize}
-                  \item Traditional inconsistency concepts don't fully capture non-monotonic behavior.
-                  \item Introduce \textbf{strong inconsistency} to better analyze inconsistencies.
-              \end{itemize}
+        \item Adding information can resolve inconsistencies.
     \end{itemize}
-    \begin{block}{Definition}
-        A subset \( \mathcal{H} \subseteq \mathcal{K} \) is \darkhighlight{strongly \( \mathcal{K} \)-inconsistent} if all its supersets within \( \mathcal{K} \) are inconsistent.
-    \end{block}
-\end{frame}
-
-\begin{frame}{Example and Importance of Strong Inconsistency}
     \begin{exampleblock}{Resolving Inconsistency}
-        Knowledge Base \( \mathcal{K} = \{ b.,\ \neg b \leftarrow \text{not } a. \} \)
+        Knowledge Base \( \mathcal{K} = \{ b.,\ \neg b \leftarrow \text{not }a. \} \)
         \begin{itemize}
             \item \( \mathcal{K} \) is inconsistent since both \( b \) and \( \neg b \) can be derived.
             \item Adding \( a. \) resolves the inconsistency.
@@ -272,47 +227,42 @@
         \end{itemize}
     \end{exampleblock}
     \begin{itemize}
-        \item \textbf{Importance of Strong Inconsistency}
-              \begin{itemize}
-                  \item Identifies conflicts that cannot be resolved by adding information.
-                  \item Helps in developing inconsistency measures for non-monotonic logics.
-              \end{itemize}
+        \item Introduce \textbf{strong inconsistency} to better analyze inconsistencies.
     \end{itemize}
+    \begin{block}{Definition}
+        A subset \( \mathcal{H} \subseteq \mathcal{K} \) is \darkhighlight{strongly \( \mathcal{K} \)-inconsistent} if all its supersets within \( \mathcal{K} \) are inconsistent.
+    \end{block}
 \end{frame}
 
 \section{Measures Based on Minimal Inconsistent Subsets}
 
 \begin{frame}{Inconsistency Measures for Non-Monotonic Logics}
     \begin{itemize}
-        \item \textbf{Extending Classical Measures}
+        \item Extending Classical Measures
               \begin{itemize}
                   \item Traditional measures count minimal inconsistent subsets (MIS).
                   \item Need to adapt these measures using strong inconsistency.
               \end{itemize}
-        \item \textbf{Purpose of Measures}
-              \begin{itemize}
-                  \item Quantify the degree of inconsistency.
-                  \item Provide insight into the severity and extent of conflicts.
-              \end{itemize}
+        \item Counting Minimal Inconsistent Subsets (MIS):
+              \[
+                  \mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|
+              \]
     \end{itemize}
-\end{frame}
-
-\begin{frame}{Inconsistency Measures}
     \begin{block}{Measure \( \mathcal{I}_{\text{MSI}} \)}
         \[
             \mathcal{I}_{\text{MSI}}(\mathcal{K}) = \left| SI_{\min}(\mathcal{K}) \right|
         \]
         Counts the number of minimal strongly inconsistent subsets.
     \end{block}
+\end{frame}
+
+\begin{frame}{Inconsistency Measures}
     \begin{block}{Measure \( \mathcal{I}_{\text{MSI}^\text{C}} \)}
         \[
             \mathcal{I}_{\text{MSI}^\text{C}}(\mathcal{K}) = \sum\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \frac{1}{|\mathcal{H}|}
         \]
         Considers the size of each minimal strongly inconsistent subset.
     \end{block}
-\end{frame}
-
-\begin{frame}{Inconsistency Measures}
     \begin{block}{Measure \( \mathcal{I}_{\text{p}} \)}
         \[
             \mathcal{I}_{\text{p}}(\mathcal{K}) = \left| \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H} \right|
@@ -325,16 +275,16 @@
     \begin{exampleblock}{Example}
         \[
             P = \left\{ \begin{array}{l}
-                a \leftarrow \text{not } a,                  \\
-                a \leftarrow \text{not } c,\ \text{not } d., \\
+                a \leftarrow \text{not }a, b.              \\
+                a \leftarrow \text{not }c,\ \text{not }d., \\
                 b., c., d.
             \end{array} \right\}
         \]
         \textbf{Minimal Strongly Inconsistent Subsets}:
         \[
             SI_{\min}(P) = \left\{ \begin{array}{l}
-                \{ a \leftarrow \text{not } a,\ b.,\ c. \}, \\
-                \{ a \leftarrow \text{not } a,\ b.,\ d. \}
+                \{ a \leftarrow \text{not }a, b., b., c. \}, \\
+                \{ a \leftarrow \text{not }a, b., b., d. \}
             \end{array} \right\}
         \]
         \textbf{Calculations}:
@@ -465,7 +415,7 @@
     \end{alertblock}
     \begin{exampleblock}{Example}
         \begin{itemize}
-            \item Consider \( P = \{ a \leftarrow \text{not } a,\ b.,\ c.,\ d. \} \)
+            \item Consider \( P = \{ a \leftarrow \text{not }a,\ b.,\ c.,\ d. \} \)
             \item \( \alpha = d. \) is free in \( P \).
             \item Removing \( \alpha \) changes \( SI_{\min}(P) \).
         \end{itemize}
@@ -633,7 +583,7 @@
                   \item Classical logic struggles with inconsistencies.
                   \item Inconsistency measures provide quantitative insights into conflicts.
               \end{itemize}
-        \item \textbf{Answer Set Programming (ASP)}
+        \item \textbf{Answer Set Programming}
               \begin{itemize}
                   \item ASP as an example of non-monotonic logic.
                   \item Capable of representing and reasoning with inconsistent knowledge bases.

@@ -1,5 +1,21 @@
 \section{Appendix}
 
+\begin{frame}{Gelfond-Lifschitz Reduct}
+    \begin{block}{Definition of Reduct}
+        For a logic program \(P\) and a set of literals \(M\), the \darkhighlight{reduct} \(P^M\) is defined as:
+        \[
+            P^M = \{head(r) \leftarrow pos(r) \mid r \in P, \mathhighlight{neg(r) \cap M = \emptyset}\}
+        \]
+        \begin{itemize}
+            \item All rules where the negative body is not contradicted by \(M\).
+            \item Removes default negation to simplify the program.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Answer Sets via Reduct}
+        A set \(M\) is an \darkhighlight{answer set} of \(P\) if \(M\) is a minimal model of the reduct \(P^M\).
+    \end{block}
+\end{frame}
+
 \begin{frame}{SI-Free Postulate Compliance}
     SI-free is not satisfied by any of the measures.
     \begin{exampleblock}{Example}
