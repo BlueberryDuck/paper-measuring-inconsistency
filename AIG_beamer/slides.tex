@@ -23,7 +23,7 @@
 \begin{frame}{Classical vs. Paraconsistent Logic}
     \begin{block}{Classical Logic}
         \begin{itemize}
-            \item \textbf{Principle of Explosion}: From a contradiction, anything can be inferred (\( \forall \phi, \psi: \{\phi, \neg \phi\} \vdash \psi \)). TODO
+            \item \textbf{Principle of Explosion}: From a contradiction, anything can be inferred (\( \forall \phi, \psi: \{\phi, \neg \phi\} \vdash \psi \)).
             \item Treats any inconsistency as catastrophic.
             \item Inconsistent knowledge bases are deemed invalid.
         \end{itemize}
@@ -110,26 +110,6 @@
 \section{Answer Set Programming}
 
 \begin{frame}{Answer Set Programming (ASP)}
-    \begin{itemize}
-        \item \textbf{Origins and Purpose}
-              \begin{itemize}
-                  \item Based on logic programming and non-monotonic reasoning.
-                  \item Used for knowledge representation and reasoning.
-              \end{itemize}
-        \item \textbf{Key Features}
-              \begin{itemize}
-                  \item Programs consist of rules with possible disjunctions in the head.
-                  \item Incorporates two kinds of negation:
-                        \begin{itemize}
-                            \item \textbf{Strong Negation} ($\neg$): explicit denial of a fact.
-                            \item \textbf{Default Negation} (\texttt{not}): assumption of falsehood in the absence of proof.
-                        \end{itemize}
-                  \item Solutions are expressed as \textbf{answer sets}, representing possible scenarios or models.
-              \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Syntax of Logic Programs}
     \begin{alertblock}{Rule Structure}
         A logic program \(P\) consists of rules of the form:
         \[
@@ -143,8 +123,11 @@
         \end{itemize}
     \end{alertblock}
     \begin{itemize}
-        \item A \textbf{fact} is a rule with an empty body: \(head(r).\)
-        \item A \textbf{constraint} is a rule with an empty head: \(\leftarrow body.\)
+        \item Incorporates two kinds of negation:
+              \begin{itemize}
+                  \item \textbf{Strong Negation} ($\neg$): explicit denial of a fact.
+                  \item \textbf{Default Negation} (\texttt{not}): assumption of falsehood in the absence of proof.
+              \end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -317,12 +300,16 @@
 \subsection{Basic Postulates}
 
 \begin{frame}{Basic Rationality Postulates}
+    % Selection based on Anthony Hunter and Sébastien Konieczny
     \begin{block}{Consistency Postulate}
         For any knowledge base \( \mathcal{K} \):
         \[
-            \mathcal{I}(\mathcal{K}) = 0 \quad \text{if and only if} \quad \mathcal{K} \text{ is consistent}
+            \mathcal{I}(\mathcal{K}) = 0 \text{ if and only if } \mathcal{K} \text{ is consistent}
         \]
     \end{block}
+\end{frame}
+
+\begin{frame}{Issue with Monotonicity in Non-Monotonic Logics}
     \begin{alertblock}{Monotonicity}
         For knowledge bases \( \mathcal{K} \) and \( \mathcal{K}' \):
         \[
@@ -336,9 +323,6 @@
                   \item More information potentially introduces more \textbf{conflicts}.
               \end{itemize}
     \end{itemize}
-\end{frame}
-
-\begin{frame}{Issue with Monotonicity in Non-Monotonic Logics}
     \begin{itemize}
         \item \textbf{Non-Monotonic Behavior}
               \begin{itemize}
@@ -353,30 +337,13 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Example of Monotonicity Issue}
-    \begin{exampleblock}{Example}
-        Consider the logic program:
-        \[
-            P = \{a \lor b.,\ a \leftarrow b.,\ c \leftarrow \text{not }b.,\ \neg c \leftarrow \text{not }b.\}
-        \]
-        \begin{itemize}
-            \item \(H = \{c \leftarrow \text{not }b.,\ \neg c \leftarrow \text{not }b.,\ a \leftarrow b.\} \in SI_{\min}(P)\)
-            \item Adding \(P' = \{b.,\ d.,\ \neg d.\}\) resolves conflicts in \(P\).
-            \item Now \(SI_{\min}(P \cup P') = \{\{d.,\ \neg d.\}\}\)
-        \end{itemize}
-    \end{exampleblock}
-    \begin{alertblock}{Conclusion}
-        \begin{itemize}
-            \item Comparison of \(\mathcal{I}(P)\) and \(\mathcal{I}(P \cup P')\) becomes unreasonable.
-        \end{itemize}
-    \end{alertblock}
-\end{frame}
-
 \begin{frame}{Revising Monotonicity: Strong Monotonicity}
-    \textbf{Definition}: \( \mathcal{K}' \) \highlight{preserves conflicts} of \( \mathcal{K} \) if:
-    \[
-        \forall \mathcal{H} \in SI(\mathcal{K}):\ \mathcal{H} \in SI(\mathcal{K} \cup \mathcal{K}')
-    \]
+    \begin{block}{Conflict Preservation}
+        \textbf{Definition}: \( \mathcal{K}' \) \darkhighlight{preserves conflicts} of \( \mathcal{K} \) if:
+        \[
+            \forall \mathcal{H} \in SI(\mathcal{K}):\ \mathcal{H} \in SI(\mathcal{K} \cup \mathcal{K}')
+        \]
+    \end{block}
     \begin{block}{Strong Monotonicity Postulate}
         If \( \mathcal{K}' \) preserves conflicts of \( \mathcal{K} \):
         \[
@@ -393,7 +360,7 @@
 
 \begin{frame}{Free Formulas}
     \begin{block}{Free Formulas}
-        \textbf{Definition}: A formula \( \alpha \in \mathcal{K} \) is \highlight{free} if:
+        \textbf{Definition}: A formula \( \alpha \in \mathcal{K} \) is \darkhighlight{free} if:
         \[
             \alpha \notin \bigcup\limits_{\mathcal{H} \in SI_{\min}(\mathcal{K})} \mathcal{H}
         \]
@@ -404,27 +371,17 @@
             \mathcal{I}(\mathcal{K}) = \mathcal{I}(\mathcal{K} \backslash \{\alpha\})
         \]
     \end{block}
-\end{frame}
-
-\begin{frame}{Issue with SI-Free}
-    \begin{alertblock}{Problem}
+    \begin{alertblock}{Issue with SI-Free Postulate}
         \begin{itemize}
             \item In non-monotonic logics, removing a free formula can affect \( SI_{\min}(\mathcal{K}) \).
             \item May introduce new conflicts or alter existing ones.
         \end{itemize}
     \end{alertblock}
-    \begin{exampleblock}{Example}
-        \begin{itemize}
-            \item Consider \( P = \{ a \leftarrow \text{not }a,\ b.,\ c.,\ d. \} \)
-            \item \( \alpha = d. \) is free in \( P \).
-            \item Removing \( \alpha \) changes \( SI_{\min}(P) \).
-        \end{itemize}
-    \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Independence Postulate with Neutral Formulas}
     \begin{block}{Neutral Formulas}
-        \textbf{Definition}: A formula \( \alpha \) is \highlight{neutral} if:
+        \textbf{Definition}: A formula \( \alpha \) is \darkhighlight{neutral} if:
         \[
             \forall \mathcal{H} \subseteq \mathcal{K}:\ \mathcal{H} \in C(\mathcal{K}) \Leftrightarrow \mathcal{H} \cup \{\alpha\} \in C(\mathcal{K})
         \]
@@ -446,26 +403,9 @@
 
 \subsection{Extended Postulates}
 
-\begin{frame}{Extended Postulates: Syntax Sensitivity}
-    \begin{itemize}
-        \item \textbf{Issue with Syntax}
-              \begin{itemize}
-                  \item Inconsistency measures can be sensitive to the \textbf{syntax} of formulas.
-                  \item Example: \( \{ a \land b \} \) vs. \( \{ a,\ b \} \)
-              \end{itemize}
-        \item \textbf{Adjunction Invariance}
-              \begin{itemize}
-                  \item An inconsistency measure should satisfy:
-                        \[
-                            \mathcal{I}(\mathcal{K} \cup \{ a \land b \}) = \mathcal{I}(\mathcal{K} \cup \{ a,\ b \})
-                        \]
-              \end{itemize}
-    \end{itemize}
-\end{frame}
-
 \begin{frame}{Strong Equivalence Postulates}
     \begin{block}{Strong Equivalence}
-        Knowledge bases \( \mathcal{K} \) and \( \mathcal{K}' \) are \highlight{strongly equivalent} if:
+        Knowledge bases \( \mathcal{K} \) and \( \mathcal{K}' \) are \darkhighlight{strongly equivalent} if:
         \[
             \forall \mathcal{G}:\ \text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})
         \]
@@ -477,16 +417,17 @@
         \]
     \end{block}
     \begin{itemize}
-        \item \textbf{Implication}:
+        \item \textbf{Intuition}:
               \begin{itemize}
-                  \item Inconsistency measure should be \textbf{invariant} under strong equivalence.
+                  %   \item ACC: The set of acceptable conclusions derived from the knowledge base (after possibly resolving inconsistencies).
+                  \item Inconsistency measure should be \textbf{unaffected} under strong equivalence.
               \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}{FW-Strong Equivalence}
     \begin{block}{FW-Strong Equivalence}
-        \(\mathcal{K}\) and \(\mathcal{K}'\) are \highlight{formula-wise strongly equivalent} if:
+        \(\mathcal{K}\) and \(\mathcal{K}'\) are \darkhighlight{formula-wise strongly equivalent} if:
         \[
             \exists\ \rho : \mathcal{K} \rightarrow \mathcal{K}'\ \text{bijective},\ \text{such that}\ \{\alpha\} \equiv_S \{\rho(\alpha)\}\ \forall \alpha \in \mathcal{K}
         \]
@@ -507,12 +448,12 @@
         \]
     \end{block}
     \begin{itemize}
-        \item Inconsistency measure should be insensitive to replacement by strongly equivalent formulas.s
+        \item Inconsistency measure should be insensitive to replacement by strongly equivalent formulas.
     \end{itemize}
 \end{frame}
 
 \begin{frame}{Separability and Strong Super-Additivity}
-    \begin{block}{Separability}
+    \begin{block}{Separability Postulate}
         If:
         \begin{align*}
             SI_{\min}(\mathcal{K} \cup \mathcal{K}')            & = SI_{\min}(\mathcal{K}) \cup SI_{\min}(\mathcal{K}') \\
@@ -523,8 +464,8 @@
             \mathcal{I}(\mathcal{K} \cup \mathcal{K}') = \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}')
         \]
     \end{block}
-    \begin{block}{Strong Super-Additivity}
-        If \( \mathcal{K} \) and \( \mathcal{K}' \) \darkhighlight{preserve each other's conflicts} and \( \mathcal{K} \cap \mathcal{K}' = \emptyset \):
+    \begin{block}{Strong Super-Additivity Postulate}
+        If \( \mathcal{K} \) and \( \mathcal{K}' \) preserve each other's conflicts and \( \mathcal{K} \cap \mathcal{K}' = \emptyset \):
         \[
             \mathcal{I}(\mathcal{K}) + \mathcal{I}(\mathcal{K}') \leq \mathcal{I}(\mathcal{K} \cup \mathcal{K}')
         \]
@@ -608,16 +549,10 @@
 
 \begin{frame}{Conclusion}
     \begin{itemize}
-        \item \textbf{Focus}
-              \begin{itemize}
-                  \item Understanding of measuring inconsistencies in non-monotonic knowledge bases.
-                  \item Adaptation of traditional inconsistency measures using strong inconsistency.
-                  \item Exploring a framework of rationality postulates for non-monotonic settings.
-              \end{itemize}
         \item \textbf{Limitations and Findings}
               \begin{itemize}
                   \item Measures generally align with rationality postulates.
-                  \item Further refinement needed for SI-free compliance.
+                  \item Further refinement needed for SI-free and strong equivalence compliance.
               \end{itemize}
         \item \textbf{Future Directions}
               \begin{itemize}
