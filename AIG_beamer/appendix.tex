@@ -19,19 +19,16 @@
 \begin{frame}{SI-Free Postulate Compliance}
     SI-free is not satisfied by any of the measures.
     \begin{exampleblock}{Example}
-        Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c, \text{not }d., b., c., d.\}\), which has:
-        \[
-            SI_{\min}(P) = \{\{a \leftarrow \text{not }a, b., b., c.\}, \{a \leftarrow \text{not }a, b., b., d.\}\}
-        \]
-        and \(\alpha = \{a \leftarrow \text{not }c, \text{not }d.\} \in Free_{\text{SI}}(P)\).
+        Consider the logic program \(P = \{a \leftarrow \text{not } a, b., a \leftarrow \text{not }c., d \leftarrow \text{not }d., b., c., d.\}\), which has \(SI_{\min}(P) = \{\{a \leftarrow \text{not }a, b., b., c.\}\}\)
+        and \(\alpha = d.\) and \(\beta = a \leftarrow \text{not }c.\) are in \(Free_{\text{SI}}(P)\).
 
         The measures evaluate to:
         \[
-            \mathcal{I}_{\text{MSI}}(P) = 2,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{2}{3},\quad \mathcal{I}_{\text{p}}(P) = 4.
+            \mathcal{I}_{\text{MSI}}(P) = 1,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{1}{3},\quad \mathcal{I}_{\text{p}}(P) = 3.
         \]
-        But if \(\alpha\) is removed, they evaluate to:
+        But if \(\alpha\) and \(\beta\) are removed, so \(SI_{\min}(P \backslash \{\alpha,\beta\}) = \{\{a \leftarrow \text{not }a, b., b.\}, \{d \leftarrow \text{not }d.\}\}\), they evaluate to:
         \[
-            \mathcal{I}_{\text{MSI}}(P \backslash \{\alpha\}) = 1,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P \backslash \{\alpha\}) = \frac{1}{2},\quad \mathcal{I}_{\text{p}}(P \backslash \{\alpha\}) = 2.
+            \mathcal{I}_{\text{MSI}}(P \backslash \{\alpha,\beta\}) = 2,\quad \mathcal{I}_{\text{MSI}^\text{C}}(P \backslash \{\alpha,\beta\}) = \frac{3}{2},\quad \mathcal{I}_{\text{p}}(P \backslash \{\alpha,\beta\}) = 3.
         \]
     \end{exampleblock}
 \end{frame}

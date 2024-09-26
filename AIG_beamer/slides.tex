@@ -1,6 +1,6 @@
-\section{Introduction}
+\section{Prerequisites}
 
-\begin{frame}{Introduction to Inconsistent Information}
+\begin{frame}{Inconsistent Information}
     \begin{itemize}
         \item \textbf{Knowledge Representation Challenge}
               \begin{itemize}
@@ -20,6 +20,8 @@
     \end{itemize}
 \end{frame}
 
+\subsection{Non-Monotonic Logics}
+
 \begin{frame}{Classical vs. Paraconsistent Logic}
     \begin{block}{Classical Logic}
         \begin{itemize}
@@ -37,33 +39,6 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Inconsistency Measures}
-    \begin{block}{Definition}
-        An \darkhighlight{inconsistency measure} is a function \( \mathcal{I}(\mathcal{K}) \) that quantifies the extent and impact of inconsistencies within a knowledge base \( \mathcal{K} \).
-    \end{block}
-    \begin{itemize}
-        \item \textbf{Purpose}:
-              \begin{itemize}
-                  \item Provides a quantitative metric rather than a binary consistent/inconsistent classification.
-                  \item Helps in understanding the severity and localization of inconsistencies.
-              \end{itemize}
-        \item \textbf{Common Approach}:
-              \begin{itemize}
-                  \item Counting Minimal Inconsistent Subsets (MIS):
-                        \[
-                            \mathcal{I}_{\text{MI}}(\mathcal{K}) = \left| I_{\min}(\mathcal{K}) \right|
-                        \]
-                  \item \( I_{\min}(\mathcal{K}) \): Set of all minimal inconsistent subsets of \( \mathcal{K} \).
-              \end{itemize}
-        \item \textbf{Example}:
-              \begin{itemize}
-                  \item For \( \mathcal{K} = \{ a, \neg a, b \} \):
-                  \item Minimal inconsistent subsets: \( I_{\min}(\mathcal{K}) = \{ \{ a, \neg a \} \} \)
-                  \item Inconsistency measure: \( \mathcal{I}_{\text{MI}}(\mathcal{K}) = 1 \)
-              \end{itemize}
-    \end{itemize}
-\end{frame}
-
 \begin{frame}{Non-Monotonic Logics}
     \begin{block}{Definition}
         A \darkhighlight{non-monotonic logic} allows for the withdrawal of conclusions in the light of new, possibly conflicting, information.
@@ -71,7 +46,7 @@
     \begin{itemize}
         \item \textbf{Contrast with Monotonic Logic}
               \begin{itemize}
-                  \item In monotonic logic, adding new axioms cannot reduce the set of derivable conclusions.
+                  \item In monotonic logic, adding new information cannot reduce the set of derivable conclusions.
                   \item Non-monotonic logic models the way human reasoning adapts to new information.
               \end{itemize}
         \item \textbf{Relevance to Inconsistency}
@@ -107,10 +82,10 @@
     \end{exampleblock}
 \end{frame}
 
-\section{Answer Set Programming}
+\subsection{Answer Set Programming}
 
 \begin{frame}{Answer Set Programming (ASP)}
-    \begin{alertblock}{Rule Structure}
+    \begin{alertblock}{Structure of Rules}
         A logic program \(P\) consists of rules of the form:
         \[
             \darkmathhighlight{l_0 \lor \dots \lor l_k} \leftarrow \yellowmathhighlight{l_{k+1}, \dots, l_m}, \mathhighlight{\text{not }l_{m+1}, \dots, \text{not }l_n}
@@ -223,7 +198,7 @@
     \begin{itemize}
         \item Extending Classical Measures
               \begin{itemize}
-                  \item Traditional measures count minimal inconsistent subsets (MIS).
+                  \item Traditional measure counts minimal inconsistent subsets (MIS).
                   \item Need to adapt these measures using strong inconsistency.
               \end{itemize}
         \item Counting Minimal Inconsistent Subsets (MIS):
@@ -258,23 +233,23 @@
     \begin{exampleblock}{Example}
         \[
             P = \left\{ \begin{array}{l}
-                a \leftarrow \text{not }a, b.              \\
-                a \leftarrow \text{not }c,\ \text{not }d., \\
-                b., c., d.
+                a \leftarrow \text{not }a, b. \\
+                d \leftarrow \text{not }d.,   \\
+                b., c.
             \end{array} \right\}
         \]
         \textbf{Minimal Strongly Inconsistent Subsets}:
         \[
             SI_{\min}(P) = \left\{ \begin{array}{l}
-                \{ a \leftarrow \text{not }a, b., b., c. \}, \\
-                \{ a \leftarrow \text{not }a, b., b., d. \}
+                \{ a \leftarrow \text{not }a, b., b.\}, \\
+                \{ d \leftarrow \text{not }d. \}
             \end{array} \right\}
         \]
         \textbf{Calculations}:
         \begin{itemize}
             \item \( \mathcal{I}_{\text{MSI}}(P) = 2 \)
-            \item \( \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{1}{3} + \frac{1}{3} = \frac{2}{3} \)
-            \item \( \mathcal{I}_{\text{p}}(P) = 4 \)
+            \item \( \mathcal{I}_{\text{MSI}^\text{C}}(P) = \frac{1}{2} + \frac{1}{1} = \frac{3}{2} \)
+            \item \( \mathcal{I}_{\text{p}}(P) = 3 \)
         \end{itemize}
     \end{exampleblock}
 \end{frame}
@@ -407,7 +382,7 @@
     \begin{block}{Strong Equivalence}
         Knowledge bases \( \mathcal{K} \) and \( \mathcal{K}' \) are \darkhighlight{strongly equivalent} if:
         \[
-            \forall \mathcal{G}:\ \text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})
+            \forall \mathcal{G}:\ \text{ACC}(\mathcal{K} \cup \mathcal{G}) = \text{ACC}(\mathcal{K}' \cup \mathcal{G})\footnotemark[1]
         \]
     \end{block}
     \begin{block}{Strong Equivalence Postulate}
@@ -419,10 +394,10 @@
     \begin{itemize}
         \item \textbf{Intuition}:
               \begin{itemize}
-                  %   \item ACC: The set of acceptable conclusions derived from the knowledge base (after possibly resolving inconsistencies).
                   \item Inconsistency measure should be \textbf{unaffected} under strong equivalence.
               \end{itemize}
     \end{itemize}
+    \footnotetext[1]{ACC is the set of acceptable conclusions derived from the knowledge base (after possibly resolving inconsistencies).}
 \end{frame}
 
 \begin{frame}{FW-Strong Equivalence}
