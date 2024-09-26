@@ -106,25 +106,6 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Semantics of Logic Programs}
-    \begin{block}{Models and Answer Sets}
-        \begin{itemize}
-            \item A \textbf{model} \(M\) of a logic program \(P\) satisfies all rules in \(P\).
-            \item \(M\) is a model if for every rule \(r\):
-                  \begin{itemize}
-                      \item If \(pos(r) \subseteq M\) and \(neg(r) \cap M = \emptyset\), then \(head(r) \cap M \neq \emptyset\).
-                  \end{itemize}
-            \item An \textbf{answer set} is a minimal model of \(P\).
-        \end{itemize}
-    \end{block}
-    \begin{block}{Handling Negation}
-        \begin{itemize}
-            \item The presence of default negation (\texttt{not}) requires special treatment.
-            \item Use the \textbf{Gelfond-Lifschitz reduct} to eliminate default negation when computing answer sets.
-        \end{itemize}
-    \end{block}
-\end{frame}
-
 \begin{frame}{Example: The Penguin Paradox in ASP}
     \begin{exampleblock}{Example: The Penguin Paradox}
         \begin{itemize}
@@ -146,28 +127,6 @@
                   \end{itemize}
         \end{itemize}
     \end{exampleblock}
-\end{frame}
-
-\begin{frame}{Computing the Answer Set}
-    \begin{block}{Candidate Answer Set \(M\)}
-        \[
-            M = \{\text{penguin(polly)},\ \text{bird(polly)},\ \text{ab(polly)}\}
-        \]
-    \end{block}
-    \begin{block}{Constructing the Reduct \(P^M\)}
-        \[
-            P^M = \left\{
-            \begin{array}{lcl}
-                \text{penguin(polly)} &            &                       \\
-                \text{bird(polly)}    & \leftarrow & \text{penguin(polly)} \\
-                \text{ab(polly)}      & \leftarrow & \text{penguin(polly)}
-            \end{array}
-            \right\}
-        \]
-        \begin{itemize}
-            \item The rule for \text{flies(polly)} is excluded since \(\text{not }\text{ab(polly)}\) is not satisfied.
-        \end{itemize}
-    \end{block}
 \end{frame}
 
 \section{Strong Inconsistency}

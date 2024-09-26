@@ -1,5 +1,24 @@
 \section{Appendix}
 
+\begin{frame}{Semantics of Logic Programs}
+    \begin{block}{Models and Answer Sets}
+        \begin{itemize}
+            \item A \textbf{model} \(M\) of a logic program \(P\) satisfies all rules in \(P\).
+            \item \(M\) is a model if for every rule \(r\):
+                  \begin{itemize}
+                      \item If \(pos(r) \subseteq M\) and \(neg(r) \cap M = \emptyset\), then \(head(r) \cap M \neq \emptyset\).
+                  \end{itemize}
+            \item An \textbf{answer set} is a minimal model of \(P\).
+        \end{itemize}
+    \end{block}
+    \begin{block}{Handling Negation}
+        \begin{itemize}
+            \item The presence of default negation (\texttt{not}) requires special treatment.
+            \item Use the \textbf{Gelfond-Lifschitz reduct} to eliminate default negation when computing answer sets.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
 \begin{frame}{Gelfond-Lifschitz Reduct}
     \begin{block}{Definition of Reduct}
         For a logic program \(P\) and a set of literals \(M\), the \darkhighlight{reduct} \(P^M\) is defined as:
@@ -13,6 +32,28 @@
     \end{block}
     \begin{block}{Answer Sets via Reduct}
         A set \(M\) is an \darkhighlight{answer set} of \(P\) if \(M\) is a minimal model of the reduct \(P^M\).
+    \end{block}
+\end{frame}
+
+\begin{frame}{Computing the Penguin Answer Set}
+    \begin{block}{Candidate Answer Set \(M\)}
+        \[
+            M = \{\text{penguin(polly)},\ \text{bird(polly)},\ \text{ab(polly)}\}
+        \]
+    \end{block}
+    \begin{block}{Constructing the Reduct \(P^M\)}
+        \[
+            P^M = \left\{
+            \begin{array}{lcl}
+                \text{penguin(polly)} &            &                       \\
+                \text{bird(polly)}    & \leftarrow & \text{penguin(polly)} \\
+                \text{ab(polly)}      & \leftarrow & \text{penguin(polly)}
+            \end{array}
+            \right\}
+        \]
+        \begin{itemize}
+            \item The rule for \text{flies(polly)} is excluded since \(\text{not }\text{ab(polly)}\) is not satisfied.
+        \end{itemize}
     \end{block}
 \end{frame}
 
